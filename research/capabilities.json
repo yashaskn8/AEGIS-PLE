@@ -57,9 +57,8 @@
     }
   ],
   "limitations": [
-    "Only category leaders were recorded; full category-by-model-by-harness matrix is pending.",
     "Leaderboard association does not demonstrate causal benefit.",
     "No hidden task content, official evaluation, or model transfer experiment was accessed.",
-    "The separately stored overall sponsored-model matrix covers all seven standard harnesses; discipline-by-pair matrix and causal capability testing are not complete."
+    "Four discipline score matrices for all eleven sponsored models and seven common harnesses are recorded; overall costs are not discipline-specific. No causal transfer or live evaluation."
   ]
 }

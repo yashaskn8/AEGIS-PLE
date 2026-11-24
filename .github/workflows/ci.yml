@@ -39,3 +39,7 @@ jobs:
         run: .venv/bin/python -m aegis.document_agent
       - name: Analyze published baseline frontier
         run: .venv/bin/python -m aegis.frontier
+      - name: Verify deterministic-first document route
+        run: .venv/bin/python -m aegis.deterministic_route
+      - name: Analyze published discipline score matrix
+        run: .venv/bin/python -m aegis.disciplines

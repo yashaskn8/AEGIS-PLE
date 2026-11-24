@@ -94,6 +94,11 @@ EXPECTED_IDS |= {"tests.test_process.Process." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_deterministic.Deterministic." + name for name in (
+    "test_zero_call_route","test_worker_veto","test_discipline_matrix","test_matrix_inconsistent",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "bacf8fc8a02eeb6871674ff1706a212a1ea2ea6a",
-    "ci_run": 45436074134,
-    "tests": 81,
+    "commit": "61b60ce49f4fc1c1cf8d3c5a20e063de7bb2c255",
+    "ci_run": 45436368531,
+    "tests": 86,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -72,6 +72,11 @@
           "reserved_output": 3072
         }
       }
+    },
+    "experiment_0011": {
+      "separate_process_cases": 40,
+      "published_pairs": 77,
+      "known_costs": 75
     }
   },
   "promotion": "BLOCKED",
@@ -179,10 +184,14 @@
     },
     {
       "id": "separate_process_document_verification",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "deterministic_first_document_route",
       "status": "IMPLEMENTED_PARTIAL"
     }
   ],
-  "next": "Verify separate-process checker and published baseline frontier CI. Continue offline integration where appropriate; official access, independent administration and arbitrary code isolation remain blocked.",
+  "next": "Verify deterministic-first routing and discipline matrix CI; preserve observed metrics. Live agent, independent governance, and official evaluation still require external authorization.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -190,7 +199,9 @@
     "python -m aegis.policy_search",
     "python -m aegis.document_experiment",
     "python -m aegis.learned_policy",
-    "python -m aegis.document_agent"
+    "python -m aegis.document_agent",
+    "python -m aegis.deterministic_route",
+    "python -m aegis.disciplines"
   ],
   "resume": {
     "last_code_commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",

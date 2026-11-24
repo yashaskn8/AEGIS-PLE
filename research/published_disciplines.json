@@ -1,0 +1,783 @@
+{
+  "source": "https://ple-bench.com/leaderboard",
+  "accessed": "2026-11-24",
+  "scope": "published hidden aggregate discipline scores; no task data",
+  "weights": {
+    "structural": 6,
+    "civil": 9,
+    "electrical": 18,
+    "mechanical": 23
+  },
+  "pairs": [
+    {
+      "model": "gemini-4-neon",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.545,
+        "civil": 0.716,
+        "electrical": 0.472,
+        "mechanical": 0.472
+      }
+    },
+    {
+      "model": "gemini-4-neon",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.555,
+        "civil": 0.612,
+        "electrical": 0.423,
+        "mechanical": 0.463
+      }
+    },
+    {
+      "model": "gemini-4-neon",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.404,
+        "civil": 0.678,
+        "electrical": 0.406,
+        "mechanical": 0.471
+      }
+    },
+    {
+      "model": "gemini-4-neon",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.567,
+        "civil": 0.697,
+        "electrical": 0.459,
+        "mechanical": 0.454
+      }
+    },
+    {
+      "model": "gemini-4-neon",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.569,
+        "civil": 0.762,
+        "electrical": 0.465,
+        "mechanical": 0.467
+      }
+    },
+    {
+      "model": "gemini-4-neon",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.477,
+        "civil": 0.693,
+        "electrical": 0.481,
+        "mechanical": 0.428
+      }
+    },
+    {
+      "model": "gemini-4-neon",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.451,
+        "civil": 0.782,
+        "electrical": 0.408,
+        "mechanical": 0.352
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.563,
+        "civil": 0.703,
+        "electrical": 0.433,
+        "mechanical": 0.416
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.546,
+        "civil": 0.624,
+        "electrical": 0.453,
+        "mechanical": 0.409
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.539,
+        "civil": 0.623,
+        "electrical": 0.438,
+        "mechanical": 0.405
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.496,
+        "civil": 0.621,
+        "electrical": 0.468,
+        "mechanical": 0.424
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.472,
+        "civil": 0.62,
+        "electrical": 0.49,
+        "mechanical": 0.385
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.516,
+        "civil": 0.635,
+        "electrical": 0.485,
+        "mechanical": 0.367
+      }
+    },
+    {
+      "model": "claude-opus-5-5",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.576,
+        "civil": 0.64,
+        "electrical": 0.479,
+        "mechanical": 0.408
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.382,
+        "civil": 0.615,
+        "electrical": 0.445,
+        "mechanical": 0.391
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.436,
+        "civil": 0.472,
+        "electrical": 0.304,
+        "mechanical": 0.365
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.497,
+        "civil": 0.579,
+        "electrical": 0.386,
+        "mechanical": 0.344
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.482,
+        "civil": 0.655,
+        "electrical": 0.446,
+        "mechanical": 0.408
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.47,
+        "civil": 0.609,
+        "electrical": 0.461,
+        "mechanical": 0.375
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.445,
+        "civil": 0.599,
+        "electrical": 0.375,
+        "mechanical": 0.349
+      }
+    },
+    {
+      "model": "gemini-4-carbon",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.365,
+        "civil": 0.432,
+        "electrical": 0.194,
+        "mechanical": 0.163
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.474,
+        "civil": 0.64,
+        "electrical": 0.387,
+        "mechanical": 0.371
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.483,
+        "civil": 0.585,
+        "electrical": 0.346,
+        "mechanical": 0.319
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.492,
+        "civil": 0.601,
+        "electrical": 0.368,
+        "mechanical": 0.336
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.431,
+        "civil": 0.531,
+        "electrical": 0.39,
+        "mechanical": 0.351
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.489,
+        "civil": 0.651,
+        "electrical": 0.425,
+        "mechanical": 0.348
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.373,
+        "civil": 0.366,
+        "electrical": 0.291,
+        "mechanical": 0.248
+      }
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.522,
+        "civil": 0.543,
+        "electrical": 0.194,
+        "mechanical": 0.208
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.449,
+        "civil": 0.515,
+        "electrical": 0.41,
+        "mechanical": 0.361
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.42,
+        "civil": 0.503,
+        "electrical": 0.323,
+        "mechanical": 0.331
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.438,
+        "civil": 0.47,
+        "electrical": 0.341,
+        "mechanical": 0.343
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.458,
+        "civil": 0.538,
+        "electrical": 0.397,
+        "mechanical": 0.348
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.382,
+        "civil": 0.481,
+        "electrical": 0.407,
+        "mechanical": 0.339
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.399,
+        "civil": 0.545,
+        "electrical": 0.346,
+        "mechanical": 0.359
+      }
+    },
+    {
+      "model": "gemini-4-argon",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.322,
+        "civil": 0.291,
+        "electrical": 0.318,
+        "mechanical": 0.261
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.322,
+        "civil": 0.286,
+        "electrical": 0.232,
+        "mechanical": 0.285
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.256,
+        "civil": 0.289,
+        "electrical": 0.271,
+        "mechanical": 0.261
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.253,
+        "civil": 0.255,
+        "electrical": 0.25,
+        "mechanical": 0.269
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.271,
+        "civil": 0.318,
+        "electrical": 0.262,
+        "mechanical": 0.269
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.117,
+        "civil": 0.184,
+        "electrical": 0.186,
+        "mechanical": 0.177
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.284,
+        "civil": 0.301,
+        "electrical": 0.259,
+        "mechanical": 0.282
+      }
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.339,
+        "civil": 0.309,
+        "electrical": 0.262,
+        "mechanical": 0.271
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.231,
+        "civil": 0.206,
+        "electrical": 0.222,
+        "mechanical": 0.217
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.263,
+        "civil": 0.263,
+        "electrical": 0.223,
+        "mechanical": 0.263
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.276,
+        "civil": 0.209,
+        "electrical": 0.229,
+        "mechanical": 0.252
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.223,
+        "civil": 0.234,
+        "electrical": 0.233,
+        "mechanical": 0.247
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.249,
+        "civil": 0.234,
+        "electrical": 0.226,
+        "mechanical": 0.251
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.268,
+        "civil": 0.238,
+        "electrical": 0.243,
+        "mechanical": 0.256
+      }
+    },
+    {
+      "model": "glm-5.2",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.211,
+        "civil": 0.233,
+        "electrical": 0.227,
+        "mechanical": 0.244
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.129,
+        "civil": 0.133,
+        "electrical": 0.159,
+        "mechanical": 0.14
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.119,
+        "civil": 0.121,
+        "electrical": 0.151,
+        "mechanical": 0.146
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.114,
+        "civil": 0.135,
+        "electrical": 0.153,
+        "mechanical": 0.141
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.078,
+        "civil": 0.132,
+        "electrical": 0.158,
+        "mechanical": 0.141
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.117,
+        "civil": 0.148,
+        "electrical": 0.162,
+        "mechanical": 0.146
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.114,
+        "civil": 0.152,
+        "electrical": 0.16,
+        "mechanical": 0.139
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.098,
+        "civil": 0.144,
+        "electrical": 0.16,
+        "mechanical": 0.152
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.005,
+        "civil": 0.021,
+        "electrical": 0.054,
+        "mechanical": 0.049
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.015,
+        "civil": 0.033,
+        "electrical": 0.056,
+        "mechanical": 0.035
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.01,
+        "civil": 0.02,
+        "electrical": 0.054,
+        "mechanical": 0.036
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.011,
+        "civil": 0.011,
+        "electrical": 0.061,
+        "mechanical": 0.047
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0.018,
+        "civil": 0.024,
+        "electrical": 0.049,
+        "mechanical": 0.037
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "codex",
+      "scores": {
+        "structural": 0.015,
+        "civil": 0.013,
+        "electrical": 0.035,
+        "mechanical": 0.057
+      }
+    },
+    {
+      "model": "gpt-oss-120b",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0.017,
+        "civil": 0.02,
+        "electrical": 0.054,
+        "mechanical": 0.057
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0.001,
+        "civil": 0.025,
+        "electrical": 0.044,
+        "mechanical": 0.05
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "pi",
+      "scores": {
+        "structural": 0.002,
+        "civil": 0.033,
+        "electrical": 0.046,
+        "mechanical": 0.044
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0.001,
+        "civil": 0.013,
+        "electrical": 0.032,
+        "mechanical": 0.036
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "agy",
+      "scores": {
+        "structural": 0.007,
+        "civil": 0.024,
+        "electrical": 0.042,
+        "mechanical": 0.058
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0,
+        "civil": 0.026,
+        "electrical": 0.027,
+        "mechanical": 0.013
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "codex",
+      "scores": {
+        "structural": 0,
+        "civil": 0.01,
+        "electrical": 0.005,
+        "mechanical": 0.01
+      }
+    },
+    {
+      "model": "gemma-4-26b",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0,
+        "civil": 0.026,
+        "electrical": 0.046,
+        "mechanical": 0.063
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "claude-code",
+      "scores": {
+        "structural": 0,
+        "civil": 0.001,
+        "electrical": 0.004,
+        "mechanical": 0.006
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "pi",
+      "scores": {
+        "structural": 0,
+        "civil": 0.001,
+        "electrical": 0.006,
+        "mechanical": 0.012
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "opencode",
+      "scores": {
+        "structural": 0,
+        "civil": 0,
+        "electrical": 0,
+        "mechanical": 0
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "agy",
+      "scores": {
+        "structural": 0,
+        "civil": 0,
+        "electrical": 0,
+        "mechanical": 0.002
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "hermes",
+      "scores": {
+        "structural": 0,
+        "civil": 0,
+        "electrical": 0,
+        "mechanical": 0.001
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "codex",
+      "scores": {
+        "structural": 0,
+        "civil": 0,
+        "electrical": 0,
+        "mechanical": 0.001
+      }
+    },
+    {
+      "model": "llama-4-maverick",
+      "harness": "openhands",
+      "scores": {
+        "structural": 0,
+        "civil": 0.002,
+        "electrical": 0.01,
+        "mechanical": 0.009
+      }
+    }
+  ]
+}
