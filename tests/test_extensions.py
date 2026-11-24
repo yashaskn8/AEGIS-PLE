@@ -123,3 +123,11 @@ class Streams(unittest.TestCase):
         for frames in ([action], [chunk("a", "stop", model="different"), usage()]):
             with self.assertRaises(WireError):
                 collect(frames, model=MODEL, output_limit=10)
+
+    def test_stream_byte_boundary_and_invalid_unicode(self):
+        exact = "界" * 2730 + "xx"
+        self.assertEqual(collect([chunk(exact, "stop"), usage()], model=MODEL,
+                                 output_limit=10).content, exact)
+        for value in (exact + "x", chr(0xD800)):
+            with self.assertRaises(WireError):
+                collect([chunk(value, "stop"), usage()], model=MODEL, output_limit=10)

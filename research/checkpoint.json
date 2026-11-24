@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "f81da600f077e1ef6e951dd53a83eeda3da80e4f",
-    "ci_run": 45441378244,
-    "tests": 118,
+    "commit": "f075817939772505d39e7732a5e9b4c3e4b39995",
+    "ci_run": 45441782248,
+    "tests": 121,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/f81da600f077e1ef6e951dd53a83eeda3da80e4f.json",
+    "observed_record": "research/evidence/f075817939772505d39e7732a5e9b4c3e4b39995.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -343,10 +343,14 @@
     },
     {
       "id": "bounded_multifield_document_scale",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "typed_provider_byte_boundaries",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 121-test commit and resource boundary. Broaden static type checking and preserve official-access blockers.",
+  "next": "Verify exact 123-test commit, including expanded strict typing and UTF-8 byte bounds. Continue only authorized offline requirements.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -359,17 +363,16 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "f81da600f077e1ef6e951dd53a83eeda3da80e4f",
-    "reason": "scale regression pending remote verification",
+    "last_code_commit": "f075817939772505d39e7732a5e9b4c3e4b39995",
+    "reason": "provider byte-boundary and typing regression pending remote verification",
     "next_files": [
-      "aegis/process_verify.py",
-      "aegis/document_worker.py",
-      "tests/test_document_scale.py",
+      "aegis/models.py",
+      "aegis/stream.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 121 tests and configured CI steps",
-      "no unverified competition or model access",
+      "preserve all 123 tests and CI steps",
+      "no unverified official access",
       "no paid calls",
       "no release promotion"
     ],

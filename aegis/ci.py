@@ -141,6 +141,10 @@ EXPECTED_IDS |= {"tests.test_document_scale.DocumentScale." + name for name in (
 )}
 
 
+EXPECTED_IDS.add("tests.test_protocol.Models.test_aggregate_content_budget_and_unicode")
+EXPECTED_IDS.add("tests.test_extensions.Streams.test_stream_byte_boundary_and_invalid_unicode")
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

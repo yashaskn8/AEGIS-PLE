@@ -145,3 +145,13 @@ class Models(unittest.TestCase):
             gemini.request(messages, max_tokens=True)
         with self.assertRaises(ValueError):
             gemini.request([{"role": "tool", "content": "x"}], max_tokens=10)
+
+    def test_aggregate_content_budget_and_unicode(self):
+        profile = Profile.parse("google-cloud/gemini-4-neon")
+        messages = [{"role": "user", "content": "界" * 65536},
+                    {"role": "user", "content": "x" * 65536}]
+        self.assertEqual(len(profile.request(messages, max_tokens=10)["messages"]), 2)
+        with self.assertRaises(ValueError):
+            profile.request(messages + [{"role": "user", "content": "x"}], max_tokens=10)
+        with self.assertRaises(ValueError):
+            profile.request([{"role": "user", "content": chr(0xD800)}], max_tokens=10)

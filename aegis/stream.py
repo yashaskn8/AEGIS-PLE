@@ -4,6 +4,7 @@ Consumes decoded synthetic chunks, not raw network streams. No tool actions.
 Provider-specific reasoning history and native APIs remain outside this subset.
 """
 from dataclasses import dataclass
+from collections.abc import Iterable
 from .protocol import WireError
 
 MAX_CHUNKS = 256
@@ -18,13 +19,13 @@ class Completion:
     cache_read_tokens: int
 
 
-def collect(chunks, *, model, output_limit):
+def collect(chunks: Iterable[object], *, model: str, output_limit: int) -> Completion:
     if type(output_limit) is not int or not 1 <= output_limit <= 32000:
         raise ValueError("invalid output limit")
-    parts = []
+    parts: list[str] = []
     size = 0
     stopped = False
-    usage = None
+    usage: tuple[int, int, int] | None = None
     for index, chunk in enumerate(chunks):
         if index >= MAX_CHUNKS:
             raise WireError("stream chunk budget exceeded")
@@ -63,7 +64,10 @@ def collect(chunks, *, model, output_limit):
         if fragment is not None:
             if type(fragment) is not str:
                 raise WireError("invalid content fragment")
-            size += len(fragment.encode("utf-8"))
+            try:
+                size += len(fragment.encode("utf-8"))
+            except UnicodeError as exc:
+                raise WireError("invalid stream Unicode") from exc
             if size > MAX_TEXT:
                 raise WireError("stream text budget exceeded")
             parts.append(fragment)
