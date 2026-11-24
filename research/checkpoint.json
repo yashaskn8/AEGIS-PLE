@@ -2,13 +2,29 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "73f95e3b5249b3e1833586d5efa71ac7084e5712",
-    "ci_run": 45433781388,
-    "tests": 28,
+    "commit": "e1f8c17921be07268a30874624bc9d50132f20c7",
+    "ci_run": 45434137959,
+    "tests": 36,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
-    }
+    },
+    "experiment_0004": {
+      "generated": 16,
+      "development": {
+        "cases": 7,
+        "matches": 7,
+        "checks": 16,
+        "baseline_checks": 26
+      },
+      "transfer": {
+        "cases": 32,
+        "matches": 32,
+        "checks": 53,
+        "baseline_checks": 100
+      }
+    },
+    "evidence": "research/evidence/e1f8c17921be07268a30874624bc9d50132f20c7.json"
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -34,7 +50,7 @@
     },
     {
       "id": "real_websocket_integration",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "mcp_and_tool_protocol",
@@ -54,7 +70,7 @@
     },
     {
       "id": "bounded_candidate_generation",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "persistent_learning",
@@ -62,11 +78,11 @@
     },
     {
       "id": "capability_matrix",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "engineering_transfer",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC"
     },
     {
       "id": "independent_governance",
@@ -114,7 +130,7 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Verify CI for the loopback and bounded policy experiment. Record actual experiment metrics; then extend independent evidence and provider response handling.",
+  "next": "Verify CI for budget and evidence replay. Continue provider response handling and bounded synthetic reasoning; full engineering capability evaluation and official execution remain subject to eligibility, permissions, compute and model access.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",

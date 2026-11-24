@@ -83,7 +83,10 @@ class Controller:
         self._version = sha256(Path(__file__).read_bytes()).hexdigest()
 
     def evaluate(self, facts: dict, *, reuse: bool = True,
-                 reuse_nodes: frozenset[str] | None = None) -> Report:
+                 reuse_nodes: frozenset[str] | None = None,
+                 max_checks: int | None = None) -> Report:
+        if max_checks is not None and (type(max_checks) is not int or not 0 <= max_checks <= MAX_NODES):
+            raise ValueError("invalid verification budget")
         if reuse_nodes is not None and (type(reuse_nodes) is not frozenset
                 or not reuse_nodes <= {node.name for node in self._order}):
             raise ValueError("invalid reuse policy")
@@ -116,6 +119,8 @@ class Controller:
                 continue
             if missing or any(p.status != "VERIFIED" for p in parents):
                 status, reason = "BLOCKED", "missing facts or unverified dependency"
+            elif max_checks is not None and evaluated >= max_checks:
+                status, reason = "BLOCKED", "verification budget exhausted"
             else:
                 evaluated += 1
                 try:

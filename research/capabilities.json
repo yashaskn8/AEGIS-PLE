@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "scope": "published baseline observations; not AEGIS measurements",
+  "source": "https://ple-bench.com/leaderboard",
+  "accessed": "2026-11-24",
+  "conditions": {
+    "set": "hidden",
+    "tasks": 56,
+    "runs_per_pair": 3
+  },
+  "leaders": [
+    {
+      "discipline": "structural",
+      "model": "Claude Opus 5.5",
+      "harness": "OpenHands"
+    },
+    {
+      "discipline": "civil",
+      "model": "Gemini 4 Neon",
+      "harness": "OpenHands"
+    },
+    {
+      "discipline": "electrical",
+      "model": "Claude Opus 5.5",
+      "harness": "Hermes"
+    },
+    {
+      "discipline": "mechanical",
+      "model": "Gemini 4 Neon",
+      "harness": "Claude Code"
+    }
+  ],
+  "transfer_hypotheses": [
+    {
+      "source": "https://github.com/google-research/ple/tree/main/sample_submissions/custom-openai",
+      "idea": "bounded context, stream handling and provider-aware message preservation",
+      "status": "UNTESTED"
+    },
+    {
+      "source": "https://github.com/google-research/ple/tree/main/sample_submissions/plan-verify",
+      "idea": "independent verification role",
+      "status": "PARTIAL_SYNTHETIC"
+    },
+    {
+      "source": "https://arxiv.org/abs/2507.19457",
+      "idea": "instance-level feedback and candidate selection",
+      "status": "PARTIAL_SYNTHETIC"
+    },
+    {
+      "source": "https://arxiv.org/abs/2506.13131",
+      "idea": "evaluator-driven bounded search",
+      "status": "PARTIAL_SYNTHETIC"
+    }
+  ],
+  "limitations": [
+    "Only category leaders were recorded; full category-by-model-by-harness matrix is pending.",
+    "Leaderboard association does not demonstrate causal benefit.",
+    "No hidden task content, official evaluation, or model transfer experiment was accessed."
+  ]
+}

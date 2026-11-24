@@ -40,6 +40,13 @@ EXPECTED_IDS |= {"tests.test_runtime.Policies." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_governance.Governance." + name for name in (
+    "test_historical_replay", "test_stale_and_missing_ci", "test_missing_skipped_duplicate_steps",
+    "test_false_metrics_and_selection", "test_budget_exhaustion", "test_budget_reuse_and_change",
+    "test_invalid_budget",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
