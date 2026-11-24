@@ -10,7 +10,8 @@ import json
 import re
 import sys
 
-MAX = 500_000
+# Independently bounded for the maximum supported document/provenance inventory.
+MAX = 640 * 1024
 
 
 def canonical(value):

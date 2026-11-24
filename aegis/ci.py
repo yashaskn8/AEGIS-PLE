@@ -135,6 +135,12 @@ EXPECTED_IDS |= {"tests.test_workflow_policy.WorkflowPolicy." + name for name in
 )}
 
 
+EXPECTED_IDS |= {"tests.test_document_scale.DocumentScale." + name for name in (
+    "test_maximum_supported_inventory", "test_seeded_multifield_transfer_and_compound_faults",
+    "test_oversized_request_rejected_before_launch_and_by_worker",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

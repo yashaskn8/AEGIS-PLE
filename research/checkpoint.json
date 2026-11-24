@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "6ed2818994f9a3e88cac4cd175a7089b088d95f6",
-    "ci_run": 45440663523,
-    "tests": 116,
+    "commit": "f81da600f077e1ef6e951dd53a83eeda3da80e4f",
+    "ci_run": 45441378244,
+    "tests": 118,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/6ed2818994f9a3e88cac4cd175a7089b088d95f6.json",
+    "observed_record": "research/evidence/f81da600f077e1ef6e951dd53a83eeda3da80e4f.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -339,10 +339,14 @@
     },
     {
       "id": "offline_transport_failure_and_deadline",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "bounded_multifield_document_scale",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 118-test integrated commit. Then measure synthetic runtime resources and broaden static coverage.",
+  "next": "Verify exact 121-test commit and resource boundary. Broaden static type checking and preserve official-access blockers.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -355,15 +359,17 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "6ed2818994f9a3e88cac4cd175a7089b088d95f6",
-    "reason": "transport regression pending remote verification",
+    "last_code_commit": "f81da600f077e1ef6e951dd53a83eeda3da80e4f",
+    "reason": "scale regression pending remote verification",
     "next_files": [
-      "aegis/document_agent.py",
+      "aegis/process_verify.py",
+      "aegis/document_worker.py",
+      "tests/test_document_scale.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 118 tests and CI steps",
-      "no unverified official access",
+      "preserve all 121 tests and configured CI steps",
+      "no unverified competition or model access",
       "no paid calls",
       "no release promotion"
     ],
@@ -417,6 +423,14 @@
       "repair": "catch OSError without retry and check deadline immediately after provider returns",
       "local_original": "2 tests: 1 failure, 1 error",
       "local_repaired": "2/2 passed; 118/118 full suite"
+    },
+    {
+      "commit": "f81da600f077e1ef6e951dd53a83eeda3da80e4f",
+      "requirement": "declared document scale reaches separate verifier",
+      "actual": "locally reproduced valid 32-document, 32-field request of 541715 bytes blocked by 500000-byte ceiling",
+      "root_cause": "controller and worker request caps did not account for complete provenance plus base64 expansion",
+      "repair": "640 KiB bounded envelope, exact maximum regression, compound revision tests, rejection above cap",
+      "local_repaired": "121/121 tests; 542355-byte Unicode fixture accepted in 0.0362 seconds on one local observation"
     }
   ]
 }

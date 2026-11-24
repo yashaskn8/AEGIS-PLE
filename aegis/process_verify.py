@@ -8,6 +8,8 @@ import sys
 from tempfile import TemporaryDirectory
 
 WORKER = Path(__file__).resolve().with_name("document_worker.py")
+# 32 * 8192-byte documents plus base64, manifest and up to 1024 provenance rows.
+MAX_REQUEST_BYTES = 640 * 1024
 
 
 def verify_in_process(manifest, required, documents, proposal, *, timeout=1.0):
@@ -17,7 +19,7 @@ def verify_in_process(manifest, required, documents, proposal, *, timeout=1.0):
         request = json.dumps({"manifest": manifest, "required": required,
             "documents": [base64.b64encode(d).decode() for d in documents],
             "proposal": proposal}, allow_nan=False, separators=(",", ":")).encode()
-        if len(request) > 500000:
+        if len(request) > MAX_REQUEST_BYTES:
             return False
         with TemporaryDirectory() as scratch:
             proc = subprocess.run([sys.executable, "-I", "-S", "-B", str(WORKER)],
