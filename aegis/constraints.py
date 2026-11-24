@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from hashlib import sha256
 import json
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 from .firewall import digest
 
@@ -42,13 +42,13 @@ class Report:
         return bool(self.evidence) and all(x.status == "VERIFIED" for x in self.evidence)
 
 
-Check = Callable[[dict], bool]
+Check = Callable[[dict[str, Any]], bool]
 
 
 class Controller:
     """A bounded DAG whose check registry is owned by the trusted caller."""
 
-    def __init__(self, requirements: tuple[Requirement, ...], checks: dict[str, Check]):
+    def __init__(self, requirements: tuple[Requirement, ...], checks: dict[str, Check]) -> None:
         if not 1 <= len(requirements) <= MAX_NODES:
             raise ValueError("invalid requirement count")
         nodes = {n.name: n for n in requirements}
@@ -59,11 +59,11 @@ class Controller:
                     or len(set(node.dependencies)) != len(node.dependencies)
                     or not set(node.dependencies) <= set(nodes)):
                 raise ValueError("invalid dependencies or facts")
-        ordered = []
-        visiting = set()
-        visited = set()
+        ordered: list[Requirement] = []
+        visiting: set[str] = set()
+        visited: set[str] = set()
 
-        def visit(name):
+        def visit(name: str) -> None:
             if name in visiting:
                 raise ValueError("cyclic requirements")
             if name in visited:
@@ -82,7 +82,7 @@ class Controller:
         self._cache: dict[str, Observation] = {}
         self._version = sha256(Path(__file__).read_bytes()).hexdigest()
 
-    def evaluate(self, facts: dict, *, reuse: bool = True,
+    def evaluate(self, facts: dict[str, Any], *, reuse: bool = True,
                  reuse_nodes: frozenset[str] | None = None,
                  max_checks: int | None = None) -> Report:
         if max_checks is not None and (type(max_checks) is not int or not 0 <= max_checks <= MAX_NODES):

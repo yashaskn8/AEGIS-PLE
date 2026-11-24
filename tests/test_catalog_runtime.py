@@ -31,15 +31,19 @@ def manifest(store):
 
 
 class CatalogRuntime(unittest.IsolatedAsyncioTestCase):
-    async def exchange(self, *, fault=None):
+    async def exchange(self, *, fault=None, custom_store=None, custom_manifest=None, write_budget=1000):
         store = {"register": csv_doc("register", 2, {"inventory_count": 4}),
                  "summary": record("summary", 1, 4)}
-        files = {INPUT:manifest(store)}
+        if custom_store is not None:
+            store = custom_store
+        files = {INPUT:manifest(store) if custom_manifest is None else custom_manifest}
         methods, fetched = [], []
         async with serve(run_catalog_session, "127.0.0.1", 0, ping_interval=None) as server:
             port = server.sockets[0].getsockname()[1]
             async with connect(f"ws://127.0.0.1:{port}",proxy=None) as peer:
-                await peer.send(encode(declared()))
+                task = declared()
+                task["limits"]["max_write_bytes"] = write_budget
+                await peer.send(encode(task))
                 async with asyncio.timeout(5):
                     for _ in range(16):
                         msg = decode(await peer.recv())
@@ -170,3 +174,30 @@ class CatalogRuntime(unittest.IsolatedAsyncioTestCase):
                        dict(original,records=[{"record_id":"../bad","sha256":"0"*64}])):
             with self.assertRaises(ValueError):
                 parse_bundle(encode(defect).encode())
+
+    async def test_count_constraints_on_catalog_runtime(self):
+        from tests.test_inventory_checks import CHECKS, REQUIRED, sources
+        for total in (9, 10):
+            store = sources(total=total)
+            payload = json.loads(manifest(store))
+            payload.update(required=list(REQUIRED), checks=CHECKS)
+            terminal, files, _, fetched = await self.exchange(
+                custom_store=store, custom_manifest=encode(payload).encode(), write_budget=4096)
+            self.assertEqual(fetched, ["register", "summary"])
+            self.assertEqual(terminal["type"], "done" if total == 9 else "error")
+            if total == 9:
+                self.assertEqual(len(json.loads(files[OUTPUT])["count_verification"]["evidence"]), 2)
+            else:
+                self.assertNotIn(OUTPUT, files)
+        payload["checks"] = [{"total": "a", "parts": ["b"]}, {"total": "b", "parts": ["a"]}]
+        terminal, files, methods, fetched = await self.exchange(
+            custom_store=store, custom_manifest=encode(payload).encode(), write_budget=4096)
+        self.assertEqual((terminal["type"], methods, fetched), ("error", [], []))
+        self.assertNotIn(OUTPUT, files)
+        store = sources()
+        payload = json.loads(manifest(store))
+        payload.update(required=list(REQUIRED), checks=CHECKS)
+        terminal, files, _, fetched = await self.exchange(
+            custom_store=store, custom_manifest=encode(payload).encode())
+        self.assertEqual((terminal["type"], fetched), ("error", ["register", "summary"]))
+        self.assertNotIn(OUTPUT, files)

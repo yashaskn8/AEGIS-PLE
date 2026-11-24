@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "e9b7bdca79e6693bfe4b98b0101bd9a4250b6b5d",
-    "ci_run": 45446496271,
-    "tests": 141,
+    "commit": "239a0540e7762bea9805b84b4834092f3d00321b",
+    "ci_run": 45447362870,
+    "tests": 147,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/e9b7bdca79e6693bfe4b98b0101bd9a4250b6b5d.json",
+    "observed_record": "research/evidence/239a0540e7762bea9805b84b4834092f3d00321b.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -168,7 +168,7 @@
       "scope": "synthetic workflow preflight",
       "steps": 21
     },
-    "strict_type_checked_files": 10,
+    "strict_type_checked_files": 11,
     "resource_comparison": {
       "full": {
         "checks": 2640,
@@ -464,10 +464,14 @@
     },
     {
       "id": "bound_catalog_record_retrieval",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "source_bound_count_constraint_integration",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 147-test integrated commit, eleven-module strict typing and all CI gates; inspect remaining offline scope without relaxing competition-access blocks.",
+  "next": "Verify exact 154-test integrated commit, thirteen-module strict typing and all mandatory checks. Continue remaining offline functional integration.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -480,20 +484,19 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "e9b7bdca79e6693bfe4b98b0101bd9a4250b6b5d",
-    "reason": "local synthetic catalog retrieval pending exact CI",
+    "last_code_commit": "239a0540e7762bea9805b84b4834092f3d00321b",
+    "reason": "count integration pending exact remote CI",
     "next_files": [
-      "aegis/mcp_catalog.py",
+      "aegis/inventory_checks.py",
+      "aegis/document_runtime.py",
       "aegis/catalog_runtime.py",
-      "tests/test_catalog_runtime.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 147 mandatory tests and CI steps",
-      "no arbitrary or live tool access",
-      "no unverified official access",
+      "preserve 154 mandatory tests and existing CI gates",
+      "no unauthorized competition/model/data access",
       "no paid calls",
-      "no release promotion"
+      "no promotion"
     ],
     "verdict": "CONDITIONAL_GO_SYNTHETIC_ONLY"
   },
@@ -596,6 +599,14 @@
       "root_cause": "wrapper checked serialized request size only after encoding input",
       "repair": "validate tuple inventory and each byte count before expansion, keep independent worker checks",
       "local_repaired": "141/141 tests"
+    },
+    {
+      "commit": "239a0540e7762bea9805b84b4834092f3d00321b",
+      "requirement": "count reporting end-to-end integration",
+      "actual": "previous local candidate 5/7 new tests passed; two loopbacks rejected 1511-byte report under 1000-byte limit",
+      "root_cause": "test fixture insufficient declared write budget, runtime correctly enforced limit",
+      "repair": "exercise sufficient 4096-byte budget plus explicit rejection under unchanged 1000-byte default in both runtimes",
+      "local_repaired": "154/154 tests, 7.313 seconds"
     }
   ]
 }

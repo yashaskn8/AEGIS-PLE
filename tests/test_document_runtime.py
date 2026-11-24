@@ -17,14 +17,16 @@ def bundle(conflict=False):
 
 
 class DocumentRuntime(unittest.IsolatedAsyncioTestCase):
-    async def exchange(self, *, conflict=False, change_at=0, corrupt=False, cancel_at=0, payload=None):
+    async def exchange(self, *, conflict=False, change_at=0, corrupt=False, cancel_at=0, payload=None, write_budget=1000):
         files = {INPUT:bundle(conflict) if payload is None else payload}
         reads = 0
         actions = 0
         async with serve(run_document_session,"127.0.0.1",0,ping_interval=None) as server:
             port = server.sockets[0].getsockname()[1]
             async with connect(f"ws://127.0.0.1:{port}",proxy=None) as peer:
-                await peer.send(encode(opening()))
+                task = opening()
+                task["limits"]["max_write_bytes"] = write_budget
+                await peer.send(encode(task))
                 async with asyncio.timeout(5):
                     for _ in range(8):
                         msg = decode(await peer.recv())
@@ -96,3 +98,15 @@ class DocumentRuntime(unittest.IsolatedAsyncioTestCase):
         terminal, files = await self.exchange(payload=payload)
         self.assertEqual(terminal["type"], "done")
         self.assertEqual(json.loads(files[OUTPUT])["report"]["facts"][0]["value"], 4)
+
+    async def test_count_constraints_on_file_runtime(self):
+        from tests.test_inventory_checks import bundle as checked_bundle, sources
+        terminal, files = await self.exchange(payload=checked_bundle(sources()), write_budget=4096)
+        self.assertEqual(terminal["type"], "done")
+        self.assertEqual(len(json.loads(files[OUTPUT])["count_verification"]["evidence"]), 2)
+        terminal, files = await self.exchange(payload=checked_bundle(sources(total=10)), write_budget=4096)
+        self.assertEqual(terminal["type"], "error")
+        self.assertNotIn(OUTPUT, files)
+        terminal, files = await self.exchange(payload=checked_bundle(sources()))
+        self.assertEqual(terminal["type"], "error")
+        self.assertNotIn(OUTPUT, files)

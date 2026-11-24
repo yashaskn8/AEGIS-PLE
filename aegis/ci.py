@@ -180,6 +180,15 @@ EXPECTED_IDS |= {"tests.test_catalog_runtime.CatalogRuntime." + name for name in
 )}
 
 
+EXPECTED_IDS |= {"tests.test_inventory_checks.InventoryChecks." + name for name in (
+    "test_chained_counts_and_binding", "test_invalid_plan_and_cycles",
+    "test_inconsistent_subtotal_and_text_blocked", "test_both_verifiers_required",
+    "test_seeded_fresh_count_transfer",
+)}
+EXPECTED_IDS.add("tests.test_document_runtime.DocumentRuntime.test_count_constraints_on_file_runtime")
+EXPECTED_IDS.add("tests.test_catalog_runtime.CatalogRuntime.test_count_constraints_on_catalog_runtime")
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
