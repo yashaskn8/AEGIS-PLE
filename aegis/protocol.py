@@ -11,6 +11,7 @@ from dataclasses import dataclass
 import json
 from pathlib import PurePosixPath
 from typing import Protocol
+from .models import Profile
 
 MAX_FRAME = 16 * 1024 * 1024
 MAX_FILE = 10_000_000
@@ -210,12 +211,41 @@ class Session:
         if reply["ok"] is not True or type(reply.get("size")) is not int or reply["size"] != len(data):
             raise WireError("write not acknowledged")
 
+    async def usage(self, profile, *, input_tokens, output_tokens, cache_read_tokens=0):
+        if self.task is None or self.terminal or self.cancelled or self.poisoned or self.busy:
+            raise WireError("session unavailable")
+        if type(profile) is not Profile or profile != Profile.parse(profile.declaration):
+            raise WireError("invalid model profile")
+        counts = (input_tokens, output_tokens, cache_read_tokens)
+        if any(type(n) is not int or not 0 <= n <= 2**53 - 1 for n in counts):
+            raise WireError("invalid usage count")
+        if cache_read_tokens > input_tokens:
+            raise WireError("cache tokens exceed input tokens")
+        # Never emit usage for a different model in the same session.
+        if getattr(self, "_usage_model", profile.model) != profile.model:
+            raise WireError("model changed within session")
+        if getattr(self, "_usage_count", 0) >= MAX_REQUESTS:
+            raise WireError("usage message budget exhausted")
+        self._usage_model = profile.model
+        self._usage_count = getattr(self, "_usage_count", 0) + 1
+        self.busy = True
+        try:
+            async with asyncio.timeout(self._remaining()):
+                await self.transport.send(encode({"type": "usage", "model": profile.model,
+                    "input_tokens": input_tokens, "output_tokens": output_tokens,
+                    "cache_read_tokens": cache_read_tokens}))
+        except BaseException:
+            self.poisoned = True
+            raise
+        finally:
+            self.busy = False
+
     async def finish(self, message, *, failed=False):
         if self.terminal or self.busy:
             raise WireError("terminal frame already sent or operation outstanding")
         message = text(message, "terminal message", 4096)
         # Cancellation grants a separate short grace window; do not reuse task deadline.
-        if self.poisoned and not self.cancelled and not failed:
+        if (self.task is None or self.poisoned) and not self.cancelled and not failed:
             raise WireError("ambiguous session cannot report success")
         self.terminal = True
         frame = {"type": "error", "message": message} if failed else {"type": "done", "final_message": message}

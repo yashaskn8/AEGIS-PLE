@@ -54,6 +54,15 @@ EXPECTED_IDS |= {"tests.test_repair.Repair." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_extensions.Extensions." + name for name in (
+    "test_usage", "test_no_completion_before_start", "test_catalog_handshake",
+    "test_catalog_not_declared", "test_catalog_compound_failures",
+)}
+EXPECTED_IDS |= {"tests.test_extensions.Streams." + name for name in (
+    "test_stream_collection", "test_missing_and_invalid_usage", "test_reject_tool_and_wrong_model",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
