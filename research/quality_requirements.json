@@ -61,7 +61,7 @@
       "id": "resource_efficiency",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
       "gate": "Three paired fresh-process synthetic workload rounds, CPU/wall/RSS measurements and strict correctness/evidence/check-count validation; actual engineering workload and model costs remain unverified.",
-      "remaining": "Measured synthetic workload setup, CPU, wall and RSS; adaptive evaluation pending; official workload and model costs remain unverified."
+      "remaining": "Adaptive routing executed remotely; local negative timing result retained. Reliable transfer and actual engineering workload costs unverified."
     },
     {
       "id": "independent_policy_protection",

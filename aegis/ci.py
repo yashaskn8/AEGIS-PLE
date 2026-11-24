@@ -157,6 +157,13 @@ EXPECTED_IDS |= {"tests.test_resources.Resources.test_isolated_comparison",
                  "tests.test_resources.Resources.test_adaptive_threshold_and_fallback"}
 
 
+EXPECTED_IDS |= {"tests.test_csv_documents.CSVDocuments." + name for name in (
+    "test_mixed_provenance_and_typed_values", "test_cross_format_conflicts_and_duplicates",
+    "test_malformed_csv_rejected", "test_fixed_category_transfer", "test_scripted_provider_mixed_input",
+)}
+EXPECTED_IDS.add("tests.test_document_runtime.DocumentRuntime.test_mixed_csv_bundle")
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

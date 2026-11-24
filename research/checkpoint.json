@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "ad1b954c60f3d21018d58d31af7bb292c1bd9bc7",
-    "ci_run": 45443581980,
-    "tests": 129,
+    "commit": "81b1f27cabf365f00210fcf73d2671f66efe72dd",
+    "ci_run": 45444208473,
+    "tests": 130,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/ad1b954c60f3d21018d58d31af7bb292c1bd9bc7.json",
+    "observed_record": "research/evidence/81b1f27cabf365f00210fcf73d2671f66efe72dd.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,10 +157,10 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14945052233,
-      "outer_sha256": "8d014483f95b354a3b0824a4cb9d669e0935b34e2784f15520e9bcd504efcd5d",
-      "inner_sha256": "10ef584ab32a73f9df6004b17875329f8aa396a7c3fa997314582966acab37a4",
-      "files": 85
+      "artifact_id": 14944672509,
+      "outer_sha256": "19878d07ed725927a374df2816cc3b02b271528a9e2a1721a03329c099b75a22",
+      "inner_sha256": "4e56210d016bd8dfc2d66e04ca7c6260b66a23648d59f45be5700c1b96048725",
+      "files": 86
     },
     "workflow_preflight": {
       "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
@@ -186,6 +186,76 @@
         "total_wall_ns": 34638967,
         "wall_ns": 23258608
       }
+    },
+    "adaptive_resource": {
+      "break_even_repeats": 94,
+      "calibration_sha256": "318988399a71f27a6641851c60ad1b7a8e750436290729e1e36522b1bb86b006",
+      "cases": [
+        {
+          "chosen": "full",
+          "chosen_minus_alternative_ns": -12454342,
+          "observations": [
+            {
+              "cases": 24,
+              "checks": 88,
+              "correct": 24,
+              "cpu_ns": 1276660,
+              "evidence_sha256": "e106666f6ad7b3e2062f10b8a2dece274d20b0695a67f70eebb087cbb52adfb5",
+              "method": "full",
+              "peak_rss_kib": 20156,
+              "setup_ns": 8270,
+              "total_wall_ns": 1285566,
+              "wall_ns": 1277296
+            },
+            {
+              "cases": 24,
+              "checks": 48,
+              "correct": 24,
+              "cpu_ns": 1005359,
+              "evidence_sha256": "e106666f6ad7b3e2062f10b8a2dece274d20b0695a67f70eebb087cbb52adfb5",
+              "method": "learned",
+              "peak_rss_kib": 20472,
+              "setup_ns": 12733779,
+              "total_wall_ns": 13739908,
+              "wall_ns": 1006129
+            }
+          ],
+          "repeats": 1
+        },
+        {
+          "chosen": "learned",
+          "chosen_minus_alternative_ns": -9211056,
+          "observations": [
+            {
+              "cases": 4320,
+              "checks": 8640,
+              "correct": 4320,
+              "cpu_ns": 174822685,
+              "evidence_sha256": "0e7638599bce286357c749732d82d6d7618aaa66c8032ba1d6726967e77f79db",
+              "method": "learned",
+              "peak_rss_kib": 29936,
+              "setup_ns": 12674918,
+              "total_wall_ns": 187503694,
+              "wall_ns": 174828776
+            },
+            {
+              "cases": 4320,
+              "checks": 15840,
+              "correct": 4320,
+              "cpu_ns": 196700769,
+              "evidence_sha256": "0e7638599bce286357c749732d82d6d7618aaa66c8032ba1d6726967e77f79db",
+              "method": "full",
+              "peak_rss_kib": 30792,
+              "setup_ns": 7795,
+              "total_wall_ns": 196714750,
+              "wall_ns": 196706955
+            }
+          ],
+          "repeats": 180
+        }
+      ],
+      "promotion": "BLOCKED",
+      "scope": "synthetic adaptive resource routing"
     }
   },
   "promotion": "BLOCKED",
@@ -377,10 +447,14 @@
     },
     {
       "id": "calibrated_adaptive_resource_routing",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "typed_csv_document_ingestion",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 130-test commit and both calibration/adaptive observations. Retain negative timing outcomes; do not claim real engineering performance or promote.",
+  "next": "Verify exact 136-test integrated commit with cross-format reconciliation, separate verifier, scripted provider and loopback tests. Then assess remaining offline format and evidence requirements.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -393,15 +467,16 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "ad1b954c60f3d21018d58d31af7bb292c1bd9bc7",
-    "reason": "adaptive routing pending remote verification",
+    "last_code_commit": "81b1f27cabf365f00210fcf73d2671f66efe72dd",
+    "reason": "mixed-format integration pending exact remote CI",
     "next_files": [
-      "aegis/resource_experiment.py",
-      "aegis/quality_evidence.py",
+      "aegis/documents.py",
+      "aegis/document_worker.py",
+      "tests/test_csv_documents.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve 130 tests and all CI steps",
+      "preserve 136 mandatory tests and all CI steps",
       "no unverified official access",
       "no paid calls",
       "no release promotion"

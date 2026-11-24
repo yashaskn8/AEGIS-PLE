@@ -17,8 +17,8 @@ def bundle(conflict=False):
 
 
 class DocumentRuntime(unittest.IsolatedAsyncioTestCase):
-    async def exchange(self, *, conflict=False, change_at=0, corrupt=False, cancel_at=0):
-        files = {INPUT:bundle(conflict)}
+    async def exchange(self, *, conflict=False, change_at=0, corrupt=False, cancel_at=0, payload=None):
+        files = {INPUT:bundle(conflict) if payload is None else payload}
         reads = 0
         actions = 0
         async with serve(run_document_session,"127.0.0.1",0,ping_interval=None) as server:
@@ -87,3 +87,12 @@ class DocumentRuntime(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(terminal["type"],"done")
         self.assertIn("incomplete",terminal["final_message"])
         self.assertNotIn(OUTPUT,files)
+
+    async def test_mixed_csv_bundle(self):
+        from tests.test_csv_documents import csv_doc
+        docs = (csv_doc("register", 2, {"inventory_count": 4}), record("summary", 1, 4))
+        payload = encode({"manifest":{"register":2,"summary":1},"required":["inventory_count"],
+                          "documents":[base64.b64encode(d).decode() for d in docs]}).encode()
+        terminal, files = await self.exchange(payload=payload)
+        self.assertEqual(terminal["type"], "done")
+        self.assertEqual(json.loads(files[OUTPUT])["report"]["facts"][0]["value"], 4)

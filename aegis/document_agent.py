@@ -10,7 +10,7 @@ from hashlib import sha256
 import json
 from time import monotonic
 
-from .documents import reconcile
+from .documents import reconcile, parse_record
 from .models import Profile
 from .protocol import decode, WireError
 from .stream import collect
@@ -58,7 +58,7 @@ async def solve(manifest, required, documents, profile, provider, *, max_calls=3
     expected = verified_projection(source)
     # Send raw fictional records, not the verified answer, to the test provider.
     request_data = json.dumps({"manifest": manifest, "required": required,
-        "documents": [decode(raw.decode()) for raw in documents],
+        "documents": [parse_record(raw) for raw in documents],
         "document_hashes": [sha256(raw).hexdigest() for raw in documents],
         "input_binding": source.input_binding}, sort_keys=True)
     if len(request_data.encode()) > 16000:

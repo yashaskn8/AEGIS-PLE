@@ -32,6 +32,47 @@ def parse(raw):
                       parse_constant=lambda _: (_ for _ in ()).throw(ValueError("constant")))
 
 
+def parse_document(raw):
+    # Independent narrow CSV parser: metadata cannot contain commas or quotes;
+    # only the final value column can use minimal doubled-quote encoding.
+    header = "family,revision,key,type,value\n"
+    text = raw.decode("utf-8").replace("\r\n", "\n")
+    if not text.startswith(header):
+        return parse(raw)
+    if not text.endswith("\n"):
+        raise ValueError("CSV terminator")
+    lines = text[len(header):-1].split("\n")
+    if not 1 <= len(lines) <= 32:
+        raise ValueError("CSV row count")
+    identity = None
+    fields = {}
+    for line in lines:
+        family, revision, field, kind, encoded = line.split(",", 4)
+        if not key(family) or not key(field) or not re.fullmatch(r"[1-9][0-9]{0,3}", revision):
+            raise ValueError("CSV metadata")
+        if identity is None:
+            identity = (family, revision)
+        if identity != (family, revision) or field in fields:
+            raise ValueError("CSV identity")
+        if encoded.startswith('"'):
+            if not re.fullmatch(r'"(?:[^"\r\n]|"")*"', encoded):
+                raise ValueError("CSV quote")
+            value = encoded[1:-1].replace('""', '"')
+            if not any(c in value for c in ',"'):
+                raise ValueError("unnecessary CSV quote")
+        else:
+            if any(c in encoded for c in ',"\r'):
+                raise ValueError("CSV unquoted value")
+            value = encoded
+        if kind == "int" and re.fullmatch(r"0|[1-9][0-9]{0,6}", value):
+            fields[field] = int(value)
+        elif kind == "text":
+            fields[field] = value
+        else:
+            raise ValueError("CSV type")
+    return {"family": identity[0], "revision": int(identity[1]), "fields": fields}
+
+
 def key(value):
     return type(value) is str and re.fullmatch(r"[a-z][a-z0-9_]{0,63}", value) is not None
 
@@ -57,7 +98,7 @@ def verify(request):
             return False
         fingerprint = sha256(raw).hexdigest()
         hashes.append(fingerprint)
-        item = parse(raw)
+        item = parse_document(raw)
         if type(item) is not dict or set(item) != {"family", "revision", "fields"}:
             return False
         family, rev, fields = item["family"], item["revision"], item["fields"]
