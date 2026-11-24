@@ -1,0 +1,25 @@
+name: Synthetic CI
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: synthetic-ci-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  verification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Record candidate and interpreter
+        run: |
+          git rev-parse HEAD
+          python3 --version
+      - name: Run fail-closed synthetic checks
+        run: python3 -m aegis.ci
+      - name: Run bounded synthetic experiment
+        run: python3 -m aegis.experiment

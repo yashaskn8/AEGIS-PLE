@@ -1,0 +1,1 @@
+"""AEGIS synthetic research foundation."""
