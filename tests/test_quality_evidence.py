@@ -129,3 +129,13 @@ class QualityEvidence(unittest.TestCase):
                 reports["synthetic workflow preflight"]["steps"] = 20
             with self.assertRaises(ValueError):
                 validate(changed, replace(binding, record_sha256=digest(changed)))
+
+    def test_required_resource_report_missing(self):
+        # Deliberately defective fixture, not an observed CI record.
+        r = record()
+        step = "Measure isolated synthetic verification resources"
+        r["steps"].insert(-2, {"name":step,"status":"completed","conclusion":"success"})
+        steps = STEPS[:-2] + (step,) + STEPS[-2:]
+        r["mandatory_steps"] = list(steps[4:-2])
+        with self.assertRaisesRegex(ValueError, "missing or unexpected reports"):
+            validate(r,replace(BINDING,steps=steps,record_sha256=digest(r)))

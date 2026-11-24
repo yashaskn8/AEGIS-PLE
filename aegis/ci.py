@@ -125,6 +125,7 @@ EXPECTED_IDS |= {"tests.test_quality_evidence.QualityEvidence." + name for name 
     "test_exact_historical_record", "test_modified_record_rejected",
     "test_structural_rejection_even_with_new_digest", "test_download_exact_and_tampered",
     "test_download_extra_inner_member", "test_preflight_record_and_required_report",
+    "test_required_resource_report_missing",
 )}
 
 
@@ -149,6 +150,10 @@ EXPECTED_IDS |= {"tests.test_deadline.Deadline." + name for name in (
     "test_late_receive_poisoned", "test_late_send_poisoned",
     "test_expired_success_refused_but_error_allowed",
 )}
+
+
+EXPECTED_IDS |= {"tests.test_resources.Resources.test_isolated_comparison",
+                 "tests.test_resources.Resources.test_invalid_budget"}
 
 
 def flatten(suite):

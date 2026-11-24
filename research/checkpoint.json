@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "208b3d1f5f4f65485a8aa690cef17a457232cdcd",
-    "ci_run": 45442302469,
-    "tests": 123,
+    "commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
+    "ci_run": 45443059654,
+    "tests": 126,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/208b3d1f5f4f65485a8aa690cef17a457232cdcd.json",
+    "observed_record": "research/evidence/00a8d455647644f0e8b620baf4735162293a7ce5.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -351,10 +351,14 @@
     },
     {
       "id": "protocol_deadline_postcondition",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "isolated_resource_comparison",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 126-test commit; measure bounded synthetic resource consumption and preserve explicit official-access blockers.",
+  "next": "Verify exact 129-test commit, six-process resource comparison and historical report validation. Evaluate whether observed setup overhead changes the bounded reuse policy recommendation; no live model performance claim.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -367,15 +371,15 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "f075817939772505d39e7732a5e9b4c3e4b39995",
-    "reason": "provider byte-boundary and typing regression pending remote verification",
+    "last_code_commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
+    "reason": "resource comparison pending remote verification",
     "next_files": [
-      "aegis/models.py",
-      "aegis/stream.py",
+      "aegis/resource_experiment.py",
+      "aegis/quality_evidence.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 123 tests and CI steps",
+      "preserve 129 tests and all CI steps",
       "no unverified official access",
       "no paid calls",
       "no release promotion"

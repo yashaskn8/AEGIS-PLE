@@ -1,0 +1,615 @@
+{
+  "scope": "synthetic educational only",
+  "commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
+  "run_id": 45443059654,
+  "job_id": 138619219189,
+  "tests": 126,
+  "mandatory_steps": [
+    "Install hash-pinned static verification tools",
+    "Validate exact workflow policy",
+    "Lint syntax and undefined-name rules",
+    "Strict type check typed arithmetic and evidence core",
+    "Run fail-closed synthetic checks",
+    "Run bounded synthetic experiment",
+    "Compare dependency verification with full recomputation",
+    "Generate and compare bounded verification policies",
+    "Compare synthetic document reconciliation ablations",
+    "Reproduce learned policy and measure fresh retention",
+    "Compare scripted document repair and single attempt",
+    "Analyze published baseline frontier",
+    "Verify deterministic-first document route",
+    "Analyze published discipline score matrix",
+    "Check installed dependency consistency",
+    "Verify checkout fingerprints and targeted mutation effectiveness",
+    "Build and verify extracted educational distribution",
+    "Archive verified educational distribution"
+  ],
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Record candidate and interpreter",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install hash-pinned loopback dependency",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install hash-pinned static verification tools",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Validate exact workflow policy",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Lint syntax and undefined-name rules",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Strict type check typed arithmetic and evidence core",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run fail-closed synthetic checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run bounded synthetic experiment",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Compare dependency verification with full recomputation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Generate and compare bounded verification policies",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Compare synthetic document reconciliation ablations",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reproduce learned policy and measure fresh retention",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Compare scripted document repair and single attempt",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Analyze published baseline frontier",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify deterministic-first document route",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Analyze published discipline score matrix",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Check installed dependency consistency",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify checkout fingerprints and targeted mutation effectiveness",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build and verify extracted educational distribution",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Archive verified educational distribution",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "reports": {
+    "synthetic checkout fingerprint": {
+      "commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
+      "files": {
+        ".github/workflows/ci.yml": {
+          "bytes": 3182,
+          "sha256": "ff41d34b7ac191e6dc39b30b3467e9779681343301f5dd21309cd913d6fc6ff4"
+        },
+        ".gitignore": {
+          "bytes": 86,
+          "sha256": "91a605fddf8f45c2fb0c00b4067db7c8eeb13774e35b14a3d6b24e4b8d9f8a25"
+        },
+        "AGENTS.md": {
+          "bytes": 29268,
+          "sha256": "035071ff831b2dd7451a7586199772a03666e6852c67af89780832db231b314e"
+        },
+        "LICENSE": {
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "README.md": {
+          "bytes": 3253,
+          "sha256": "50e5431b8d76dc2a057e06b0328ccad25f7eda9991bd250a9b722ee0d8787263"
+        },
+        "aegis/__init__.py": {
+          "bytes": 43,
+          "sha256": "fc726aef79ec3a31c7831cd1a983fd0bf1b9c239b0159bb327616bac3e9e9cfe"
+        },
+        "aegis/aggregation.py": {
+          "bytes": 1070,
+          "sha256": "8920099bcb73b69788bf67b3d88a42a568a412d8529ca6749f7277f508d5b5d3"
+        },
+        "aegis/ci.py": {
+          "bytes": 7287,
+          "sha256": "d43176f3da06d830a1e93605d8dce6b82010e14af6c4e855bb6dd5942e666661"
+        },
+        "aegis/ci_evidence.py": {
+          "bytes": 6689,
+          "sha256": "110a7fc0d073719e0f6f0fe1dfc859fc674551794193a2cd0ab98d9a04b44f7e"
+        },
+        "aegis/constraints.py": {
+          "bytes": 5344,
+          "sha256": "a69fb13dde7cb254b55fab502c45eb1c2f29fcb284de1f257af053c008da7fe2"
+        },
+        "aegis/deterministic_route.py": {
+          "bytes": 1946,
+          "sha256": "d82e3268cf3033ce495d000a1af8e901400d1e9210e8f177fe17e458b1fb1a04"
+        },
+        "aegis/disciplines.py": {
+          "bytes": 1719,
+          "sha256": "2b585febc61f9929f60240cdf17d75011a45fac89c51ed5fcdbed945e4be1343"
+        },
+        "aegis/distribution.py": {
+          "bytes": 4768,
+          "sha256": "66cfef4438d6960088ec00ff29b44d91ac8caced22a3dcf609a67e8bd1933e94"
+        },
+        "aegis/document_agent.py": {
+          "bytes": 8885,
+          "sha256": "c526b55c0909b7a7f6b40dc3a7ab0bb6e30ff5b67ed81c28daa6bd914afd5b09"
+        },
+        "aegis/document_experiment.py": {
+          "bytes": 3996,
+          "sha256": "713df4f906cc8ff63ccf18c7245b67e70749b034644855cde3b93c312bb09b97"
+        },
+        "aegis/document_runtime.py": {
+          "bytes": 2388,
+          "sha256": "f50361ae5740a1ed3065a9167911edb90f23797d5c6f5f5de529f8ed8aa339c0"
+        },
+        "aegis/document_worker.py": {
+          "bytes": 4057,
+          "sha256": "552852c955e96605f34b644d150f453256baa2bf5cb7c11678a9905bf0512c3c"
+        },
+        "aegis/documents.py": {
+          "bytes": 4061,
+          "sha256": "e004db965f49c5cfd6e47ac03cbdcd2f6fde379af193d4700a93ced69127a4eb"
+        },
+        "aegis/experiment.py": {
+          "bytes": 2223,
+          "sha256": "ba814d593ce067e530fec8c82d29af9c4fc545a9438ee08e01afaf2d05ac2658"
+        },
+        "aegis/firewall.py": {
+          "bytes": 4256,
+          "sha256": "b54421164b94d23a5c49ed1fed1d332a58e696fd870978cecd214b42ae9ee12a"
+        },
+        "aegis/frontier.py": {
+          "bytes": 2069,
+          "sha256": "9f8df056c4ea4985e662cdb3f8a8fd5fd70544bab30c7a0991b84b1da7ed065d"
+        },
+        "aegis/graph_experiment.py": {
+          "bytes": 2116,
+          "sha256": "f938c9261c9785e1d6931d319f8afdeb1dbd70a842b92dd3e18e1574e802070d"
+        },
+        "aegis/learned_policy.py": {
+          "bytes": 3089,
+          "sha256": "0262e022724ff93284d3db0e72f7ce2c32bfdffac0b73bec7ed30b3738b94c8f"
+        },
+        "aegis/mcp_catalog.py": {
+          "bytes": 5996,
+          "sha256": "8f52184db9c6d1fd5f36fba3f3fcc5d326acedbf26a6ea49384ead451b81bd89"
+        },
+        "aegis/models.py": {
+          "bytes": 3041,
+          "sha256": "7b91581b1ae1e0ebfabaa36360caac19b113aedd6cefdaef0320c04e74e10129"
+        },
+        "aegis/policy_search.py": {
+          "bytes": 3476,
+          "sha256": "8e8e9a2d85b723aa10dced1e3b58386fc924cca407ab34509f6616b166b3b7ef"
+        },
+        "aegis/process_verify.py": {
+          "bytes": 1614,
+          "sha256": "5e6cadeb308b1549bd23907c24219d2c5dbf93c2649dd4ad0bdec25a3726c9d8"
+        },
+        "aegis/protocol.py": {
+          "bytes": 11092,
+          "sha256": "819b15aaa7887bd5561cd727d316f43386d89cca1fce87ea2690882d89738afb"
+        },
+        "aegis/quality.py": {
+          "bytes": 7077,
+          "sha256": "54d80ba00893b62326bd3427b31e63fc314df4a68ae444cc9bfeaa533d08cf3c"
+        },
+        "aegis/quality_evidence.py": {
+          "bytes": 7899,
+          "sha256": "04508814fdc129cf6687e8455d6aee966becb66d317694713d357db5b9628154"
+        },
+        "aegis/repair.py": {
+          "bytes": 5267,
+          "sha256": "a7221a8c0e57c7672fd1dbc0d7f397a3155bc634cec8581bbaa96437dbdb110b"
+        },
+        "aegis/stream.py": {
+          "bytes": 3658,
+          "sha256": "f19ddb455db308122e62c2bea4ef12f575af5ea8b15753cec10f1d9162669d0b"
+        },
+        "aegis/synthetic_runtime.py": {
+          "bytes": 2721,
+          "sha256": "c1110aec590cb6d3cce385801426c6ba024263f90d9ececc24bcd02e64945726"
+        },
+        "aegis/workflow_policy.py": {
+          "bytes": 2553,
+          "sha256": "edd430f388b631c7bcea79504482260ba925d07b3175d52e015b20af35d5b064"
+        },
+        "docs/DEVELOPMENT.md": {
+          "bytes": 28747,
+          "sha256": "ac5ff339ca78f1494b3dd68e77334d427d906ca54cf6717ae3342549811f35ef"
+        },
+        "requirements-ci.txt": {
+          "bytes": 547,
+          "sha256": "afc418d094a7802ab239d984c49435502b4289aa9f0f39f6bd91e2617d4a33e2"
+        },
+        "requirements.txt": {
+          "bytes": 367,
+          "sha256": "f8f1d92e512c28638d6533fda41404bb2bcac66cc1de7eb44e14eddbdca8ca37"
+        },
+        "research/capabilities.json": {
+          "bytes": 1937,
+          "sha256": "e5dcdedfd0abad82222cc2746fdb67509c0766cbffab6d60a579cc0e47aae1f4"
+        },
+        "research/checkpoint.json": {
+          "bytes": 15452,
+          "sha256": "222c8c05b9b39fce981bd4324261968d73de503d96b6ab9bde0467951f182ef6"
+        },
+        "research/evidence/208b3d1f5f4f65485a8aa690cef17a457232cdcd.json": {
+          "bytes": 22320,
+          "sha256": "80fce8d8d249640733f8ac5cea09bd4d56b5eb98cac336bfe88d53d2dd315d17"
+        },
+        "research/evidence/2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4.json": {
+          "bytes": 21349,
+          "sha256": "33254613dad24a2108f5b50149d550fd4fd436b942358d72e9641667fde7528a"
+        },
+        "research/evidence/2fb93faa30ba22762381c443e192d9114a93ff6a.json": {
+          "bytes": 44235,
+          "sha256": "49befcbdcf25e89a06df065f89ac44252921ee409c248348c2c2af4818084afc"
+        },
+        "research/evidence/39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc.json": {
+          "bytes": 44235,
+          "sha256": "b25f131eba76ca7904f592f42d968b0162aaa9f32b817d4b2b753c18a89af8dd"
+        },
+        "research/evidence/4236db94e907d527900348f8dfe1b634f7522cb8.json": {
+          "bytes": 31880,
+          "sha256": "49fc467c6faa9cc8b996172053ccb005dc542d55cc5b23264423db547cc3a32a"
+        },
+        "research/evidence/654bf81d9bf75c995a744b86f5195dc88091b861.json": {
+          "bytes": 19500,
+          "sha256": "cbdc7978cc8f436f4bbb622455ec1e26aefbbbb82669b8f541cabf382b311616"
+        },
+        "research/evidence/6e45162b9aa80864e870bc55a9638da0a40b7d5e.json": {
+          "bytes": 15900,
+          "sha256": "b394d74a26a2dbfd48499e3ae3dd6077dfb7a756b75abba881bfde0654a3b03c"
+        },
+        "research/evidence/6ed2818994f9a3e88cac4cd175a7089b088d95f6.json": {
+          "bytes": 21552,
+          "sha256": "219e08d0518f3b29f8c92acd1c56604a3cdab24e1d95218286cb87160704c985"
+        },
+        "research/evidence/7850eb7544df48c28a7ab875b935bd9ec5ea7d04.json": {
+          "bytes": 21150,
+          "sha256": "85e46eedf26ea4e103a8ee252106e13f990fd057adec9b535945f9a7e49eb174"
+        },
+        "research/evidence/8ec3e99087bcef4de47db9b9843bc3180045dec2.json": {
+          "bytes": 20233,
+          "sha256": "f83186a73072c99c68d3dbe20a9418edbe2da558d5c32d9de9167fab647fab6f"
+        },
+        "research/evidence/a063077c2cb8eca6e83fc643924e3fd42262f8e6.json": {
+          "bytes": 58270,
+          "sha256": "3a5c136d5ab736d8afd44a7d38ff206eec898dbb60ae68ded92b24940eef03f9"
+        },
+        "research/evidence/a0aa103587a62917ad390c314c3530e2f0aa88dc.json": {
+          "bytes": 19703,
+          "sha256": "6a8339377c36a9063e68aaa0ab5fc2e23a6411f0744cce1464e093bf57c49b24"
+        },
+        "research/evidence/b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639.json": {
+          "bytes": 32736,
+          "sha256": "7d2ba84339fb8830d3def50b8fb17085834e0cd1294cfc02dfa0e740a1bc173d"
+        },
+        "research/evidence/bacf8fc8a02eeb6871674ff1706a212a1ea2ea6a.json": {
+          "bytes": 25706,
+          "sha256": "0397f4a8290e96e61ce951ce06f52be94781530d19d243984b10add05f9bf5e4"
+        },
+        "research/evidence/e1f8c17921be07268a30874624bc9d50132f20c7.json": {
+          "bytes": 44235,
+          "sha256": "7c8e22a064943a4bfb5c7ca00bd097f6e98c7eff9b57a97fc13a4291d8d9a731"
+        },
+        "research/evidence/e78bae31b266a8769f04ab04d67f6956ee2cb9bf.json": {
+          "bytes": 44235,
+          "sha256": "f0d67c77dd0885ffbe86d59c9c1a5574ea3424c66845b481cd36886c2ba6ce49"
+        },
+        "research/evidence/f075817939772505d39e7732a5e9b4c3e4b39995.json": {
+          "bytes": 22119,
+          "sha256": "0efb4d2d84e63f3c39994ffa614352e17fc0ce1cedd49487a565ebdbd8faaa0f"
+        },
+        "research/evidence/f81da600f077e1ef6e951dd53a83eeda3da80e4f.json": {
+          "bytes": 21751,
+          "sha256": "b937088fafa8928a30f3ea4b04c64ddaa56849e4941b8d96a37ee6fbc4a93a77"
+        },
+        "research/published_disciplines.json": {
+          "bytes": 16317,
+          "sha256": "755b472984a528d3730f2b527b5ef0df372b3164abd1d92930f049b817735618"
+        },
+        "research/published_overall.json": {
+          "bytes": 11832,
+          "sha256": "f1ef5f107d82e78199804a399325dea1166541ff64dba8a5cff3286d36896c03"
+        },
+        "research/quality_requirements.json": {
+          "bytes": 3042,
+          "sha256": "9d40c53a324135cf65581ea6e0062a324c7f0cb6312c40ab04973466d3bca118"
+        },
+        "serve.py": {
+          "bytes": 1016,
+          "sha256": "00b0c74c3662c881f33b91147ef9e4c54e02c5e440ba8ea0582f8525fb347ec0"
+        },
+        "tests/__init__.py": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "tests/test_constraints.py": {
+          "bytes": 4017,
+          "sha256": "3c436148a11c3eba9e3fbca2e4812ffc38e16307fbe334c5394453dcf8f6cdda"
+        },
+        "tests/test_deadline.py": {
+          "bytes": 2208,
+          "sha256": "3ecd7158769acd092cc5389957ee78918336bdace4fd21dcdd6f4aaa138901dd"
+        },
+        "tests/test_decimal_precision.py": {
+          "bytes": 596,
+          "sha256": "875e8f005d4c7895f03db17ebaab2099a6128d01347ce527b261b966f1fc0344"
+        },
+        "tests/test_deterministic.py": {
+          "bytes": 1311,
+          "sha256": "8858ba6f725ef63cf7200fff69dee6dd9c410bc14b24446a11dd0c8663d9626e"
+        },
+        "tests/test_distribution.py": {
+          "bytes": 1289,
+          "sha256": "9ebbb41534083924b4ba09b823a4f2a348c83c8282510d9fc2c2951d25bb346e"
+        },
+        "tests/test_document_agent.py": {
+          "bytes": 5555,
+          "sha256": "866ca1252778ba6db688e640ce49452366c31b8a4232e97099dad6978754d2fd"
+        },
+        "tests/test_document_runtime.py": {
+          "bytes": 4114,
+          "sha256": "256fec9e815c6cb17cdf26e8729988d51edf88610edada19184e48f9475145cb"
+        },
+        "tests/test_document_scale.py": {
+          "bytes": 4924,
+          "sha256": "83738e8a992da600a300a47c03d2f62b3ce0574da475e5033b5e6f92a149a50b"
+        },
+        "tests/test_documents.py": {
+          "bytes": 3010,
+          "sha256": "e830c5e97eb7c71660ba897a2c52163b687b336347c71ec1bfce4fe8642ca9c6"
+        },
+        "tests/test_extensions.py": {
+          "bytes": 5671,
+          "sha256": "eed4d35d8aa4caa3478113e8ddbbd7ee9bf056bd06f2cf73dcbb73b19523d594"
+        },
+        "tests/test_foundation.py": {
+          "bytes": 3459,
+          "sha256": "c2a41436452e77afa1b95850f135407cc6a738bc7d94a704398625a83783ea1f"
+        },
+        "tests/test_governance.py": {
+          "bytes": 3405,
+          "sha256": "4c65466837a92401043debbfea8c19bcbd7c81417d3c905b70e65914d5ba09d9"
+        },
+        "tests/test_learning.py": {
+          "bytes": 1915,
+          "sha256": "69544bb7347d08d2e3267a61506729f50bda5b25efcbacdf2ad837fe5a45cca0"
+        },
+        "tests/test_process.py": {
+          "bytes": 2099,
+          "sha256": "ae6382a9e0dfe277bf592b1fe01b0726231b29967cffc252046f1cbc8f70d5b5"
+        },
+        "tests/test_protocol.py": {
+          "bytes": 6641,
+          "sha256": "e94af4cb9714ca960758727139cdb92648f456912a20bc42f5bf70511f5b5b65"
+        },
+        "tests/test_quality.py": {
+          "bytes": 1532,
+          "sha256": "b901376dea2aec8d9f168e4f17762359459b8a12ea0d60719be6d0dcb0aa69ab"
+        },
+        "tests/test_quality_evidence.py": {
+          "bytes": 6086,
+          "sha256": "6521da63f98256c3e799f92f96e7ab0f9ca6518a329d7fb79f71d50849f15028"
+        },
+        "tests/test_repair.py": {
+          "bytes": 4326,
+          "sha256": "2dc2a2dee6ad6a868741727ebcd2c8c8c899bbf8a9eb38d471ce498cf7c3401a"
+        },
+        "tests/test_runtime.py": {
+          "bytes": 4741,
+          "sha256": "772484a08c5c28974e85d33a016cbebb7cefc451eaefab78bac7020ac37e9701"
+        },
+        "tests/test_workflow_policy.py": {
+          "bytes": 2310,
+          "sha256": "7dd5af0ea36be34098c97b0615130769358b6a764dc5e468a31e70eff162504c"
+        }
+      },
+      "platform": "Linux-7.0.0-1014-aws-x86_64-with-glibc2.39",
+      "promotion": "BLOCKED",
+      "python": "3.12.3",
+      "scope": "synthetic checkout fingerprint",
+      "tree_digest": "41a341a114ff2348eeaaa35bf7ca751d3ac1fd42799b4a09b24fc1cf11013a80",
+      "websockets": "15.0.1"
+    },
+    "targeted synthetic mutation gate": {
+      "killed": 4,
+      "mutants": 4,
+      "promotion": "BLOCKED",
+      "rows": [
+        {
+          "baseline": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutant": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [
+              "tests.test_constraints.Constraints.test_contradictory_evidence"
+            ],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutation": "contradictory_evidence",
+          "source_sha256": "b54421164b94d23a5c49ed1fed1d332a58e696fd870978cecd214b42ae9ee12a",
+          "test": "tests.test_constraints.Constraints.test_contradictory_evidence"
+        },
+        {
+          "baseline": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutant": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [
+              "tests.test_deterministic.Deterministic.test_worker_veto"
+            ],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutation": "ignore_worker_veto",
+          "source_sha256": "d82e3268cf3033ce495d000a1af8e901400d1e9210e8f177fe17e458b1fb1a04",
+          "test": "tests.test_deterministic.Deterministic.test_worker_veto"
+        },
+        {
+          "baseline": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutant": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [
+              "tests.test_documents.Documents.test_conflicting_provenance"
+            ],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutation": "skip_conflict_rejection",
+          "source_sha256": "e004db965f49c5cfd6e47ac03cbdcd2f6fde379af193d4700a93ced69127a4eb",
+          "test": "tests.test_documents.Documents.test_conflicting_provenance"
+        },
+        {
+          "baseline": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutant": {
+            "errors": [],
+            "expected_failures": 0,
+            "failures": [
+              "tests.test_extensions.Extensions.test_usage"
+            ],
+            "run": 1,
+            "skipped": 0,
+            "unexpected_successes": 0
+          },
+          "mutation": "skip_usage_model_lock",
+          "source_sha256": "819b15aaa7887bd5561cd727d316f43386d89cca1fce87ea2690882d89738afb",
+          "test": "tests.test_extensions.Extensions.test_usage"
+        }
+      ],
+      "scope": "targeted synthetic mutation gate"
+    },
+    "verified synthetic source distribution": {
+      "bytes": 866914,
+      "commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
+      "extracted_test_gate": "passed",
+      "files": 82,
+      "promotion": "BLOCKED",
+      "reproducible": true,
+      "scope": "verified synthetic source distribution",
+      "sha256": "5008317c504f70e3b96bf58ca02d186ee9fc9277954ab8216578e120a513ea66"
+    },
+    "synthetic workflow preflight": {
+      "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
+      "promotion": "BLOCKED",
+      "scope": "synthetic workflow preflight",
+      "steps": 21
+    }
+  },
+  "artifact": {
+    "id": 14943867650,
+    "name": "aegis-educational-00a8d455647644f0e8b620baf4735162293a7ce5",
+    "size_in_bytes": 144198,
+    "digest": "sha256:766612dfdadac88be59f4da4a5ffbc394c2eba63370620a17c410c2468373020",
+    "expired": false,
+    "head_sha": "00a8d455647644f0e8b620baf4735162293a7ce5"
+  },
+  "promotion": "BLOCKED"
+}

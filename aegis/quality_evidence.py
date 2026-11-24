@@ -10,6 +10,7 @@ from io import BytesIO
 import json
 from pathlib import PurePosixPath
 import re
+from statistics import median
 from typing import Any
 from zipfile import ZIP_STORED, BadZipFile, ZipFile
 
@@ -48,6 +49,52 @@ class Binding:
     workflow_policy_sha256: str | None = None
 
 
+RESOURCE_METHODS = ("full", "learned")
+RESOURCE_ROUNDS = 3
+RESOURCE_REPEATS = 30
+MAX_WALL_NS = 10_000_000_000
+MAX_CPU_NS = 8_000_000_000
+MAX_RSS_KIB = 128 * 1024
+RESOURCE_FIELDS = ("setup_ns", "wall_ns", "cpu_ns", "peak_rss_kib", "checks", "total_wall_ns")
+
+
+def validate_resource_pair(rows: list[dict[str, Any]], repeats: int) -> None:
+    require(len(rows) == 2 and {r["method"] for r in rows} == set(RESOURCE_METHODS),
+            "resource method inventory mismatch")
+    full, learned = (next(r for r in rows if r["method"] == m) for m in RESOURCE_METHODS)
+    cases = 24 * repeats  # fixed archived learning-retention workload
+    for row in rows:
+        require(type(row["cases"]) is int and row["cases"] == cases
+                and type(row["correct"]) is int and row["correct"] == cases
+                and type(row["checks"]) is int and 0 < row["checks"] <= cases * 4
+                and hex_digest(row["evidence_sha256"]), "resource correctness violation")
+        require(all(type(row[k]) is int and 0 < row[k] <= ceiling
+                    for k, ceiling in (("setup_ns", MAX_WALL_NS), ("wall_ns", MAX_WALL_NS),
+                                       ("cpu_ns", MAX_CPU_NS), ("peak_rss_kib", MAX_RSS_KIB)))
+                and type(row["total_wall_ns"]) is int
+                and row["total_wall_ns"] == row["setup_ns"] + row["wall_ns"]
+                and row["total_wall_ns"] <= MAX_WALL_NS, "resource budget violation")
+    require(full["evidence_sha256"] == learned["evidence_sha256"]
+            and full["checks"] == 88 * repeats and learned["checks"] == 48 * repeats,
+            "learned policy did not retain evidence and check savings")
+
+
+def validate_resource_report(report: dict[str, Any], *, rounds: int, repeats: int) -> None:
+    require(type(rounds) is int and 1 <= rounds <= RESOURCE_ROUNDS
+            and type(repeats) is int and 1 <= repeats <= RESOURCE_REPEATS,
+            "resource experiment exceeds declared budget")
+    require(report["scope"] == "synthetic resource comparison" and report["promotion"] == "BLOCKED"
+            and report["rounds"] == rounds and report["repeats"] == repeats,
+            "resource report identity mismatch")
+    observations = report["observations"]
+    require(len(observations) == rounds, "resource round inventory mismatch")
+    for rows in observations:
+        validate_resource_pair(rows, repeats)
+    summary = {method: {key: median(r[key] for rows in observations for r in rows if r["method"] == method)
+                        for key in RESOURCE_FIELDS} for method in RESOURCE_METHODS}
+    require(summary == report["median"], "resource median mismatch")
+
+
 def validate(record: dict[str, Any], binding: Binding) -> None:
     require(hex_digest(binding.commit, 40) and hex_digest(binding.record_sha256), "invalid binding")
     require(all(type(x) is int and x > 0 for x in (binding.run, binding.job, binding.tests)),
@@ -72,7 +119,12 @@ def validate(record: dict[str, Any], binding: Binding) -> None:
         require(hex_digest(binding.workflow_policy_sha256), "missing trusted workflow digest")
     else:
         require(binding.workflow_policy_sha256 is None, "unexpected workflow digest")
+    if "Measure isolated synthetic verification resources" in binding.steps:
+        expected_reports.add("synthetic resource comparison")
     require(set(reports) == expected_reports, "missing or unexpected reports")
+    if "synthetic resource comparison" in expected_reports:
+        validate_resource_report(reports["synthetic resource comparison"],
+                                 rounds=RESOURCE_ROUNDS, repeats=RESOURCE_REPEATS)
     if "synthetic workflow preflight" in expected_reports:
         preflight = reports["synthetic workflow preflight"]
         require(preflight["policy_sha256"] == binding.workflow_policy_sha256
