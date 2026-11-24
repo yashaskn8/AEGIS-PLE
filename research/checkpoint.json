@@ -350,7 +350,7 @@
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 123-test commit, including expanded strict typing and UTF-8 byte bounds. Continue only authorized offline requirements.",
+  "next": "Verify the corrected 123-test commit with strict mypy on six explicit modules and all CI gates.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -434,6 +434,16 @@
       "root_cause": "controller and worker request caps did not account for complete provenance plus base64 expansion",
       "repair": "640 KiB bounded envelope, exact maximum regression, compound revision tests, rejection above cap",
       "local_repaired": "121/121 tests; 542355-byte Unicode fixture accepted in 0.0362 seconds on one local observation"
+    },
+    {
+      "commit": "8a5f92a9224ab1b2c131794a1fd090b15f71c7c0",
+      "run": 45442069514,
+      "job": 138615646143,
+      "expected": "expanded strict type gate passes",
+      "actual": "30 mypy errors in imported protocol.py; remaining mandatory tests and packaging skipped",
+      "root_cause": "strict mypy follows the stream module's protocol dependency, which lacked complete annotations",
+      "repair": "annotate protocol dependency and make all six checked modules explicit; preserve the same strict gate",
+      "local_repaired": "123 tests passed; workflow policy preflight passed; pinned remote mypy pending"
     }
   ]
 }

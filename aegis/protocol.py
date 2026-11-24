@@ -10,7 +10,7 @@ import binascii
 from dataclasses import dataclass
 import json
 from pathlib import PurePosixPath
-from typing import Protocol
+from typing import Any, Protocol, Self
 from .models import Profile
 
 MAX_FRAME = 16 * 1024 * 1024
@@ -31,7 +31,7 @@ class Transport(Protocol):
     async def recv(self) -> str: ...
 
 
-def unique(pairs):
+def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result = {}
     for key, value in pairs:
         if key in result:
@@ -40,13 +40,13 @@ def unique(pairs):
     return result
 
 
-def decode(raw: str) -> dict:
+def decode(raw: str) -> dict[str, Any]:
     try:
         if type(raw) is not str or len(raw.encode("utf-8")) > MAX_FRAME:
             raise WireError("invalid frame size or type")
-        def invalid_constant(_):
+        def invalid_constant(_: str) -> None:
             raise WireError("invalid JSON constant")
-        value = json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_constant)
+        value: object = json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_constant)
         if type(value) is not dict:
             raise WireError("expected object")
         return value
@@ -54,7 +54,7 @@ def decode(raw: str) -> dict:
         raise WireError("invalid JSON") from exc
 
 
-def encode(value: dict) -> str:
+def encode(value: dict[str, Any]) -> str:
     try:
         raw = json.dumps(value, allow_nan=False, ensure_ascii=True, separators=(",", ":"))
         if len(raw.encode()) > MAX_FRAME:
@@ -64,13 +64,13 @@ def encode(value: dict) -> str:
         raise WireError("invalid frame") from exc
 
 
-def positive(value, name, maximum):
+def positive(value: object, name: str, maximum: int) -> int:
     if type(value) is not int or not 1 <= value <= maximum:
         raise WireError("invalid " + name)
     return value
 
 
-def text(value, name, maximum=65536):
+def text(value: object, name: str, maximum: int = 65536) -> str:
     if type(value) is not str or not value or len(value) > maximum or "\x00" in value:
         raise WireError("invalid " + name)
     try:
@@ -89,15 +89,14 @@ class Task:
     max_write: int
 
     @classmethod
-    def parse(cls, frame):
+    def parse(cls, frame: dict[str, Any]) -> Self:
         if frame.get("type") != "task" or type(frame.get("protocol")) is not int or frame["protocol"] != 1:
             raise WireError("unsupported opening frame")
         limits = frame.get("limits")
         if type(limits) is not dict or type(frame.get("mcp_servers")) is not list:
             raise WireError("invalid task capabilities")
-        timeout = limits.get("agent_timeout_sec")
-        if timeout is not None:
-            positive(timeout, "deadline", 86400)
+        raw_timeout = limits.get("agent_timeout_sec")
+        timeout = None if raw_timeout is None else positive(raw_timeout, "deadline", 86400)
         write = positive(limits.get("max_write_bytes"), "write limit", MAX_FILE)
         root = text(frame.get("workdir"), "workdir", 1024)
         if not PurePosixPath(root).is_absolute() or ".." in PurePosixPath(root).parts:
@@ -112,20 +111,20 @@ class Session:
     Intentionally narrower than PLE: no exec, HTTP, append or concurrent requests.
     The transport must be an authorized synthetic peer until policy is cleared.
     """
-    def __init__(self, transport: Transport, *, io_timeout: float = 5.0):
+    def __init__(self, transport: Transport, *, io_timeout: float = 5.0) -> None:
         if not 0 < io_timeout <= 30:
             raise ValueError("invalid I/O timeout")
         self.transport = transport
         self.io_timeout = io_timeout
-        self.task = None
-        self.deadline = None
+        self.task: Task | None = None
+        self.deadline: float | None = None
         self.count = 0
         self.terminal = False
         self.cancelled = False
         self.poisoned = False
         self.busy = False
 
-    def _remaining(self):
+    def _remaining(self) -> float:
         remaining = self.io_timeout
         if self.deadline is not None:
             remaining = min(remaining, self.deadline - asyncio.get_running_loop().time())
@@ -133,7 +132,7 @@ class Session:
             raise WireError("task deadline reached")
         return remaining
 
-    async def _recv(self):
+    async def _recv(self) -> dict[str, Any]:
         try:
             async with asyncio.timeout(self._remaining()):
                 value = decode(await self.transport.recv())
@@ -144,22 +143,23 @@ class Session:
             raise Cancelled("peer cancelled")
         return value
 
-    async def start(self):
+    async def start(self) -> Task:
         if self.task is not None or self.terminal or self.busy or self.poisoned:
             raise WireError("cannot start session")
         self.busy = True
         try:
-            self.task = Task.parse(await self._recv())
-            if self.task.timeout is not None:
-                self.deadline = asyncio.get_running_loop().time() + self.task.timeout
-            return self.task
+            task = Task.parse(await self._recv())
+            self.task = task
+            if task.timeout is not None:
+                self.deadline = asyncio.get_running_loop().time() + task.timeout
+            return task
         except BaseException:
             self.poisoned = True
             raise
         finally:
             self.busy = False
 
-    def _path(self, path):
+    def _path(self, path: str) -> str:
         path = text(path, "path", 1024)
         # Synthetic controller uses relative paths only. Peer owns filesystem isolation.
         p = PurePosixPath(path)
@@ -167,7 +167,7 @@ class Session:
             raise WireError("path outside synthetic scope")
         return str(p)
 
-    async def _request(self, kind, **fields):
+    async def _request(self, kind: str, **fields: Any) -> dict[str, Any]:
         if self.task is None or self.terminal or self.cancelled or self.poisoned or self.busy:
             raise WireError("session unavailable")
         if self.count >= MAX_REQUESTS:
@@ -191,7 +191,7 @@ class Session:
         finally:
             self.busy = False
 
-    async def read(self, path):
+    async def read(self, path: str) -> bytes:
         reply = await self._request("read_file", path=self._path(path))
         if reply["ok"] is not True or reply.get("truncated") is not False:
             raise WireError("file unavailable or incomplete")
@@ -203,7 +203,7 @@ class Session:
             raise WireError("file size mismatch")
         return data
 
-    async def write(self, path, data):
+    async def write(self, path: str, data: bytes) -> None:
         if self.task is None or type(data) is not bytes or len(data) > self.task.max_write:
             raise WireError("invalid write payload")
         reply = await self._request("write_file", path=self._path(path),
@@ -211,7 +211,8 @@ class Session:
         if reply["ok"] is not True or type(reply.get("size")) is not int or reply["size"] != len(data):
             raise WireError("write not acknowledged")
 
-    async def usage(self, profile, *, input_tokens, output_tokens, cache_read_tokens=0):
+    async def usage(self, profile: Profile, *, input_tokens: int, output_tokens: int,
+                    cache_read_tokens: int = 0) -> None:
         if self.task is None or self.terminal or self.cancelled or self.poisoned or self.busy:
             raise WireError("session unavailable")
         if type(profile) is not Profile or profile != Profile.parse(profile.declaration):
@@ -240,7 +241,7 @@ class Session:
         finally:
             self.busy = False
 
-    async def finish(self, message, *, failed=False):
+    async def finish(self, message: str, *, failed: bool = False) -> None:
         if self.terminal or self.busy:
             raise WireError("terminal frame already sent or operation outstanding")
         message = text(message, "terminal message", 4096)
