@@ -24,7 +24,11 @@ def build(raw):
             or type(payload["documents"]) is not list or len(payload["documents"]) > 32):
         raise ValueError("invalid bundle schema")
     documents = tuple(base64.b64decode(d,validate=True) for d in payload["documents"])
-    result = solve(payload["manifest"],tuple(payload["required"]),documents)
+    return render_report(payload["manifest"], tuple(payload["required"]), documents)
+
+
+def render_report(manifest, required, documents):
+    result = solve(manifest, required, documents)
     if result["status"] != "VERIFIED_SYNTHETIC":
         raise WireError("document evidence blocked")
     return encode({"scope":"synthetic only","model_calls":0,"report":result["output"]}).encode()

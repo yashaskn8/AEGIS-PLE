@@ -173,6 +173,13 @@ EXPECTED_IDS |= {"tests.test_repair.Repair." + name for name in (
 EXPECTED_IDS.add("tests.test_process.Process.test_document_limits_before_encoding")
 
 
+EXPECTED_IDS |= {"tests.test_catalog_runtime.CatalogRuntime." + name for name in (
+    "test_catalog_to_verified_report", "test_corruption_change_and_cancel_fail_closed",
+    "test_schema_and_arguments_before_dispatch", "test_result_compound_failures_poison_session",
+    "test_lookup_budget_and_exact_request_identity", "test_manifest_validation_before_lookup",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

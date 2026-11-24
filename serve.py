@@ -11,6 +11,7 @@ from websockets.asyncio.server import serve
 from aegis.protocol import MAX_FRAME
 from aegis.synthetic_runtime import run_session
 from aegis.document_runtime import run_document_session
+from aegis.catalog_runtime import run_catalog_session
 
 
 async def main():
@@ -18,9 +19,11 @@ async def main():
     if not 1 <= port <= 65535:
         raise ValueError("invalid port")
     mode = os.environ.get("AEGIS_SYNTHETIC_MODE", "measurements")
-    if mode not in ("measurements", "documents"):
+    handlers = {"measurements": run_session, "documents": run_document_session,
+                "catalog_documents": run_catalog_session}
+    if mode not in handlers:
         raise ValueError("invalid synthetic mode")
-    handler = run_document_session if mode == "documents" else run_session
+    handler = handlers[mode]
     async with serve(handler, "127.0.0.1", port, max_size=MAX_FRAME,
                      ping_interval=None, compression=None) as server:
         await server.serve_forever()

@@ -35,3 +35,5 @@ For the fictional document protocol, run `AEGIS_SYNTHETIC_MODE=documents python 
 ### Local CI preflight
 
 Install the hash-pinned CI tools from `requirements-ci.txt` in the documented Python 3.12 Linux x86-64 environment, then run `python -m aegis.workflow_policy` before pushing workflow changes. Run `python -m aegis.ci` for the complete mandatory test suite. Any intentional workflow-policy change requires review of both the workflow and its policy digest. This repository-owned check is not independent release approval.
+
+The educational `catalog_documents` loopback mode reads `inventory_catalog_bundle.json`, retrieves only explicitly hash-bound fictional records from the fixed synthetic catalog service, reconciles them, and writes the verified inventory report. It does not use real services or a model-selected tool.

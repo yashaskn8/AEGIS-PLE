@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "8b9782c95c9593789874022b7a1d3ac2fd61b5c8",
-    "ci_run": 45445801268,
-    "tests": 140,
+    "commit": "e9b7bdca79e6693bfe4b98b0101bd9a4250b6b5d",
+    "ci_run": 45446496271,
+    "tests": 141,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/8b9782c95c9593789874022b7a1d3ac2fd61b5c8.json",
+    "observed_record": "research/evidence/e9b7bdca79e6693bfe4b98b0101bd9a4250b6b5d.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,10 +157,10 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14945952397,
-      "outer_sha256": "24a4f4df2ae7711dc6111635b3f7a0531b526faf4cc505a0353d92f97194d5a0",
-      "inner_sha256": "e3a504c040023511e71515474df190aa653258371c5f4961eab709985067166a",
-      "files": 89
+      "artifact_id": 14945723274,
+      "outer_sha256": "034d610c9b4a66f47ad84a1755b163189b6c4e1096e7be296a50e133e525996f",
+      "inner_sha256": "2b6f77f5c36509f5f128bacb70ea06fa96e7f7c4db272190d99975f27163dd72",
+      "files": 90
     },
     "workflow_preflight": {
       "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
@@ -168,7 +168,7 @@
       "scope": "synthetic workflow preflight",
       "steps": 21
     },
-    "strict_type_checked_files": 7,
+    "strict_type_checked_files": 10,
     "resource_comparison": {
       "full": {
         "checks": 2640,
@@ -396,7 +396,7 @@
     {
       "id": "static_typing_and_lint",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
-      "remaining": "Seven verified strictly typed modules; ten-module expansion pending; broader typing/lint coverage remains unfinished."
+      "remaining": "Ten modules verified with strict mypy; remaining static coverage incomplete."
     },
     {
       "id": "synthetic_distributable",
@@ -460,10 +460,14 @@
     },
     {
       "id": "verifier_source_preallocation_bounds",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "bound_catalog_record_retrieval",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 141-test integrated commit, ten-module strict typing and all existing CI steps. Review remaining functional and externally blocked requirements.",
+  "next": "Verify exact 147-test integrated commit, eleven-module strict typing and all CI gates; inspect remaining offline scope without relaxing competition-access blocks.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -476,16 +480,17 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "8b9782c95c9593789874022b7a1d3ac2fd61b5c8",
-    "reason": "source envelope repair pending exact remote CI",
+    "last_code_commit": "e9b7bdca79e6693bfe4b98b0101bd9a4250b6b5d",
+    "reason": "local synthetic catalog retrieval pending exact CI",
     "next_files": [
-      "aegis/documents.py",
-      "aegis/document_worker.py",
-      "aegis/process_verify.py",
+      "aegis/mcp_catalog.py",
+      "aegis/catalog_runtime.py",
+      "tests/test_catalog_runtime.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 141 tests and all CI steps",
+      "preserve all 147 mandatory tests and CI steps",
+      "no arbitrary or live tool access",
       "no unverified official access",
       "no paid calls",
       "no release promotion"
