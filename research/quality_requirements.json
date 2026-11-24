@@ -88,8 +88,13 @@
     },
     {
       "id": "workflow_preflight",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "exact parsed workflow semantic digest; duplicate keys, YAML aliases and malformed YAML rejected"
+    },
+    {
+      "id": "preflight_historical_evidence_schema",
+      "status": "IMPLEMENTED",
+      "gate": "required historical preflight report, externally supplied policy digest and exact step count"
     }
   ],
   "promotion": "BLOCKED"

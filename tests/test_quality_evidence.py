@@ -107,3 +107,25 @@ class QualityEvidence(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify_download(outer, commit=COMMIT, outer_sha=sha256(outer).hexdigest(),
                             inner_sha=sha256(inner.getvalue()).hexdigest(), tree_digest="0"*64)
+
+    def test_preflight_record_and_required_report(self):
+        commit = "7850eb7544df48c28a7ab875b935bd9ec5ea7d04"
+        r = json.loads((Path("research/evidence") / (commit + ".json")).read_text())
+        steps = STEPS[:5] + ("Validate exact workflow policy",) + STEPS[5:]
+        binding = Binding(commit, 45440048895, 138608320941, 114,
+                          "ca564d79f31f4729f02779d19bf51f175c0df69bef6fd1caec40895270808832",
+                          steps, "26b8924bfa56ffd79e89b6812aa2e46a274a716b4d79f36df5bd93ac2539907e")
+        validate(r, binding)
+        with self.assertRaises(ValueError):
+            validate(r, replace(binding, workflow_policy_sha256=None))
+        for defect in ("missing", "digest", "steps"):
+            changed = json.loads(json.dumps(r))
+            reports = changed["reports"]
+            if defect == "missing":
+                reports.pop("synthetic workflow preflight")
+            elif defect == "digest":
+                reports["synthetic workflow preflight"]["policy_sha256"] = "0"*64
+            else:
+                reports["synthetic workflow preflight"]["steps"] = 20
+            with self.assertRaises(ValueError):
+                validate(changed, replace(binding, record_sha256=digest(changed)))

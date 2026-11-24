@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "7850eb7544df48c28a7ab875b935bd9ec5ea7d04",
-    "ci_run": 45440048895,
-    "tests": 114,
+    "commit": "2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4",
+    "ci_run": 45440339547,
+    "tests": 115,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/7850eb7544df48c28a7ab875b935bd9ec5ea7d04.json",
+    "observed_record": "research/evidence/2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,17 +157,14 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14942686542,
-      "outer_sha256": "69455e8e440ed6084dbd9ddb6e3fbf0e384031202276973910f0c7c102929972",
-      "inner_sha256": "2147d31ccaf7294d6979005d8f574e90ac944ac0a0ad763e3d91d8bacd9a66f0",
-      "tree_digest": "f206afaf99876fc1f73c2cf4c850d99f95f4e2ea194ae7e170c83b4b15e1e3bb",
-      "files": 68,
-      "local_tests": 105,
-      "local_python": "3.13.5",
-      "local_websockets": "16.0"
+      "artifact_id": 14941684451,
+      "outer_sha256": "e079d66abe445f022918e84df9cfbdef1b6565b24f2e23cf228db0aed7650bc6",
+      "inner_sha256": "6da6674545fe74bd7021ce1d65edcfea2ddced93c2a6ed93e06dc71ce9ca6e2d",
+      "tree_digest": "64b6f05464e9d7cf46aef611ae4ef26ffdf45c2887055871df0195494c1d868a",
+      "files": 75
     },
     "workflow_preflight": {
-      "policy_sha256": "26b8924bfa56ffd79e89b6812aa2e46a274a716b4d79f36df5bd93ac2539907e",
+      "policy_sha256": "05644c78cc989c850b00f243ac5e47379a556da7c9bbac600d40d38b4d2e1b4c",
       "promotion": "BLOCKED",
       "scope": "synthetic workflow preflight",
       "steps": 21
@@ -335,10 +332,14 @@
     },
     {
       "id": "workflow_preflight",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "preflight_historical_evidence_schema",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify typed workflow policy regression and all 115 tests on the exact integrated commit. Preserve verified scope; continue historical evidence schema coverage and broader static analysis.",
+  "next": "Verify the exact integrated 116-test commit, archive the run externally, then address broader static coverage and remaining authorization gates.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -351,15 +352,15 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "7850eb7544df48c28a7ab875b935bd9ec5ea7d04",
-    "reason": "typed workflow regression pending remote verification",
+    "last_code_commit": "2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4",
+    "reason": "current schema regression awaits integrated CI",
     "next_files": [
-      "aegis/workflow_policy.py",
       "aegis/quality_evidence.py",
-      "research/quality_requirements.json"
+      "research/quality_requirements.json",
+      "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 115 tests and all existing CI steps",
+      "preserve all 116 tests and configured CI steps",
       "no unverified competition or model access",
       "no paid calls",
       "no release promotion"

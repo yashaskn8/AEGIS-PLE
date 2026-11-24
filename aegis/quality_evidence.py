@@ -45,6 +45,7 @@ class Binding:
     tests: int
     record_sha256: str
     steps: tuple[str, ...]
+    workflow_policy_sha256: str | None = None
 
 
 def validate(record: dict[str, Any], binding: Binding) -> None:
@@ -64,8 +65,19 @@ def validate(record: dict[str, Any], binding: Binding) -> None:
             "mandatory step did not pass")
     require(tuple(record["mandatory_steps"]) == binding.steps[4:-2], "mandatory policy mismatch")
     reports = record["reports"]
-    require(set(reports) == {"synthetic checkout fingerprint", "targeted synthetic mutation gate",
-                             "verified synthetic source distribution"}, "missing or unexpected reports")
+    expected_reports = {"synthetic checkout fingerprint", "targeted synthetic mutation gate",
+                        "verified synthetic source distribution"}
+    if "Validate exact workflow policy" in binding.steps:
+        expected_reports.add("synthetic workflow preflight")
+        require(hex_digest(binding.workflow_policy_sha256), "missing trusted workflow digest")
+    else:
+        require(binding.workflow_policy_sha256 is None, "unexpected workflow digest")
+    require(set(reports) == expected_reports, "missing or unexpected reports")
+    if "synthetic workflow preflight" in expected_reports:
+        preflight = reports["synthetic workflow preflight"]
+        require(preflight["policy_sha256"] == binding.workflow_policy_sha256
+                and type(preflight["steps"]) is int and preflight["steps"] == len(binding.steps) - 3,
+                "workflow preflight mismatch")
     checkout = reports["synthetic checkout fingerprint"]
     package = reports["verified synthetic source distribution"]
     require(checkout["commit"] == package["commit"] == binding.commit, "stale report")
