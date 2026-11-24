@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639",
-    "ci_run": 45436839314,
-    "tests": 96,
+    "commit": "6e45162b9aa80864e870bc55a9638da0a40b7d5e",
+    "ci_run": 45437514532,
+    "tests": 100,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639.json",
+    "observed_record": "research/evidence/6e45162b9aa80864e870bc55a9638da0a40b7d5e.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -126,6 +126,11 @@
     "experiment_0013": {
       "loopback_cases": 6,
       "passed": 6
+    },
+    "experiment_0014": {
+      "mutants": 4,
+      "killed": 4,
+      "files": 62
     }
   },
   "promotion": "BLOCKED",
@@ -256,26 +261,26 @@
     },
     {
       "id": "quality_fingerprints",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "targeted_mutation_gate",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "static_typing_and_lint",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "synthetic_distributable",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "quality_requirements_reconciliation",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED_SYNTHETIC"
     }
   ],
-  "next": "Verify compile, fingerprint and targeted mutation CI. Then build and smoke-test a reproducible educational distributable and reconcile actual gate evidence.",
+  "next": "Verify static quality gates and reproducible synthetic distribution build, then inspect remaining evidence and integration gaps.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",

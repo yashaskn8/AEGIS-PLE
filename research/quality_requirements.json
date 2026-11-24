@@ -4,56 +4,56 @@
   "requirements": [
     {
       "id": "exact_commit",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "checkout fingerprint and independent GitHub observation"
     },
     {
       "id": "syntax",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "compile every tracked Python file"
     },
     {
       "id": "test_inventory",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "aegis.ci"
     },
     {
       "id": "unit_integration_regression",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "aegis.ci"
     },
     {
       "id": "differential_metamorphic",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "existing seeded tests"
     },
     {
       "id": "mutation_effectiveness",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "four fixed trusted mutations with matching assertion failures"
     },
     {
       "id": "dependency_integrity",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "hash-pinned installation and pip check"
     },
     {
       "id": "credential_exposure",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "narrow tracked-file patterns; full scan not established"
     },
     {
       "id": "environment_fingerprint",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "aegis.quality"
     },
     {
       "id": "lint_and_static_typing",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "distributable_build_and_smoke",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "resource_efficiency",
