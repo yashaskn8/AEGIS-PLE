@@ -33,3 +33,13 @@ class WorkflowPolicy(unittest.TestCase):
                         raw + "\nextra: !!str value\n"):
             with self.assertRaises(ValueError):
                 validate(changed)
+
+    def test_scalar_type_changes_rejected(self):
+        raw = WORKFLOW.read_text()
+        for old, new in (("persist-credentials: false", 'persist-credentials: "false"'),
+                         ("timeout-minutes: 5", 'timeout-minutes: "5"'),
+                         ("  push:\n", '  push: ""\n')):
+            changed = raw.replace(old, new)
+            self.assertNotEqual(changed, raw)
+            with self.assertRaises(ValueError):
+                validate(changed)

@@ -6,15 +6,16 @@ an independently protected policy or detect a workflow that never starts remotel
 import hashlib
 import json
 from pathlib import Path
+import re
 
 import yaml
 
 WORKFLOW = Path(".github/workflows/ci.yml")
-EXPECTED = "26b8924bfa56ffd79e89b6812aa2e46a274a716b4d79f36df5bd93ac2539907e"
+EXPECTED = "05644c78cc989c850b00f243ac5e47379a556da7c9bbac600d40d38b4d2e1b4c"
 MAX_BYTES = 32768
 
 
-class UniqueLoader(yaml.BaseLoader):
+class UniqueLoader(yaml.SafeLoader):
     def construct_mapping(self, node, deep=False):
         pairs = self.construct_pairs(node, deep=deep)
         result = {}
@@ -23,6 +24,17 @@ class UniqueLoader(yaml.BaseLoader):
                 raise ValueError("duplicate or non-string YAML key")
             result[key] = value
         return result
+
+
+# GitHub's on key must remain a string; preserve actual booleans and nulls.
+UniqueLoader.yaml_implicit_resolvers = {
+    key: [(tag, pattern) for tag, pattern in resolvers
+          if tag != "tag:yaml.org,2002:bool"]
+    for key, resolvers in yaml.SafeLoader.yaml_implicit_resolvers.items()
+}
+UniqueLoader.add_implicit_resolver("tag:yaml.org,2002:bool",
+                                   re.compile(r"^(?:true|false|True|False|TRUE|FALSE)$"),
+                                   list("tTfF"))
 
 
 def parse(raw):
@@ -41,7 +53,7 @@ def parse(raw):
 
 
 def fingerprint(value):
-    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
 
 def validate(raw):

@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "8ec3e99087bcef4de47db9b9843bc3180045dec2",
-    "ci_run": 45439737586,
-    "tests": 110,
+    "commit": "7850eb7544df48c28a7ab875b935bd9ec5ea7d04",
+    "ci_run": 45440048895,
+    "tests": 114,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/8ec3e99087bcef4de47db9b9843bc3180045dec2.json",
+    "observed_record": "research/evidence/7850eb7544df48c28a7ab875b935bd9ec5ea7d04.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -165,7 +165,14 @@
       "local_tests": 105,
       "local_python": "3.13.5",
       "local_websockets": "16.0"
-    }
+    },
+    "workflow_preflight": {
+      "policy_sha256": "26b8924bfa56ffd79e89b6812aa2e46a274a716b4d79f36df5bd93ac2539907e",
+      "promotion": "BLOCKED",
+      "scope": "synthetic workflow preflight",
+      "steps": 21
+    },
+    "strict_type_checked_files": 3
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -304,7 +311,7 @@
     {
       "id": "static_typing_and_lint",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
-      "remaining": "Strict typing currently covers two core modules; lint covers selected syntax and undefined-name families. Broader static coverage remains unfinished."
+      "remaining": "Strict typing covers three core modules; broader typing and lint remain unfinished."
     },
     {
       "id": "synthetic_distributable",
@@ -331,7 +338,7 @@
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify 114-test exact commit, workflow preflight and expanded static type scope; archive actual evidence and continue independent educational verification.",
+  "next": "Verify typed workflow policy regression and all 115 tests on the exact integrated commit. Preserve verified scope; continue historical evidence schema coverage and broader static analysis.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -344,20 +351,18 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "654bf81d9bf75c995a744b86f5195dc88091b861",
-    "reason": "interactive execution checkpoint; original project incomplete",
+    "last_code_commit": "7850eb7544df48c28a7ab875b935bd9ec5ea7d04",
+    "reason": "typed workflow regression pending remote verification",
     "next_files": [
-      "research/quality_requirements.json",
-      "aegis/ci_evidence.py",
-      "aegis/quality.py",
-      "aegis/protocol.py"
+      "aegis/workflow_policy.py",
+      "aegis/quality_evidence.py",
+      "research/quality_requirements.json"
     ],
     "gates": [
-      "preserve 105 mandatory tests and all static, mutation, fingerprint and distribution gates",
-      "no unverified model or dataset access",
+      "preserve all 115 tests and all existing CI steps",
+      "no unverified competition or model access",
       "no paid calls",
-      "no automatic release promotion",
-      "no untrusted code execution"
+      "no release promotion"
     ],
     "verdict": "CONDITIONAL_GO_SYNTHETIC_ONLY"
   },
@@ -393,6 +398,13 @@
       "actual": "firewall.py:96 union-attr: Decimal | Literal[0] has no quantize on int",
       "root_cause": "confirmed: default sum start is int 0; use Decimal(0) explicitly",
       "repair": "typed Decimal start; preserve boundary and differential tests; add precision regression"
+    },
+    {
+      "commit": "7850eb7544df48c28a7ab875b935bd9ec5ea7d04",
+      "requirement": "workflow policy semantic type binding",
+      "actual": "BaseLoader conflates false and quoted false; confirmed by local inspection",
+      "root_cause": "BaseLoader resolves scalar values as strings",
+      "repair": "SafeLoader with explicit boolean resolver; reject scalar type substitutions in regression"
     }
   ]
 }
