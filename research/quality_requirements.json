@@ -83,8 +83,13 @@
     },
     {
       "id": "historical_quality_evidence",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "externally bound historical record replay and independent artifact byte/hash verification"
+    },
+    {
+      "id": "workflow_preflight",
+      "status": "IMPLEMENTED",
+      "gate": "exact parsed workflow semantic digest; duplicate keys, YAML aliases and malformed YAML rejected"
     }
   ],
   "promotion": "BLOCKED"

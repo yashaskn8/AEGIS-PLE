@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "a0aa103587a62917ad390c314c3530e2f0aa88dc",
-    "ci_run": 45438603063,
-    "tests": 105,
+    "commit": "8ec3e99087bcef4de47db9b9843bc3180045dec2",
+    "ci_run": 45439737586,
+    "tests": 110,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/a0aa103587a62917ad390c314c3530e2f0aa88dc.json",
+    "observed_record": "research/evidence/8ec3e99087bcef4de47db9b9843bc3180045dec2.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -320,14 +320,18 @@
     },
     {
       "id": "quality_evidence_replay",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "downloaded_artifact_verification",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "workflow_preflight",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify 110-test exact commit and quality evidence replay CI, then add workflow preflight validation and broader static coverage.",
+  "next": "Verify 114-test exact commit, workflow preflight and expanded static type scope; archive actual evidence and continue independent educational verification.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",

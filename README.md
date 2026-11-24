@@ -31,3 +31,7 @@ See [development policy and research plan](docs/DEVELOPMENT.md). [AGENTS.md](AGE
 The independent trusted verifier runs in a separate process but is not a hostile-code sandbox or an immutable release authority. See `research/checkpoint.json` for exact status. No official submission or real engineering approval is claimed.
 
 For the fictional document protocol, run `AEGIS_SYNTHETIC_MODE=documents python serve.py` on loopback. A synthetic peer supplies `inventory_bundle.json` with a manifest, required fact keys, and base64-encoded records. The server writes `inventory_report.json` only after the two trusted verification paths agree and the source is re-read. It checks exact output readback and source stability again before successful completion. The default measurement mode is unchanged.
+
+### Local CI preflight
+
+Install the hash-pinned CI tools from `requirements-ci.txt` in the documented Python 3.12 Linux x86-64 environment, then run `python -m aegis.workflow_policy` before pushing workflow changes. Run `python -m aegis.ci` for the complete mandatory test suite. Any intentional workflow-policy change requires review of both the workflow and its policy digest. This repository-owned check is not independent release approval.

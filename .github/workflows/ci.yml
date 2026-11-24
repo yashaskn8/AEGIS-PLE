@@ -26,10 +26,12 @@ jobs:
       - name: Install hash-pinned static verification tools
         run: |
           .venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r requirements-ci.txt
+      - name: Validate exact workflow policy
+        run: .venv/bin/python -m aegis.workflow_policy
       - name: Lint syntax and undefined-name rules
         run: .venv/bin/ruff check --no-cache --select E9,F63,F7,F82 aegis tests serve.py
       - name: Strict type check typed arithmetic and evidence core
-        run: .venv/bin/python -m mypy --strict --no-incremental --cache-dir=/dev/null aegis/aggregation.py aegis/firewall.py
+        run: .venv/bin/python -m mypy --strict --no-incremental --cache-dir=/dev/null aegis/aggregation.py aegis/firewall.py aegis/quality_evidence.py
       - name: Run fail-closed synthetic checks
         run: .venv/bin/python -m aegis.ci
       - name: Run bounded synthetic experiment

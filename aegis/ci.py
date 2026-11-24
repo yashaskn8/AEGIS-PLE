@@ -127,6 +127,12 @@ EXPECTED_IDS |= {"tests.test_quality_evidence.QualityEvidence." + name for name 
 )}
 
 
+EXPECTED_IDS |= {"tests.test_workflow_policy.WorkflowPolicy." + name for name in (
+    "test_exact_current_workflow", "test_original_yaml_parse_failure",
+    "test_valid_yaml_with_changed_gate_rejected", "test_duplicate_keys_and_aliases_rejected",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
