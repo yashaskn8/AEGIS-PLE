@@ -54,11 +54,11 @@ jobs:
       - name: Verify checkout fingerprints and targeted mutation effectiveness
         run: .venv/bin/python -m aegis.quality
       - name: Build and verify extracted educational distribution
-        run: .venv/bin/python -m aegis.distribution "${{ runner.temp }}/aegis-educational.zip"
+        run: .venv/bin/python -m aegis.distribution runs/aegis-educational.zip
       - name: Archive verified educational distribution
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: aegis-educational-${{ github.sha }}
-          path: ${{ runner.temp }}/aegis-educational.zip
+          path: runs/aegis-educational.zip
           if-no-files-found: error
           retention-days: 7

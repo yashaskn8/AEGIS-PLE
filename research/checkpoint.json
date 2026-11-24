@@ -280,7 +280,7 @@
       "status": "VERIFIED_SYNTHETIC"
     }
   ],
-  "next": "Verify static quality gates and reproducible synthetic distribution build, then inspect remaining evidence and integration gaps.",
+  "next": "Verify workflow correction; if no jobs again, isolate the configuration and preserve the artifact upload requirement as blocked until diagnosed.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -309,5 +309,15 @@
       "no untrusted code execution"
     ],
     "verdict": "CONDITIONAL_GO_SYNTHETIC_ONLY"
-  }
+  },
+  "failures": [
+    {
+      "commit": "88f27bfa31b3f42b41e148ca33e681d98bce146a",
+      "run": 45437826452,
+      "expected": "all workflow jobs execute",
+      "actual": "terminal failure with zero jobs",
+      "root_cause": "UNKNOWN: workflow rejected before jobs; error annotation unavailable",
+      "repair": "Use static ignored workspace path instead of runner context for archive; retain every mandatory check and upload."
+    }
+  ]
 }
