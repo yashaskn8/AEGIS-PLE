@@ -24,7 +24,8 @@ jobs:
           python3 -m venv .venv
           .venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r requirements.txt
       - name: Install hash-pinned static verification tools
-        run: .venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r requirements-ci.txt
+        run: |
+          .venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r requirements-ci.txt
       - name: Lint syntax and undefined-name rules
         run: .venv/bin/ruff check --no-cache --select E9,F63,F7,F82 aegis tests serve.py
       - name: Strict type check typed arithmetic and evidence core
@@ -55,3 +56,10 @@ jobs:
         run: .venv/bin/python -m aegis.quality
       - name: Build and verify extracted educational distribution
         run: .venv/bin/python -m aegis.distribution runs/aegis-educational.zip
+      - name: Archive verified educational distribution
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aegis-educational-${{ github.sha }}
+          path: runs/aegis-educational.zip
+          if-no-files-found: error
+          retention-days: 7

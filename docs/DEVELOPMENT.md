@@ -88,3 +88,6 @@ Commit 88f27bfa31b3f42b41e148ca33e681d98bce146a, run 45437826452: GitHub reporte
 
 ### Failure 0015-B
 Run 45438009941 on 16ecf515ddfc10ced91f040a8c9c080d121fcd11 also failed before jobs. The runner path was not a sufficient explanation. The exact workflow diagnostic remains unavailable. Split construction and static verification from publication so a publication configuration rejection does not prevent independent tests. The publication workflow is triggered on the same commit and performs its own archive verification before upload. Its success is mandatory for publication acceptance; this split does not authorize release or treat any missing workflow as a pass.
+
+### Confirmed root cause 0015-C
+The failed workflow was reproduced using the local PyYAML parser: `mapping values are not allowed here` at the colon followed by whitespace in the newly introduced plain scalar pip install command. Converting the command to a YAML block scalar parsed successfully. Restore the combined mandatory workflow with all static, test, build and publication checks intact. The path and split experiments did not resolve the actual parser defect. Prior failed runs remain recorded.

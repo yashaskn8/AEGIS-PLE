@@ -281,11 +281,10 @@
     },
     {
       "id": "synthetic_artifact_publication",
-      "status": "BLOCKED",
-      "blocker": "workflow rejected before jobs; independent publication check must succeed before distribution acceptance"
+      "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify synthetic CI and independent publication workflow on exact current commit. Diagnose any executed test failures.",
+  "next": "Verify corrected combined CI, static checks, extracted build and artifact publication.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -331,6 +330,13 @@
       "actual": "terminal failure, zero jobs",
       "root_cause": "UNKNOWN; static path alternative did not repair",
       "repair": "Isolate publication in a separately triggered mandatory publication workflow. Do not accept publication until it executes and succeeds."
+    },
+    {
+      "commit": "8218832f06361c4b96706fa2638ba94524b951a2",
+      "run": 45438096236,
+      "actual": "terminal failure, zero jobs",
+      "root_cause": "Confirmed by reproducing YAML parsing failure locally: unquoted run scalar contains colon followed by space in --only-binary=:all: --no-deps.",
+      "repair": "Use block scalar and restore original combined mandatory pipeline."
     }
   ]
 }
