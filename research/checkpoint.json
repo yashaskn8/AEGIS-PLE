@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "e78bae31b266a8769f04ab04d67f6956ee2cb9bf",
-    "ci_run": 45434441700,
-    "tests": 43,
+    "commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",
+    "ci_run": 45434726597,
+    "tests": 52,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -24,7 +24,7 @@
         "baseline_checks": 100
       }
     },
-    "evidence": "research/evidence/e78bae31b266a8769f04ab04d67f6956ee2cb9bf.json"
+    "evidence": "research/evidence/39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc.json"
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -58,7 +58,7 @@
     },
     {
       "id": "provider_reasoning_loop",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "adaptive_budget",
@@ -130,11 +130,28 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Verify current CI for bounded proposal/repair. Next: strict usage accounting and declared MCP transport using only synthetic peers, then benign cross-domain document fixtures. Resume from latest main; no live endpoints, untrusted code, paid calls, official data, or promotion without required authorization.",
+  "next": "Start by checking current main and its CI. Implement validated usage messages and declared MCP JSON-RPC transport against synthetic peers; then add benign cross-domain document processing fixtures and source-bound checks. Native/streaming provider integration, isolated untrusted execution, independent protection, full capability matrix, real engineering benchmark and competition readiness remain unfinished.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
     "python -m aegis.graph_experiment",
     "python -m aegis.policy_search"
-  ]
+  ],
+  "resume": {
+    "last_code_commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",
+    "reason": "bounded interactive development session checkpoint; work incomplete",
+    "next_files": [
+      "aegis/protocol.py",
+      "aegis/models.py",
+      "tests/test_protocol.py",
+      "research/checkpoint.json"
+    ],
+    "gates": [
+      "preserve all 52 mandatory tests",
+      "no unverified model or dataset access",
+      "no paid calls",
+      "no automatic release promotion"
+    ],
+    "verdict": "CONDITIONAL_GO_SYNTHETIC_ONLY"
+  }
 }
