@@ -459,7 +459,7 @@
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 140-test commit, seven-module strict typing and all unchanged CI gates; if verified, review remaining offline implementation and blocked external prerequisites.",
+  "next": "Verify the exact corrected commit and all 140 mandatory tests, seven-module strict typing, resource experiments and publication.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -569,6 +569,15 @@
       "root_cause": "Unknown output consumption retried, missing completion deadline postcondition, bool timeout accepted, reply bounded by characters rather than bytes",
       "repair": "Stop on timeout or unverified reply, reject late completion, validate timeout type and UTF-8 byte size",
       "local_repaired": "140/140 tests"
+    },
+    {
+      "commit": "3c332ecaa18a8dba177394752b742fd2e022575d",
+      "run": 45445642305,
+      "job": 138628528062,
+      "expected": "strict mypy on seven modules",
+      "actual": "aegis/repair.py:88 var-annotated: Need type annotation for reasons; all subsequent gates skipped",
+      "root_cause": "empty list lacks explicit element type under strict mypy",
+      "repair": "annotate reasons as list[str]; retain full strict gate"
     }
   ]
 }

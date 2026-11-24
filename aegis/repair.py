@@ -85,7 +85,7 @@ async def solve(raw: bytes, profile: Profile, provider: Callable[[dict[str, Any]
                                               "micrometres": fixture.micrometres})},
     ]
     reserved = calls = 0
-    reasons = []
+    reasons: list[str] = []
     for _ in range(attempts):
         # Reserve before calling. Unused or unverifiable allowance is not refunded.
         remaining = output_budget - reserved
