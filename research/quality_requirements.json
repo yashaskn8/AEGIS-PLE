@@ -80,6 +80,11 @@
       "id": "artifact_publication",
       "status": "VERIFIED_SYNTHETIC",
       "gate": "Archive verified educational distribution in Synthetic CI"
+    },
+    {
+      "id": "historical_quality_evidence",
+      "status": "IMPLEMENTED",
+      "gate": "externally bound historical record replay and independent artifact byte/hash verification"
     }
   ],
   "promotion": "BLOCKED"

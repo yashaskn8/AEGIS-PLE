@@ -120,6 +120,13 @@ EXPECTED_IDS |= {"tests.test_distribution.Distribution." + name for name in (
 EXPECTED_IDS.add("tests.test_decimal_precision.DecimalPrecision.test_all_zero_and_large_boundary")
 
 
+EXPECTED_IDS |= {"tests.test_quality_evidence.QualityEvidence." + name for name in (
+    "test_exact_historical_record", "test_modified_record_rejected",
+    "test_structural_rejection_even_with_new_digest", "test_download_exact_and_tampered",
+    "test_download_extra_inner_member",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
