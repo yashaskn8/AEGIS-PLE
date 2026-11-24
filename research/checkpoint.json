@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "scope": "synthetic only",
+  "last_verified": {
+    "commit": "a97d495db9bb7bdd515c777d7506d88f52726d61",
+    "ci_run": 45433168107,
+    "tests": 17,
+    "experiment_0002": {
+      "full_checks": 26,
+      "incremental_checks": 16
+    }
+  },
+  "promotion": "BLOCKED",
+  "tasks": [
+    {
+      "id": "baseline",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "synthetic_ci",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "constraint_graph",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "protocol_file_subset",
+      "status": "IMPLEMENTED"
+    },
+    {
+      "id": "provider_request_profiles",
+      "status": "IMPLEMENTED"
+    },
+    {
+      "id": "real_websocket_integration",
+      "status": "PENDING"
+    },
+    {
+      "id": "mcp_and_tool_protocol",
+      "status": "PENDING"
+    },
+    {
+      "id": "provider_reasoning_loop",
+      "status": "PENDING"
+    },
+    {
+      "id": "adaptive_budget",
+      "status": "PENDING"
+    },
+    {
+      "id": "evidence_intelligence",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "bounded_candidate_generation",
+      "status": "PENDING"
+    },
+    {
+      "id": "persistent_learning",
+      "status": "PENDING"
+    },
+    {
+      "id": "capability_matrix",
+      "status": "PENDING"
+    },
+    {
+      "id": "engineering_transfer",
+      "status": "PENDING"
+    },
+    {
+      "id": "independent_governance",
+      "status": "BLOCKED",
+      "blocker": "main unprotected; connector lacks administration"
+    },
+    {
+      "id": "untrusted_code_isolation",
+      "status": "BLOCKED",
+      "blocker": "independent isolated evaluation environment not authorized"
+    },
+    {
+      "id": "official_eligibility",
+      "status": "BLOCKED",
+      "blocker": "competition eligibility not verified"
+    },
+    {
+      "id": "official_data",
+      "status": "BLOCKED",
+      "blocker": "dataset permissions not verified"
+    },
+    {
+      "id": "official_model_access",
+      "status": "BLOCKED",
+      "blocker": "no authorized model credentials or compute credits"
+    },
+    {
+      "id": "official_artifact_policy",
+      "status": "BLOCKED",
+      "blocker": "organizer clarification required"
+    },
+    {
+      "id": "official_container_checks",
+      "status": "BLOCKED",
+      "blocker": "authorized compatible cloud resources not established"
+    },
+    {
+      "id": "official_benchmarks",
+      "status": "BLOCKED",
+      "blocker": "above prerequisites"
+    },
+    {
+      "id": "release",
+      "status": "BLOCKED",
+      "blocker": "no independently verified release or user approval"
+    }
+  ],
+  "next": "Verify this commit's CI and inspect protocol errors; then implement bounded synthetic policy generation and persistent evidence.",
+  "commands": [
+    "python -m aegis.ci",
+    "python -m aegis.experiment",
+    "python -m aegis.graph_experiment"
+  ]
+}

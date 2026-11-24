@@ -20,6 +20,16 @@ EXPECTED_IDS |= {"tests.test_constraints.Constraints." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_protocol.ProtocolTests." + name for name in (
+    "test_round_trip", "test_invalid_opening", "test_mismatched_id", "test_cancel",
+    "test_timeout", "test_incomplete_files", "test_bad_paths_and_writes",
+    "test_concurrent_request_rejected", "test_strict_json",
+)}
+EXPECTED_IDS |= {"tests.test_protocol.Models." + name for name in (
+    "test_all_declarations", "test_provider_controls",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
