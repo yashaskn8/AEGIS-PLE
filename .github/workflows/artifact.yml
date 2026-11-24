@@ -1,0 +1,27 @@
+name: Educational Artifact Publication
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  publication:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Install hash-pinned runtime
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r requirements.txt
+      - name: Build and verify extracted educational distribution
+        run: .venv/bin/python -m aegis.distribution runs/aegis-educational.zip
+      - name: Archive verified educational distribution
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aegis-educational-${{ github.sha }}
+          path: runs/aegis-educational.zip
+          if-no-files-found: error
+          retention-days: 7

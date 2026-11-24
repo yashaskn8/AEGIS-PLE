@@ -85,3 +85,6 @@ Run 45437514532 verified 100 tests, four designated assertion-killed mutants, 62
 
 ### Failure 0015-A
 Commit 88f27bfa31b3f42b41e148ca33e681d98bce146a, run 45437826452: GitHub reported terminal failure and zero jobs, so no static or package gate ran. GitHub check-suite annotations were not available through the connection. The added workflow fragment parses as YAML locally; root cause remains unknown. First bounded correction replaces runner-context paths with the existing ignored runs directory, retaining every gate including artifact upload. No acceptance criterion is weakened.
+
+### Failure 0015-B
+Run 45438009941 on 16ecf515ddfc10ced91f040a8c9c080d121fcd11 also failed before jobs. The runner path was not a sufficient explanation. The exact workflow diagnostic remains unavailable. Split construction and static verification from publication so a publication configuration rejection does not prevent independent tests. The publication workflow is triggered on the same commit and performs its own archive verification before upload. Its success is mandatory for publication acceptance; this split does not authorize release or treat any missing workflow as a pass.

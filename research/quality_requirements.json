@@ -73,6 +73,12 @@
     {
       "id": "release_approval",
       "status": "BLOCKED"
+    },
+    {
+      "id": "artifact_publication",
+      "status": "BLOCKED",
+      "gate": "Educational Artifact Publication workflow",
+      "blocker": "prior workflow rejected before jobs; cannot accept absent or failed publication"
     }
   ],
   "promotion": "BLOCKED"

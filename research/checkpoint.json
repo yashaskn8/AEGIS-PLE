@@ -278,9 +278,14 @@
     {
       "id": "quality_requirements_reconciliation",
       "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "synthetic_artifact_publication",
+      "status": "BLOCKED",
+      "blocker": "workflow rejected before jobs; independent publication check must succeed before distribution acceptance"
     }
   ],
-  "next": "Verify workflow correction; if no jobs again, isolate the configuration and preserve the artifact upload requirement as blocked until diagnosed.",
+  "next": "Verify synthetic CI and independent publication workflow on exact current commit. Diagnose any executed test failures.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -318,6 +323,14 @@
       "actual": "terminal failure with zero jobs",
       "root_cause": "UNKNOWN: workflow rejected before jobs; error annotation unavailable",
       "repair": "Use static ignored workspace path instead of runner context for archive; retain every mandatory check and upload."
+    },
+    {
+      "commit": "16ecf515ddfc10ced91f040a8c9c080d121fcd11",
+      "run": 45438009941,
+      "expected": "all workflow jobs execute",
+      "actual": "terminal failure, zero jobs",
+      "root_cause": "UNKNOWN; static path alternative did not repair",
+      "repair": "Isolate publication in a separately triggered mandatory publication workflow. Do not accept publication until it executes and succeeds."
     }
   ]
 }
