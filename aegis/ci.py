@@ -105,6 +105,12 @@ EXPECTED_IDS |= {"tests.test_document_runtime.DocumentRuntime." + name for name 
 )}
 
 
+EXPECTED_IDS |= {"tests.test_quality.Quality." + name for name in (
+    "test_mutation_anchor_exact","test_mutation_syntax",
+    "test_no_unrelated_mutant_kill","test_narrow_secret_patterns",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

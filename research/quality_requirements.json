@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "scope": "authorized synthetic research; official promotion blocked",
+  "requirements": [
+    {
+      "id": "exact_commit",
+      "status": "IMPLEMENTED",
+      "gate": "checkout fingerprint and independent GitHub observation"
+    },
+    {
+      "id": "syntax",
+      "status": "IMPLEMENTED",
+      "gate": "compile every tracked Python file"
+    },
+    {
+      "id": "test_inventory",
+      "status": "IMPLEMENTED",
+      "gate": "aegis.ci"
+    },
+    {
+      "id": "unit_integration_regression",
+      "status": "IMPLEMENTED",
+      "gate": "aegis.ci"
+    },
+    {
+      "id": "differential_metamorphic",
+      "status": "IMPLEMENTED",
+      "gate": "existing seeded tests"
+    },
+    {
+      "id": "mutation_effectiveness",
+      "status": "IMPLEMENTED",
+      "gate": "four fixed trusted mutations with matching assertion failures"
+    },
+    {
+      "id": "dependency_integrity",
+      "status": "IMPLEMENTED",
+      "gate": "hash-pinned installation and pip check"
+    },
+    {
+      "id": "credential_exposure",
+      "status": "IMPLEMENTED",
+      "gate": "narrow tracked-file patterns; full scan not established"
+    },
+    {
+      "id": "environment_fingerprint",
+      "status": "IMPLEMENTED",
+      "gate": "aegis.quality"
+    },
+    {
+      "id": "lint_and_static_typing",
+      "status": "PENDING"
+    },
+    {
+      "id": "distributable_build_and_smoke",
+      "status": "PENDING"
+    },
+    {
+      "id": "resource_efficiency",
+      "status": "IMPLEMENTED_PARTIAL",
+      "gate": "synthetic call counts; wall time and real costs unverified"
+    },
+    {
+      "id": "independent_policy_protection",
+      "status": "BLOCKED",
+      "blocker": "repository admin permission and independent evaluator custody unavailable"
+    },
+    {
+      "id": "official_container_and_benchmark",
+      "status": "BLOCKED",
+      "blocker": "existing eligibility, model, data, artifact and compute gates"
+    },
+    {
+      "id": "release_approval",
+      "status": "BLOCKED"
+    }
+  ],
+  "promotion": "BLOCKED"
+}

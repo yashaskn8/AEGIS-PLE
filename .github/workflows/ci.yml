@@ -43,3 +43,7 @@ jobs:
         run: .venv/bin/python -m aegis.deterministic_route
       - name: Analyze published discipline score matrix
         run: .venv/bin/python -m aegis.disciplines
+      - name: Check installed dependency consistency
+        run: .venv/bin/python -m pip check
+      - name: Verify checkout fingerprints and targeted mutation effectiveness
+        run: .venv/bin/python -m aegis.quality
