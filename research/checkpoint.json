@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6",
-    "ci_run": 45435657813,
-    "tests": 68,
+    "commit": "61d6daaa9023acda278c256c2f6d0dd317bd98af",
+    "ci_run": 45435863193,
+    "tests": 73,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -46,6 +46,14 @@
           "valid_records_recovered": 12
         }
       }
+    },
+    "experiment_0009": {
+      "cases": 24,
+      "correct": 24,
+      "false_accepts": 0,
+      "checks": 48,
+      "baseline_checks": 88,
+      "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     }
   },
   "promotion": "BLOCKED",
@@ -96,7 +104,7 @@
     },
     {
       "id": "persistent_learning",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "capability_matrix",
@@ -152,14 +160,15 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Check the policy replay and retention CI. Continue with bounded synthetic multi-source proposal repair and independent process tests; external prerequisites remain blocked.",
+  "next": "Verify integrated source-bound repair and negative CI controls; then verify the complete synthetic pipeline and record actual observed results.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
     "python -m aegis.graph_experiment",
     "python -m aegis.policy_search",
     "python -m aegis.document_experiment",
-    "python -m aegis.learned_policy"
+    "python -m aegis.learned_policy",
+    "python -m aegis.document_agent"
   ],
   "resume": {
     "last_code_commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",
