@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",
-    "ci_run": 45434726597,
-    "tests": 52,
+    "commit": "2fb93faa30ba22762381c443e192d9114a93ff6a",
+    "ci_run": 45435426632,
+    "tests": 60,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -24,7 +24,7 @@
         "baseline_checks": 100
       }
     },
-    "evidence": "research/evidence/39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc.json",
+    "evidence": "research/evidence/2fb93faa30ba22762381c443e192d9114a93ff6a.json",
     "checkpoint_commit": "df87d8be251112a4e4b1a12a3bd7e8d80b0d70b8",
     "checkpoint_ci_run": 45434870519
   },
@@ -56,11 +56,11 @@
     },
     {
       "id": "mcp_and_tool_protocol",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "provider_reasoning_loop",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "adaptive_budget",
@@ -84,7 +84,7 @@
     },
     {
       "id": "engineering_transfer",
-      "status": "PARTIAL_SYNTHETIC"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "independent_governance",
@@ -132,12 +132,13 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Verify latest CI, then develop source revision reconciliation and executable learning with held-back synthetic document fixtures.",
+  "next": "Verify document reconciliation CI and recorded experiment. Then implement replay of learned policy from an authenticated-by-caller historical record with fresh reevaluation and no automatic promotion.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
     "python -m aegis.graph_experiment",
-    "python -m aegis.policy_search"
+    "python -m aegis.policy_search",
+    "python -m aegis.document_experiment"
   ],
   "resume": {
     "last_code_commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",

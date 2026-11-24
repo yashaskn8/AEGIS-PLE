@@ -31,3 +31,5 @@ jobs:
         run: .venv/bin/python -m aegis.graph_experiment
       - name: Generate and compare bounded verification policies
         run: .venv/bin/python -m aegis.policy_search
+      - name: Compare synthetic document reconciliation ablations
+        run: .venv/bin/python -m aegis.document_experiment

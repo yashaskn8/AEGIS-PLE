@@ -63,6 +63,14 @@ EXPECTED_IDS |= {"tests.test_extensions.Streams." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_documents.Documents." + name for name in (
+    "test_fixed_category_experiment", "test_order_invariance", "test_no_obsolete_fallback",
+    "test_conflicting_provenance", "test_unapproved_and_duplicate",
+    "test_malformed_boolean_duplicate_keys", "test_manifest_and_limits",
+    "test_required_fact_absent",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
