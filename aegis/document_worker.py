@@ -9,16 +9,17 @@ from hashlib import sha256
 import json
 import re
 import sys
+from typing import Any
 
 # Independently bounded for the maximum supported document/provenance inventory.
 MAX = 640 * 1024
 
 
-def canonical(value):
+def canonical(value: object) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
-def unique(pairs):
+def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result = {}
     for key, value in pairs:
         if key in result:
@@ -27,12 +28,12 @@ def unique(pairs):
     return result
 
 
-def parse(raw):
+def parse(raw: bytes) -> object:
     return json.loads(raw.decode("utf-8"), object_pairs_hook=unique,
                       parse_constant=lambda _: (_ for _ in ()).throw(ValueError("constant")))
 
 
-def parse_document(raw):
+def parse_document(raw: bytes) -> object:
     # Independent narrow CSV parser: metadata cannot contain commas or quotes;
     # only the final value column can use minimal doubled-quote encoding.
     header = "family,revision,key,type,value\n"
@@ -44,8 +45,8 @@ def parse_document(raw):
     lines = text[len(header):-1].split("\n")
     if not 1 <= len(lines) <= 32:
         raise ValueError("CSV row count")
-    identity = None
-    fields = {}
+    identity: tuple[str, str] | None = None
+    fields: dict[str, int | str] = {}
     for line in lines:
         family, revision, field, kind, encoded = line.split(",", 4)
         if not key(family) or not key(field) or not re.fullmatch(r"[1-9][0-9]{0,3}", revision):
@@ -70,15 +71,17 @@ def parse_document(raw):
             fields[field] = value
         else:
             raise ValueError("CSV type")
+    if identity is None:
+        raise ValueError("missing CSV identity")
     return {"family": identity[0], "revision": int(identity[1]), "fields": fields}
 
 
-def key(value):
+def key(value: object) -> bool:
     return type(value) is str and re.fullmatch(r"[a-z][a-z0-9_]{0,63}", value) is not None
 
 
-def verify(request):
-    if set(request) != {"manifest", "required", "documents", "proposal"}:
+def verify(request: object) -> bool:
+    if type(request) is not dict or set(request) != {"manifest", "required", "documents", "proposal"}:
         return False
     manifest, required = request["manifest"], request["required"]
     if (type(manifest) is not dict or not 1 <= len(manifest) <= 32
@@ -90,8 +93,8 @@ def verify(request):
     docs = request["documents"]
     if type(docs) is not list or len(docs) > 32:
         return False
-    records = {}
-    hashes = []
+    records: dict[tuple[str, int], tuple[str, dict[str, int | str]]] = {}
+    hashes: list[str] = []
     for encoded in docs:
         raw = base64.b64decode(encoded, validate=True)
         if len(raw) > 8192:
@@ -113,10 +116,10 @@ def verify(request):
         records[family, rev] = (fingerprint, fields)
     if any((family, rev) not in records for family, rev in manifest.items()):
         return False
-    facts = []
+    facts: list[dict[str, Any]] = []
     for field in sorted(required):
-        sources = []
-        values = []
+        sources: list[dict[str, str | int]] = []
+        values: list[str] = []
         for family, rev in sorted(manifest.items()):
             fingerprint, fields = records[family, rev]
             if field in fields:
@@ -131,7 +134,7 @@ def verify(request):
     return canonical(request["proposal"]) == canonical(expected)
 
 
-def main():
+def main() -> None:
     raw = sys.stdin.buffer.read(MAX + 1)
     result = False
     if len(raw) <= MAX:

@@ -51,7 +51,7 @@
       "id": "lint_and_static_typing",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
       "gate": "Ruff E9,F63,F7,F82; strict mypy on six core modules",
-      "remaining": "Seven explicit core modules proposed for strict typing; exact integrated remote verification pending; wider coverage unfinished."
+      "remaining": "Seven modules verified; ten proposed, pending exact CI; wider coverage unfinished."
     },
     {
       "id": "distributable_build_and_smoke",

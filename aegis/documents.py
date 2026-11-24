@@ -9,6 +9,7 @@ from hashlib import sha256
 import re
 import csv
 from io import StringIO
+from typing import Any
 
 from .firewall import digest
 from .protocol import decode, WireError
@@ -41,11 +42,11 @@ class Reconciliation:
     input_binding: str
 
 
-def _valid_key(key):
+def _valid_key(key: object) -> bool:
     return type(key) is str and KEY.fullmatch(key) is not None
 
 
-def _value(value):
+def _value(value: object) -> bool:
     return (type(value) is int and 0 <= value <= 1_000_000
             or type(value) is str and 0 < len(value) <= 128
             and all(ch.isprintable() for ch in value))
@@ -54,7 +55,7 @@ def _value(value):
 CSV_HEADER = ("family", "revision", "key", "type", "value")
 
 
-def parse_record(raw):
+def parse_record(raw: bytes) -> dict[str, Any]:
     """Accept JSON or canonical typed CSV; retain raw bytes outside this parser."""
     text = raw.decode("utf-8")
     if not text.startswith(",".join(CSV_HEADER) + "\n") and not text.startswith(",".join(CSV_HEADER) + "\r\n"):
@@ -70,7 +71,7 @@ def parse_record(raw):
     family, rev = rows[1][:2]
     if not re.fullmatch(r"[1-9][0-9]{0,3}", rev):
         raise ValueError("invalid CSV revision")
-    fields = {}
+    fields: dict[str, int | str] = {}
     for row in rows[1:]:
         if len(row) != 5 or row[:2] != [family, rev]:
             raise ValueError("inconsistent CSV record")
@@ -86,7 +87,7 @@ def parse_record(raw):
     return {"family": family, "revision": int(rev), "fields": fields}
 
 
-def reconcile(manifest, required, documents):
+def reconcile(manifest: object, required: object, documents: object) -> Reconciliation:
     if (type(manifest) is not dict or not 1 <= len(manifest) <= MAX_DOCS
             or any(not _valid_key(k) or type(v) is not int or not 1 <= v <= 1000
                    for k, v in manifest.items())
@@ -99,9 +100,9 @@ def reconcile(manifest, required, documents):
         raise ValueError("document inventory exceeds bounds")
     hashes = sorted(sha256(raw).hexdigest() for raw in documents)
     binding = digest({"manifest": manifest, "required": sorted(required), "documents": hashes})
-    reasons = set()
-    selected = {}
-    seen = set()
+    reasons: set[str] = set()
+    selected: dict[str, tuple[dict[str, int | str], Source]] = {}
+    seen: set[tuple[str, int]] = set()
     for raw in documents:
         try:
             item = parse_record(raw)

@@ -46,3 +46,13 @@ class Process(unittest.TestCase):
         r["pairs"][0]["cost_usd"] = -1
         with self.assertRaises(ValueError):
             analyze(r)
+
+    def test_document_limits_before_encoding(self):
+        # No unbounded base64 allocation or child launch for invalid inventories.
+        for documents in ((b"x" * 8193,), (b"x",) * 33, ("not bytes",)):
+            with self.subTest(documents=len(documents)), \
+                    patch("aegis.process_verify.base64.b64encode") as encode, \
+                    patch("aegis.process_verify.subprocess.run") as launch:
+                self.assertFalse(verify_in_process(M, R, documents, {}))
+                encode.assert_not_called()
+                launch.assert_not_called()

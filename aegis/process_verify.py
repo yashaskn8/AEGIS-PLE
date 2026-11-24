@@ -12,8 +12,13 @@ WORKER = Path(__file__).resolve().with_name("document_worker.py")
 MAX_REQUEST_BYTES = 640 * 1024
 
 
-def verify_in_process(manifest, required, documents, proposal, *, timeout=1.0):
+def verify_in_process(manifest: object, required: object, documents: object,
+                      proposal: object, *, timeout: float = 1.0) -> bool:
     if type(timeout) not in (float, int) or not 0 < timeout <= 2:
+        return False
+    # Check source bounds before base64 expansion; the worker checks independently.
+    if (type(documents) is not tuple or len(documents) > 32
+            or any(type(raw) is not bytes or len(raw) > 8192 for raw in documents)):
         return False
     try:
         request = json.dumps({"manifest": manifest, "required": required,
@@ -27,7 +32,7 @@ def verify_in_process(manifest, required, documents, proposal, *, timeout=1.0):
                 cwd=scratch, env={}, timeout=timeout, check=False)
         if proc.returncode != 0 or len(proc.stdout) > 256 or proc.stderr:
             return False
-        result = json.loads(proc.stdout)
+        result: object = json.loads(proc.stdout)
         return (type(result) is dict and set(result) == {"accepted","request_sha256"}
                 and result["accepted"] is True
                 and result["request_sha256"] == sha256(request).hexdigest())
