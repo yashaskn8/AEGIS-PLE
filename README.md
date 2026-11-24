@@ -29,3 +29,5 @@ See [development policy and research plan](docs/DEVELOPMENT.md). [AGENTS.md](AGE
 - `python -m aegis.frontier` and `python -m aegis.disciplines`: public aggregate baseline analysis, not AEGIS benchmark performance.
 
 The independent trusted verifier runs in a separate process but is not a hostile-code sandbox or an immutable release authority. See `research/checkpoint.json` for exact status. No official submission or real engineering approval is claimed.
+
+For the fictional document protocol, run `AEGIS_SYNTHETIC_MODE=documents python serve.py` on loopback. A synthetic peer supplies `inventory_bundle.json` with a manifest, required fact keys, and base64-encoded records. The server writes `inventory_report.json` only after the two trusted verification paths agree and the source is re-read. It checks exact output readback and source stability again before successful completion. The default measurement mode is unchanged.

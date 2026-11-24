@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "61b60ce49f4fc1c1cf8d3c5a20e063de7bb2c255",
-    "ci_run": 45436368531,
-    "tests": 86,
+    "commit": "4236db94e907d527900348f8dfe1b634f7522cb8",
+    "ci_run": 45436617561,
+    "tests": 90,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/bacf8fc8a02eeb6871674ff1706a212a1ea2ea6a.json",
+    "observed_record": "research/evidence/4236db94e907d527900348f8dfe1b634f7522cb8.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -77,6 +77,51 @@
       "separate_process_cases": 40,
       "published_pairs": 77,
       "known_costs": 75
+    },
+    "experiment_0012": {
+      "deterministic": {
+        "cases": 40,
+        "correct": 40,
+        "false_accepts": 0,
+        "model_calls": 0,
+        "promotion": "BLOCKED",
+        "scope": "deterministic synthetic document route"
+      },
+      "disciplines": {
+        "discipline_scores": 308,
+        "leaders": {
+          "civil": [
+            {
+              "harness": "openhands",
+              "model": "gemini-4-neon",
+              "score": 0.782
+            }
+          ],
+          "electrical": [
+            {
+              "harness": "hermes",
+              "model": "claude-opus-5-5",
+              "score": 0.49
+            }
+          ],
+          "mechanical": [
+            {
+              "harness": "claude-code",
+              "model": "gemini-4-neon",
+              "score": 0.472
+            }
+          ],
+          "structural": [
+            {
+              "harness": "openhands",
+              "model": "claude-opus-5-5",
+              "score": 0.576
+            }
+          ]
+        },
+        "pairs": 77,
+        "scope": "published aggregate discipline matrix, not AEGIS"
+      }
     }
   },
   "promotion": "BLOCKED",
@@ -131,7 +176,7 @@
     },
     {
       "id": "capability_matrix",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "VERIFIED_PUBLIC_AGGREGATE"
     },
     {
       "id": "engineering_transfer",
@@ -188,10 +233,14 @@
     },
     {
       "id": "deterministic_first_document_route",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "integrated_document_loopback",
       "status": "IMPLEMENTED_PARTIAL"
     }
   ],
-  "next": "Verify deterministic-first routing and discipline matrix CI; preserve observed metrics. Live agent, independent governance, and official evaluation still require external authorization.",
+  "next": "Verify integrated loopback CI, record actual results and review outstanding authorization blockers.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
