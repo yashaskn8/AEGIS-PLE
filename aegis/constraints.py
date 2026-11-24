@@ -82,7 +82,11 @@ class Controller:
         self._cache: dict[str, Observation] = {}
         self._version = sha256(Path(__file__).read_bytes()).hexdigest()
 
-    def evaluate(self, facts: dict, *, reuse: bool = True) -> Report:
+    def evaluate(self, facts: dict, *, reuse: bool = True,
+                 reuse_nodes: frozenset[str] | None = None) -> Report:
+        if reuse_nodes is not None and (type(reuse_nodes) is not frozenset
+                or not reuse_nodes <= {node.name for node in self._order}):
+            raise ValueError("invalid reuse policy")
         if type(facts) is not dict or len(facts) > MAX_FACTS:
             raise ValueError("invalid fact inventory")
         if any(type(key) is not str for key in facts):
@@ -105,7 +109,8 @@ class Controller:
             })
             old = self._cache.get(node.name)
             # Only successful evidence is reusable: errors may be transient.
-            if reuse and old and old.binding == binding and old.status == "VERIFIED":
+            if (reuse and (reuse_nodes is None or node.name in reuse_nodes)
+                    and old and old.binding == binding and old.status == "VERIFIED"):
                 current[node.name] = old
                 reused += 1
                 continue

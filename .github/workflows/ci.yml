@@ -19,9 +19,15 @@ jobs:
         run: |
           git rev-parse HEAD
           python3 --version
+      - name: Install hash-pinned loopback dependency
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install --require-hashes --only-binary=:all: --no-deps -r requirements.txt
       - name: Run fail-closed synthetic checks
-        run: python3 -m aegis.ci
+        run: .venv/bin/python -m aegis.ci
       - name: Run bounded synthetic experiment
-        run: python3 -m aegis.experiment
+        run: .venv/bin/python -m aegis.experiment
       - name: Compare dependency verification with full recomputation
-        run: python3 -m aegis.graph_experiment
+        run: .venv/bin/python -m aegis.graph_experiment
+      - name: Generate and compare bounded verification policies
+        run: .venv/bin/python -m aegis.policy_search

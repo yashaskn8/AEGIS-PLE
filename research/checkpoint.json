@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "a97d495db9bb7bdd515c777d7506d88f52726d61",
-    "ci_run": 45433168107,
-    "tests": 17,
+    "commit": "73f95e3b5249b3e1833586d5efa71ac7084e5712",
+    "ci_run": 45433781388,
+    "tests": 28,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -26,15 +26,15 @@
     },
     {
       "id": "protocol_file_subset",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED"
     },
     {
       "id": "provider_request_profiles",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED"
     },
     {
       "id": "real_websocket_integration",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "mcp_and_tool_protocol",
@@ -46,19 +46,19 @@
     },
     {
       "id": "adaptive_budget",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "evidence_intelligence",
-      "status": "PARTIAL"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "bounded_candidate_generation",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "persistent_learning",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "capability_matrix",
@@ -66,7 +66,7 @@
     },
     {
       "id": "engineering_transfer",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "independent_governance",
@@ -114,10 +114,11 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Verify this commit's CI and inspect protocol errors; then implement bounded synthetic policy generation and persistent evidence.",
+  "next": "Verify CI for the loopback and bounded policy experiment. Record actual experiment metrics; then extend independent evidence and provider response handling.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
-    "python -m aegis.graph_experiment"
+    "python -m aegis.graph_experiment",
+    "python -m aegis.policy_search"
   ]
 }
