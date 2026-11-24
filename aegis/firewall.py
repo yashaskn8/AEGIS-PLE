@@ -93,9 +93,9 @@ def assess(candidate: Candidate, fixture: Fixture) -> Assessment:
         # Independent oracle: Decimal arithmetic, not candidate integer rounding.
         with localcontext() as ctx:
             ctx.prec = 40
-            expected = int(sum(Decimal(x) / Decimal(1000)
-                               for x in fixture.micrometres).quantize(
-                                   Decimal("1"), rounding=ROUND_HALF_UP))
+            total = sum((Decimal(x) / Decimal(1000)
+                         for x in fixture.micrometres), Decimal(0))
+            expected = int(total.quantize(Decimal("1"), rounding=ROUND_HALF_UP))
         outcomes = (
             ("output_schema", True, "exact integer total_mm", "exact integer total_mm"),
             ("independent_total", result["total_mm"] == expected,

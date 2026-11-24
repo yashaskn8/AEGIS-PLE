@@ -284,7 +284,7 @@
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify corrected combined CI, static checks, extracted build and artifact publication.",
+  "next": "Verify corrected exact commit through static checks, mandatory tests, mutation, fingerprint, packaging and publication.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -337,6 +337,15 @@
       "actual": "terminal failure, zero jobs",
       "root_cause": "Confirmed by reproducing YAML parsing failure locally: unquoted run scalar contains colon followed by space in --only-binary=:all: --no-deps.",
       "repair": "Use block scalar and restore original combined mandatory pipeline."
+    },
+    {
+      "commit": "4535baf05b955c9a74251828f4e93c6eff97e40a",
+      "run": 45438214857,
+      "job": 138601744246,
+      "expected": "strict mypy pass",
+      "actual": "firewall.py:96 union-attr: Decimal | Literal[0] has no quantize on int",
+      "root_cause": "confirmed: default sum start is int 0; use Decimal(0) explicitly",
+      "repair": "typed Decimal start; preserve boundary and differential tests; add precision regression"
     }
   ]
 }

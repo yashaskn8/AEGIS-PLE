@@ -91,3 +91,6 @@ Run 45438009941 on 16ecf515ddfc10ced91f040a8c9c080d121fcd11 also failed before j
 
 ### Confirmed root cause 0015-C
 The failed workflow was reproduced using the local PyYAML parser: `mapping values are not allowed here` at the colon followed by whitespace in the newly introduced plain scalar pip install command. Converting the command to a YAML block scalar parsed successfully. Restore the combined mandatory workflow with all static, test, build and publication checks intact. The path and split experiments did not resolve the actual parser defect. Prior failed runs remain recorded.
+
+### Failure 0015-D
+Run 45438214857 on 4535baf05b955c9a74251828f4e93c6eff97e40a started jobs and passed pinned installation and lint. Strict mypy failed at firewall.py:96 because sum's default start is an integer. Explicit Decimal(0) establishes a Decimal result without changing rounding semantics. Add a regression with all-zero and maximum-scale inputs under reduced ambient decimal precision. All prior checks remain mandatory; none of the skipped steps in the failed run are counted as passes.
