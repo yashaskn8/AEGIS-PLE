@@ -12,22 +12,26 @@
     {
       "discipline": "structural",
       "model": "Claude Opus 5.5",
-      "harness": "OpenHands"
+      "harness": "OpenHands",
+      "score": 0.576
     },
     {
       "discipline": "civil",
       "model": "Gemini 4 Neon",
-      "harness": "OpenHands"
+      "harness": "OpenHands",
+      "score": 0.782
     },
     {
       "discipline": "electrical",
       "model": "Claude Opus 5.5",
-      "harness": "Hermes"
+      "harness": "Hermes",
+      "score": 0.49
     },
     {
       "discipline": "mechanical",
       "model": "Gemini 4 Neon",
-      "harness": "Claude Code"
+      "harness": "Claude Code",
+      "score": 0.472
     }
   ],
   "transfer_hypotheses": [
@@ -55,6 +59,7 @@
   "limitations": [
     "Only category leaders were recorded; full category-by-model-by-harness matrix is pending.",
     "Leaderboard association does not demonstrate causal benefit.",
-    "No hidden task content, official evaluation, or model transfer experiment was accessed."
+    "No hidden task content, official evaluation, or model transfer experiment was accessed.",
+    "The separately stored overall sponsored-model matrix covers all seven standard harnesses; discipline-by-pair matrix and causal capability testing are not complete."
   ]
 }

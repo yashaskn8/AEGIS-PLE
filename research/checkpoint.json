@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "61d6daaa9023acda278c256c2f6d0dd317bd98af",
-    "ci_run": 45435863193,
-    "tests": 73,
+    "commit": "bacf8fc8a02eeb6871674ff1706a212a1ea2ea6a",
+    "ci_run": 45436074134,
+    "tests": 81,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -54,6 +54,24 @@
       "checks": 48,
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
+    },
+    "observed_record": "research/evidence/bacf8fc8a02eeb6871674ff1706a212a1ea2ea6a.json",
+    "experiment_0010": {
+      "cases": 16,
+      "metrics": {
+        "bounded_repair": {
+          "calls": 20,
+          "correct": 16,
+          "false_accepts": 0,
+          "reserved_output": 5120
+        },
+        "single": {
+          "calls": 12,
+          "correct": 12,
+          "false_accepts": 0,
+          "reserved_output": 3072
+        }
+      }
     }
   },
   "promotion": "BLOCKED",
@@ -158,9 +176,13 @@
       "id": "release",
       "status": "BLOCKED",
       "blocker": "no independently verified release or user approval"
+    },
+    {
+      "id": "separate_process_document_verification",
+      "status": "IMPLEMENTED_PARTIAL"
     }
   ],
-  "next": "Verify integrated source-bound repair and negative CI controls; then verify the complete synthetic pipeline and record actual observed results.",
+  "next": "Verify separate-process checker and published baseline frontier CI. Continue offline integration where appropriate; official access, independent administration and arbitrary code isolation remain blocked.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",

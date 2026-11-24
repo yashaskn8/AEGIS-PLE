@@ -37,3 +37,5 @@ jobs:
         run: .venv/bin/python -m aegis.learned_policy
       - name: Compare scripted document repair and single attempt
         run: .venv/bin/python -m aegis.document_agent
+      - name: Analyze published baseline frontier
+        run: .venv/bin/python -m aegis.frontier

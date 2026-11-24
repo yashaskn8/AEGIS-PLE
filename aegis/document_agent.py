@@ -14,6 +14,7 @@ from .documents import reconcile
 from .models import Profile
 from .protocol import decode, WireError
 from .stream import collect
+from .process_verify import verify_in_process
 from .document_experiment import CATEGORIES, record
 
 
@@ -90,6 +91,13 @@ async def solve(manifest, required, documents, profile, provider, *, max_calls=3
                 break
             candidate = decode(completion.content)
             if matches(candidate, expected):
+                remaining = deadline_sec - (monotonic() - start)
+                if remaining <= 0 or not await asyncio.to_thread(verify_in_process, manifest, required, documents, candidate, timeout=min(1.0, remaining)):
+                    diagnostics.append("independent_process_rejected")
+                    break
+                if monotonic() - start >= deadline_sec:
+                    diagnostics.append("deadline_exceeded")
+                    break
                 return Result("VERIFIED_SYNTHETIC", calls, reserved, used_in, used_out,
                               tuple(diagnostics), candidate)
             reason = "fact_or_provenance_mismatch"

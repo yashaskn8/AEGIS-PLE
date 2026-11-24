@@ -88,6 +88,12 @@ EXPECTED_IDS |= {"tests.test_document_agent.GateNegative." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_process.Process." + name for name in (
+    "test_distinct_worker_agrees_on_valid_and_invalid", "test_reject_changed_source_and_proposal",
+    "test_worker_timeout_and_malformed_response", "test_published_frontier", "test_invalid_matrix",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):
