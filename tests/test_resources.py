@@ -27,3 +27,42 @@ class Resources(unittest.TestCase):
         for rounds,repeats in ((0,1),(4,1),(1,31),(True,1)):
             with self.assertRaises(ValueError):
                 run(rounds=rounds,repeats=repeats)
+
+    def test_adaptive_threshold_and_fallback(self):
+        from aegis.quality_evidence import (RESOURCE_FIELDS, resource_break_even,
+                                           resource_choice, validate_adaptive_report, digest)
+        from statistics import median
+        # Controller-owned fabricated timing fixture only; not benchmark evidence.
+        def pair(repeats, saving):
+            rows = []
+            for method, setup, wall, checks in (('full',1,100,88),('learned',21,100-saving,48)):
+                rows.append(dict(method=method,cases=24*repeats,correct=24*repeats,
+                                 checks=checks*repeats,evidence_sha256='a'*64,setup_ns=setup,
+                                 wall_ns=wall,cpu_ns=wall,peak_rss_kib=10,total_wall_ns=setup+wall))
+            return rows
+        def calibration(savings):
+            obs = [pair(30,s) for s in savings]
+            return dict(scope='synthetic resource comparison',promotion='BLOCKED',rounds=3,repeats=30,
+                        observations=obs,median={m:{k:median(r[k] for rows in obs for r in rows if r['method']==m)
+                                                for k in RESOURCE_FIELDS} for m in ('full','learned')})
+        report = calibration([10,8,6])
+        threshold = resource_break_even(report)
+        self.assertEqual(threshold,101)
+        self.assertEqual(resource_choice(threshold,100),'full')
+        self.assertEqual(resource_choice(threshold,101),'learned')
+        self.assertIsNone(resource_break_even(calibration([10,8,0])))
+        self.assertEqual(resource_choice(None,180),'full')
+        with self.assertRaises(ValueError):
+            resource_choice(threshold,181)
+        cases = []
+        for repeats in (1,180):
+            chosen = resource_choice(threshold,repeats)
+            rows = sorted(pair(repeats,10),key=lambda r:r['method']!=chosen)
+            cases.append(dict(repeats=repeats,chosen=chosen,observations=rows,
+                              chosen_minus_alternative_ns=rows[0]['total_wall_ns']-rows[1]['total_wall_ns']))
+        outcome = dict(scope='synthetic adaptive resource routing',promotion='BLOCKED',
+                       calibration_sha256=digest(report),break_even_repeats=threshold,cases=cases)
+        validate_adaptive_report(outcome,report)
+        outcome['cases'][0]['chosen'] = 'learned'
+        with self.assertRaises(ValueError):
+            validate_adaptive_report(outcome,report)

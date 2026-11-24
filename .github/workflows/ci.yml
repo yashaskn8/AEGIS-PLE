@@ -44,7 +44,7 @@ jobs:
         run: .venv/bin/python -m aegis.document_experiment
       - name: Reproduce learned policy and measure fresh retention
         run: .venv/bin/python -m aegis.learned_policy
-      - name: Measure isolated synthetic verification resources
+      - name: Measure synthetic resources and adaptive routing
         run: .venv/bin/python -m aegis.resource_experiment
       - name: Compare scripted document repair and single attempt
         run: .venv/bin/python -m aegis.document_agent

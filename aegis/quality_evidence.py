@@ -55,6 +55,7 @@ RESOURCE_REPEATS = 30
 MAX_WALL_NS = 10_000_000_000
 MAX_CPU_NS = 8_000_000_000
 MAX_RSS_KIB = 128 * 1024
+ADAPTIVE_REPEATS = (1, 180)
 RESOURCE_FIELDS = ("setup_ns", "wall_ns", "cpu_ns", "peak_rss_kib", "checks", "total_wall_ns")
 
 
@@ -95,6 +96,45 @@ def validate_resource_report(report: dict[str, Any], *, rounds: int, repeats: in
     require(summary == report["median"], "resource median mismatch")
 
 
+def resource_break_even(calibration: dict[str, Any]) -> int | None:
+    """Conservative linear estimate; no speedup is promised."""
+    validate_resource_report(calibration, rounds=RESOURCE_ROUNDS, repeats=RESOURCE_REPEATS)
+    savings: list[int] = []
+    premiums: list[int] = []
+    for rows in calibration["observations"]:
+        by_method = {r["method"]: r for r in rows}
+        full, learned = by_method["full"], by_method["learned"]
+        savings.append(full["wall_ns"] - learned["wall_ns"])
+        premiums.append(max(0, learned["setup_ns"] - full["setup_ns"]))
+    if min(savings) <= 0:
+        return None
+    return max(premiums) * RESOURCE_REPEATS // min(savings) + 1
+
+
+def resource_choice(threshold: int | None, repeats: int) -> str:
+    require(type(repeats) is int and 1 <= repeats <= ADAPTIVE_REPEATS[-1], "invalid adaptive workload")
+    require(threshold is None or (type(threshold) is int and threshold >= 1), "invalid threshold")
+    return "learned" if threshold is not None and repeats >= threshold else "full"
+
+
+def validate_adaptive_report(report: dict[str, Any], calibration: dict[str, Any]) -> None:
+    threshold = resource_break_even(calibration)
+    require(report["scope"] == "synthetic adaptive resource routing" and report["promotion"] == "BLOCKED"
+            and report["calibration_sha256"] == digest(calibration)
+            and report["break_even_repeats"] == threshold, "adaptive calibration mismatch")
+    cases = report["cases"]
+    require(tuple(c["repeats"] for c in cases) == ADAPTIVE_REPEATS, "adaptive workload inventory mismatch")
+    for case in cases:
+        repeats = case["repeats"]
+        chosen = resource_choice(threshold, repeats)
+        require(case["chosen"] == chosen and case["observations"][0]["method"] == chosen,
+                "adaptive policy did not execute selected route")
+        rows = case["observations"]
+        validate_resource_pair(rows, repeats)
+        require(case["chosen_minus_alternative_ns"] == rows[0]["total_wall_ns"] - rows[1]["total_wall_ns"],
+                "adaptive cost accounting mismatch")
+
+
 def validate(record: dict[str, Any], binding: Binding) -> None:
     require(hex_digest(binding.commit, 40) and hex_digest(binding.record_sha256), "invalid binding")
     require(all(type(x) is int and x > 0 for x in (binding.run, binding.job, binding.tests)),
@@ -119,12 +159,18 @@ def validate(record: dict[str, Any], binding: Binding) -> None:
         require(hex_digest(binding.workflow_policy_sha256), "missing trusted workflow digest")
     else:
         require(binding.workflow_policy_sha256 is None, "unexpected workflow digest")
-    if "Measure isolated synthetic verification resources" in binding.steps:
+    if ("Measure isolated synthetic verification resources" in binding.steps
+            or "Measure synthetic resources and adaptive routing" in binding.steps):
         expected_reports.add("synthetic resource comparison")
+    if "Measure synthetic resources and adaptive routing" in binding.steps:
+        expected_reports.add("synthetic adaptive resource routing")
     require(set(reports) == expected_reports, "missing or unexpected reports")
     if "synthetic resource comparison" in expected_reports:
         validate_resource_report(reports["synthetic resource comparison"],
                                  rounds=RESOURCE_ROUNDS, repeats=RESOURCE_REPEATS)
+    if "synthetic adaptive resource routing" in expected_reports:
+        validate_adaptive_report(reports["synthetic adaptive resource routing"],
+                                 reports["synthetic resource comparison"])
     if "synthetic workflow preflight" in expected_reports:
         preflight = reports["synthetic workflow preflight"]
         require(preflight["policy_sha256"] == binding.workflow_policy_sha256

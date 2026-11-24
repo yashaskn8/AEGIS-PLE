@@ -19,11 +19,13 @@ from .graph_experiment import NODES, CHECKS
 from .learned_policy import fresh, load
 from .quality_evidence import (RESOURCE_METHODS as METHODS, RESOURCE_ROUNDS as ROUNDS,
                                RESOURCE_REPEATS as REPEATS, RESOURCE_FIELDS,
-                               validate_resource_pair, validate_resource_report)
+                               validate_resource_pair, validate_resource_report,
+                               ADAPTIVE_REPEATS, resource_break_even, resource_choice,
+                               validate_adaptive_report)
 
 
 def worker(method, repeats):
-    if method not in METHODS or type(repeats) is not int or not 1 <= repeats <= REPEATS:
+    if method not in METHODS or type(repeats) is not int or not 1 <= repeats <= ADAPTIVE_REPEATS[-1]:
         raise ValueError("invalid resource experiment configuration")
     if platform.system() != "Linux":
         raise RuntimeError("RSS units require Linux")
@@ -48,6 +50,14 @@ def worker(method, repeats):
             "peak_rss_kib":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}
 
 
+def launch(method, repeats):
+    result = subprocess.run([sys.executable,"-B","-m","aegis.resource_experiment",
+                             method,str(repeats)],capture_output=True,timeout=12,check=True)
+    if len(result.stdout) > 4096 or result.stderr:
+        raise ValueError("unexpected resource worker output")
+    return json.loads(result.stdout)
+
+
 def run(rounds=ROUNDS, repeats=REPEATS):
     if type(rounds) is not int or not 1 <= rounds <= ROUNDS or type(repeats) is not int or not 1 <= repeats <= REPEATS:
         raise ValueError("resource experiment exceeds declared budget")
@@ -55,11 +65,7 @@ def run(rounds=ROUNDS, repeats=REPEATS):
     for index in range(rounds):
         rows = []
         for method in METHODS if index % 2 == 0 else tuple(reversed(METHODS)):
-            result = subprocess.run([sys.executable,"-B","-m","aegis.resource_experiment",
-                                     method,str(repeats)],capture_output=True,timeout=12,check=True)
-            if len(result.stdout) > 4096 or result.stderr:
-                raise ValueError("unexpected resource worker output")
-            rows.append(json.loads(result.stdout))
+            rows.append(launch(method,repeats))
         validate_resource_pair(rows,repeats)
         observations.append(rows)
     summary = {method:{key:median(r[key] for rows in observations for r in rows if r["method"] == method)
@@ -71,9 +77,26 @@ def run(rounds=ROUNDS, repeats=REPEATS):
     return report
 
 
+def adaptive(calibration):
+    threshold = resource_break_even(calibration)
+    cases = []
+    for repeats in ADAPTIVE_REPEATS:
+        chosen = resource_choice(threshold,repeats)
+        alternative = "full" if chosen == "learned" else "learned"
+        rows = [launch(chosen,repeats),launch(alternative,repeats)]
+        cases.append({"repeats":repeats,"chosen":chosen,"observations":rows,
+                      "chosen_minus_alternative_ns":rows[0]["total_wall_ns"]-rows[1]["total_wall_ns"]})
+    report = {"scope":"synthetic adaptive resource routing","promotion":"BLOCKED",
+              "calibration_sha256":digest(calibration),"break_even_repeats":threshold,"cases":cases}
+    validate_adaptive_report(report,calibration)
+    return report
+
+
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print(json.dumps(run(),sort_keys=True))
+        calibration = run()
+        print(json.dumps(calibration,sort_keys=True))
+        print(json.dumps(adaptive(calibration),sort_keys=True))
     elif len(sys.argv) == 3:
         print(json.dumps(worker(sys.argv[1],int(sys.argv[2])),sort_keys=True))
     else:

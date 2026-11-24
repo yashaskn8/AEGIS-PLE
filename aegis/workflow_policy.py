@@ -11,7 +11,7 @@ import re
 import yaml
 
 WORKFLOW = Path(".github/workflows/ci.yml")
-EXPECTED = "1b913e6563c434cdd1b0a5a969123c45e5b87dfc62a07e8e4b6013cd726670f9"
+EXPECTED = "4faa21bc438efddf3123c015fea64aee5beecc82beb799b79cdcae967ccd5ae0"
 MAX_BYTES = 32768
 
 

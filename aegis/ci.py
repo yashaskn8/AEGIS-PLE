@@ -153,7 +153,8 @@ EXPECTED_IDS |= {"tests.test_deadline.Deadline." + name for name in (
 
 
 EXPECTED_IDS |= {"tests.test_resources.Resources.test_isolated_comparison",
-                 "tests.test_resources.Resources.test_invalid_budget"}
+                 "tests.test_resources.Resources.test_invalid_budget",
+                 "tests.test_resources.Resources.test_adaptive_threshold_and_fallback"}
 
 
 def flatten(suite):

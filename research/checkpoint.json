@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
-    "ci_run": 45443059654,
-    "tests": 126,
+    "commit": "ad1b954c60f3d21018d58d31af7bb292c1bd9bc7",
+    "ci_run": 45443581980,
+    "tests": 129,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/00a8d455647644f0e8b620baf4735162293a7ce5.json",
+    "observed_record": "research/evidence/ad1b954c60f3d21018d58d31af7bb292c1bd9bc7.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,10 +157,10 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14943164344,
-      "outer_sha256": "16fbfaaebcc703605e0566512e8e6abc815212685fc799d96cf9429f47ee116e",
-      "inner_sha256": "6e01d1581b27e8e2aac5512487769663099ae6f466f15ec68809c23d1b81a04c",
-      "files": 80
+      "artifact_id": 14945052233,
+      "outer_sha256": "8d014483f95b354a3b0824a4cb9d669e0935b34e2784f15520e9bcd504efcd5d",
+      "inner_sha256": "10ef584ab32a73f9df6004b17875329f8aa396a7c3fa997314582966acab37a4",
+      "files": 85
     },
     "workflow_preflight": {
       "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
@@ -168,7 +168,25 @@
       "scope": "synthetic workflow preflight",
       "steps": 21
     },
-    "strict_type_checked_files": 6
+    "strict_type_checked_files": 6,
+    "resource_comparison": {
+      "full": {
+        "checks": 2640,
+        "cpu_ns": 26423411,
+        "peak_rss_kib": 22128,
+        "setup_ns": 10155,
+        "total_wall_ns": 26432534,
+        "wall_ns": 26422869
+      },
+      "learned": {
+        "checks": 1440,
+        "cpu_ns": 23249840,
+        "peak_rss_kib": 22092,
+        "setup_ns": 11380359,
+        "total_wall_ns": 34638967,
+        "wall_ns": 23258608
+      }
+    }
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -355,10 +373,14 @@
     },
     {
       "id": "isolated_resource_comparison",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "calibrated_adaptive_resource_routing",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 129-test commit, six-process resource comparison and historical report validation. Evaluate whether observed setup overhead changes the bounded reuse policy recommendation; no live model performance claim.",
+  "next": "Verify exact 130-test commit and both calibration/adaptive observations. Retain negative timing outcomes; do not claim real engineering performance or promote.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -371,15 +393,15 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "00a8d455647644f0e8b620baf4735162293a7ce5",
-    "reason": "resource comparison pending remote verification",
+    "last_code_commit": "ad1b954c60f3d21018d58d31af7bb292c1bd9bc7",
+    "reason": "adaptive routing pending remote verification",
     "next_files": [
       "aegis/resource_experiment.py",
       "aegis/quality_evidence.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve 129 tests and all CI steps",
+      "preserve 130 tests and all CI steps",
       "no unverified official access",
       "no paid calls",
       "no release promotion"
