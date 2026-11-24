@@ -110,3 +110,13 @@ class DocumentRuntime(unittest.IsolatedAsyncioTestCase):
         terminal, files = await self.exchange(payload=checked_bundle(sources()))
         self.assertEqual(terminal["type"], "error")
         self.assertNotIn(OUTPUT, files)
+
+    async def test_derived_counts_on_file_runtime(self):
+        from tests.test_inventory_checks import bundle as checked_bundle, sources
+        plan = [{"total": "computed", "parts": ["a", "b"], "derive": True}]
+        terminal, files = await self.exchange(payload=checked_bundle(sources(), plan), write_budget=4096)
+        self.assertEqual(terminal["type"], "done")
+        report = json.loads(files[OUTPUT])
+        self.assertEqual(report["count_verification"]["derived_facts"],
+                         [{"key": "computed", "value": 5, "source_keys": ["a", "b"]}])
+        self.assertNotIn("computed", {f["key"] for f in report["report"]["facts"]})

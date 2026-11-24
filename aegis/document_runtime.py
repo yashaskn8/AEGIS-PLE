@@ -39,7 +39,7 @@ def render_report(manifest, required, documents, plan=()):
         raise WireError("document evidence blocked")
     report = {"scope":"synthetic only","model_calls":0,"report":result["output"]}
     if plan:
-        report["count_verification"] = verify_checks(plan, result["output"])
+        report["count_verification"] = verify_checks(plan, result["output"], documents)
     return encode(report).encode()
 
 

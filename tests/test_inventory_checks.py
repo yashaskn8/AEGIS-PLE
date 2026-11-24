@@ -80,3 +80,45 @@ class InventoryChecks(unittest.TestCase):
             self.assertEqual(len(result["count_verification"]["evidence"]), 2)
             with self.assertRaises(ValueError):
                 build(bundle(sources(a, b, c, a+b, a+b+c+1)))
+
+    def test_derived_counts_distinct_from_observed_evidence(self):
+        plan = [{"total": "grand", "parts": ["intermediate", "c"], "derive": True},
+                {"total": "intermediate", "parts": ["a", "b"], "derive": True},
+                {"total": "total", "parts": ["grand"]}]
+        report = json.loads(build(bundle(sources(), plan)))
+        proof = report["count_verification"]
+        self.assertEqual(proof["derived_facts"], [
+            {"key": "intermediate", "value": 5, "source_keys": ["a", "b"]},
+            {"key": "grand", "value": 9, "source_keys": ["a", "b", "c"]}])
+        self.assertEqual({x["key"] for x in report["report"]["facts"]}, set(REQUIRED))
+        binding = proof.pop("binding")
+        self.assertEqual(binding, digest({"source": report["report"]["input_binding"],
+                                         "facts": report["report"]["facts"], **proof}))
+        self.assertEqual(build(bundle(sources(), plan)), build(bundle(sources(), plan[::-1])))
+        with self.assertRaises(ValueError):
+            build(bundle(sources(total=10), plan))
+
+    def test_derivation_rejects_shadowing_cycles_and_overflow(self):
+        store = sources()
+        for plan in ([{"total": "a", "parts": ["b"], "derive": True}],
+                     [{"total": "x", "parts": ["missing"], "derive": True}],
+                     [{"total": "x", "parts": ["y"], "derive": True},
+                      {"total": "y", "parts": ["x"], "derive": True}],
+                     [{"total": "x", "parts": ["a"], "derive": 1}],
+                     [{"total": "x", "parts": ["a"]}]):
+            with self.subTest(plan=plan), self.assertRaises(ValueError):
+                build(bundle(store, plan))
+        plan = [{"total": "x", "parts": ["a", "b"], "derive": True}]
+        shadowed = dict(store, register=csv_doc("register", 2, {"a": 2, "b": 3, "subtotal": 5, "x": 5}))
+        for invalid in (shadowed, sources(a=1_000_000, b=1_000_000)):
+            with self.assertRaises(ValueError):
+                build(bundle(invalid, plan))
+
+    def test_derived_counts_bounded_fresh_transfer(self):
+        rng = random.Random(10593)
+        plan = [{"total": "x", "parts": ["a", "b"], "derive": True},
+                {"total": "y", "parts": ["x", "c"], "derive": True}]
+        for _ in range(12):
+            a, b, c = (rng.randrange(300_001) for _ in range(3))
+            proof = json.loads(build(bundle(sources(a, b, c, a+b, a+b+c), plan)))["count_verification"]
+            self.assertEqual([x["value"] for x in proof["derived_facts"]], [a+b, a+b+c])

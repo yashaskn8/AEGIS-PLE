@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "239a0540e7762bea9805b84b4834092f3d00321b",
-    "ci_run": 45447362870,
-    "tests": 147,
+    "commit": "46137b25794b859287ed9bc26f15bce59ee21f40",
+    "ci_run": 45458941556,
+    "tests": 154,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/239a0540e7762bea9805b84b4834092f3d00321b.json",
+    "observed_record": "research/evidence/46137b25794b859287ed9bc26f15bce59ee21f40.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,10 +157,11 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14945723274,
-      "outer_sha256": "034d610c9b4a66f47ad84a1755b163189b6c4e1096e7be296a50e133e525996f",
-      "inner_sha256": "2b6f77f5c36509f5f128bacb70ea06fa96e7f7c4db272190d99975f27163dd72",
-      "files": 90
+      "artifact_id": 14950839559,
+      "outer_sha256": "1376f9ce0ddac83be9571412259fe00ac53dfc7c0906ac4c74d56de65d160cfa",
+      "inner_sha256": "e9401924d692902c20890d1b559b70d908483ee7acd6274bde828cae73a163b9",
+      "tree_digest": "c5689a0059d6a005e774012d99b717ad34e16cb41c4b349572ff3344b8c54a73",
+      "files": 96
     },
     "workflow_preflight": {
       "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
@@ -168,7 +169,7 @@
       "scope": "synthetic workflow preflight",
       "steps": 21
     },
-    "strict_type_checked_files": 11,
+    "strict_type_checked_files": 13,
     "resource_comparison": {
       "full": {
         "checks": 2640,
@@ -396,7 +397,7 @@
     {
       "id": "static_typing_and_lint",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
-      "remaining": "Ten modules verified with strict mypy; remaining static coverage incomplete."
+      "remaining": "Thirteen strict typed modules verified; broader static coverage unfinished."
     },
     {
       "id": "synthetic_distributable",
@@ -468,10 +469,14 @@
     },
     {
       "id": "source_bound_count_constraint_integration",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "bounded_derived_count_reasoning",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 154-test integrated commit, thirteen-module strict typing and all mandatory checks. Continue remaining offline functional integration.",
+  "next": "Verify exact 159-test integrated commit and all existing CI gates. Continue bounded offline deliverable functionality and reasoning integration; official evaluation remains blocked.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -484,19 +489,18 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "239a0540e7762bea9805b84b4834092f3d00321b",
-    "reason": "count integration pending exact remote CI",
+    "last_code_commit": "46137b25794b859287ed9bc26f15bce59ee21f40",
+    "reason": "derived count reasoning pending exact CI",
     "next_files": [
       "aegis/inventory_checks.py",
-      "aegis/document_runtime.py",
-      "aegis/catalog_runtime.py",
+      "tests/test_inventory_checks.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve 154 mandatory tests and existing CI gates",
-      "no unauthorized competition/model/data access",
+      "preserve all 159 mandatory tests and all existing CI steps",
+      "no unverified official access",
       "no paid calls",
-      "no promotion"
+      "no release promotion"
     ],
     "verdict": "CONDITIONAL_GO_SYNTHETIC_ONLY"
   },

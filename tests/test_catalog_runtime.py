@@ -201,3 +201,23 @@ class CatalogRuntime(unittest.IsolatedAsyncioTestCase):
             custom_store=store, custom_manifest=encode(payload).encode())
         self.assertEqual((terminal["type"], fetched), ("error", ["register", "summary"]))
         self.assertNotIn(OUTPUT, files)
+
+    async def test_derived_counts_on_catalog_runtime(self):
+        from tests.test_inventory_checks import REQUIRED, sources
+        store = sources()
+        payload = json.loads(manifest(store))
+        payload.update(required=list(REQUIRED), checks=[{"total": "computed", "parts": ["a", "b"], "derive": True}])
+        terminal, files, _, fetched = await self.exchange(
+            custom_store=store, custom_manifest=encode(payload).encode(), write_budget=4096)
+        self.assertEqual((terminal["type"], fetched), ("done", ["register", "summary"]))
+        report = json.loads(files[OUTPUT])
+        self.assertEqual(report["count_verification"]["derived_facts"],
+                         [{"key": "computed", "value": 5, "source_keys": ["a", "b"]}])
+        self.assertNotIn("computed", {f["key"] for f in report["report"]["facts"]})
+        store["register"] = csv_doc("register", 2, {"a": 2, "b": 3, "subtotal": 5, "computed": 5})
+        altered = json.loads(manifest(store))
+        altered.update(required=payload["required"], checks=payload["checks"])
+        terminal, files, _, fetched = await self.exchange(
+            custom_store=store, custom_manifest=encode(altered).encode(), write_budget=4096)
+        self.assertEqual((terminal["type"], fetched), ("error", ["register", "summary"]))
+        self.assertNotIn(OUTPUT, files)
