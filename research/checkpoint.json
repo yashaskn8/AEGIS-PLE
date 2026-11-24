@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "6e45162b9aa80864e870bc55a9638da0a40b7d5e",
-    "ci_run": 45437514532,
-    "tests": 100,
+    "commit": "654bf81d9bf75c995a744b86f5195dc88091b861",
+    "ci_run": 45438357313,
+    "tests": 105,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/6e45162b9aa80864e870bc55a9638da0a40b7d5e.json",
+    "observed_record": "research/evidence/654bf81d9bf75c995a744b86f5195dc88091b861.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -131,6 +131,30 @@
       "mutants": 4,
       "killed": 4,
       "files": 62
+    },
+    "experiment_0015": {
+      "mutants_killed": 4,
+      "mutants_total": 4,
+      "lint_scope": "E9,F63,F7,F82",
+      "strict_type_checked_files": 2,
+      "distribution": {
+        "bytes": 626298,
+        "commit": "654bf81d9bf75c995a744b86f5195dc88091b861",
+        "extracted_test_gate": "passed",
+        "files": 67,
+        "promotion": "BLOCKED",
+        "reproducible": true,
+        "scope": "verified synthetic source distribution",
+        "sha256": "9f5726d092fbcde6fb72bec5645ffd99f36a933a0245791ed8611bc8e10910b6"
+      },
+      "artifact": {
+        "id": 14942536752,
+        "name": "aegis-educational-654bf81d9bf75c995a744b86f5195dc88091b861",
+        "size_in_bytes": 104742,
+        "digest": "sha256:60e1adb79bff7eac66d92b469eecbf39974ee5f3c365b15f1dc4e7434db2d8f9",
+        "expired": false,
+        "head_sha": "654bf81d9bf75c995a744b86f5195dc88091b861"
+      }
     }
   },
   "promotion": "BLOCKED",
@@ -269,11 +293,12 @@
     },
     {
       "id": "static_typing_and_lint",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Strict typing currently covers two core modules; lint covers selected syntax and undefined-name families. Broader static coverage remains unfinished."
     },
     {
       "id": "synthetic_distributable",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "quality_requirements_reconciliation",
@@ -281,10 +306,10 @@
     },
     {
       "id": "synthetic_artifact_publication",
-      "status": "IMPLEMENTED"
+      "status": "VERIFIED_SYNTHETIC"
     }
   ],
-  "next": "Verify corrected exact commit through static checks, mandatory tests, mutation, fingerprint, packaging and publication.",
+  "next": "Inspect latest main and CI; extend independent historical evidence validation to the new exact step and artifact inventory, broaden static typing, add YAML workflow preflight regression, and retain all unresolved authorization gates. No live benchmark or release until prerequisites are independently verified.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -297,16 +322,16 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639",
-    "reason": "End of bounded interactive implementation session; full project remains incomplete.",
+    "last_code_commit": "654bf81d9bf75c995a744b86f5195dc88091b861",
+    "reason": "interactive execution checkpoint; original project incomplete",
     "next_files": [
-      "research/checkpoint.json",
-      "docs/DEVELOPMENT.md",
-      "aegis/protocol.py",
-      "aegis/document_runtime.py"
+      "research/quality_requirements.json",
+      "aegis/ci_evidence.py",
+      "aegis/quality.py",
+      "aegis/protocol.py"
     ],
     "gates": [
-      "preserve all 96 mandatory tests",
+      "preserve 105 mandatory tests and all static, mutation, fingerprint and distribution gates",
       "no unverified model or dataset access",
       "no paid calls",
       "no automatic release promotion",

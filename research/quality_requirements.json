@@ -49,11 +49,13 @@
     },
     {
       "id": "lint_and_static_typing",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "gate": "Ruff E9,F63,F7,F82 across code; strict mypy on aggregation and firewall",
+      "remaining": "Full typing and broader lint coverage not established."
     },
     {
       "id": "distributable_build_and_smoke",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "VERIFIED_SYNTHETIC"
     },
     {
       "id": "resource_efficiency",
@@ -76,7 +78,7 @@
     },
     {
       "id": "artifact_publication",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "Archive verified educational distribution in Synthetic CI"
     }
   ],
