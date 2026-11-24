@@ -145,6 +145,12 @@ EXPECTED_IDS.add("tests.test_protocol.Models.test_aggregate_content_budget_and_u
 EXPECTED_IDS.add("tests.test_extensions.Streams.test_stream_byte_boundary_and_invalid_unicode")
 
 
+EXPECTED_IDS |= {"tests.test_deadline.Deadline." + name for name in (
+    "test_late_receive_poisoned", "test_late_send_poisoned",
+    "test_expired_success_refused_but_error_allowed",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

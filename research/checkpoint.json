@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "f075817939772505d39e7732a5e9b4c3e4b39995",
-    "ci_run": 45441782248,
-    "tests": 121,
+    "commit": "208b3d1f5f4f65485a8aa690cef17a457232cdcd",
+    "ci_run": 45442302469,
+    "tests": 123,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/f075817939772505d39e7732a5e9b4c3e4b39995.json",
+    "observed_record": "research/evidence/208b3d1f5f4f65485a8aa690cef17a457232cdcd.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,18 +157,18 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14943930424,
-      "outer_sha256": "2c75f7efb4e3eef379f3f729ae0263a29dc9b21603443223ae3644af24ab8526",
-      "inner_sha256": "46f28753789e3330639145302e0b7ca0f1886734b5c58397dcf6a51147a49ad3",
-      "files": 76
+      "artifact_id": 14943164344,
+      "outer_sha256": "16fbfaaebcc703605e0566512e8e6abc815212685fc799d96cf9429f47ee116e",
+      "inner_sha256": "6e01d1581b27e8e2aac5512487769663099ae6f466f15ec68809c23d1b81a04c",
+      "files": 80
     },
     "workflow_preflight": {
-      "policy_sha256": "05644c78cc989c850b00f243ac5e47379a556da7c9bbac600d40d38b4d2e1b4c",
+      "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
       "promotion": "BLOCKED",
       "scope": "synthetic workflow preflight",
       "steps": 21
     },
-    "strict_type_checked_files": 3
+    "strict_type_checked_files": 6
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -307,7 +307,7 @@
     {
       "id": "static_typing_and_lint",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
-      "remaining": "Strict typing covers three core modules; broader typing and lint remain unfinished."
+      "remaining": "Six core modules pass strict mypy; remaining modules and broader lint are not fully checked."
     },
     {
       "id": "synthetic_distributable",
@@ -347,10 +347,14 @@
     },
     {
       "id": "typed_provider_byte_boundaries",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "protocol_deadline_postcondition",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify the corrected 123-test commit with strict mypy on six explicit modules and all CI gates.",
+  "next": "Verify exact 126-test commit; measure bounded synthetic resource consumption and preserve explicit official-access blockers.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -444,6 +448,14 @@
       "root_cause": "strict mypy follows the stream module's protocol dependency, which lacked complete annotations",
       "repair": "annotate protocol dependency and make all six checked modules explicit; preserve the same strict gate",
       "local_repaired": "123 tests passed; workflow policy preflight passed; pinned remote mypy pending"
+    },
+    {
+      "commit": "208b3d1f5f4f65485a8aa690cef17a457232cdcd",
+      "requirement": "bounded synthetic transport completion",
+      "actual": "three new local tests failed: late receive, late send, success after deadline",
+      "root_cause": "asyncio timeout alone does not reject a cancellation-suppressing transport; finish reused I/O grace for successful completion",
+      "repair": "monotonic postcondition on send and receive; normal terminal success uses remaining task time",
+      "local_repaired": "126/126 tests"
     }
   ]
 }

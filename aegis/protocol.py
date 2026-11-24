@@ -133,15 +133,28 @@ class Session:
         return remaining
 
     async def _recv(self) -> dict[str, Any]:
+        end = asyncio.get_running_loop().time() + self._remaining()
         try:
-            async with asyncio.timeout(self._remaining()):
+            async with asyncio.timeout_at(end):
                 value = decode(await self.transport.recv())
         except TimeoutError as exc:
             raise WireError("receive timeout") from exc
+        if asyncio.get_running_loop().time() >= end:
+            raise WireError("late receive")
         if value.get("type") == "cancel":
             self.cancelled = True
             raise Cancelled("peer cancelled")
         return value
+
+    async def _send(self, frame: dict[str, Any], timeout: float) -> None:
+        end = asyncio.get_running_loop().time() + timeout
+        try:
+            async with asyncio.timeout_at(end):
+                await self.transport.send(encode(frame))
+        except TimeoutError as exc:
+            raise WireError("send timeout") from exc
+        if asyncio.get_running_loop().time() >= end:
+            raise WireError("late send")
 
     async def start(self) -> Task:
         if self.task is not None or self.terminal or self.busy or self.poisoned:
@@ -176,8 +189,7 @@ class Session:
         request_id = str(self.count)
         self.busy = True
         try:
-            async with asyncio.timeout(self._remaining()):
-                await self.transport.send(encode({"type": kind, "id": request_id, **fields}))
+            await self._send({"type": kind, "id": request_id, **fields}, self._remaining())
             reply = await self._recv()
             if reply.get("type") != "result" or reply.get("id") != request_id:
                 raise WireError("uncorrelated result")
@@ -231,10 +243,9 @@ class Session:
         self._usage_count = getattr(self, "_usage_count", 0) + 1
         self.busy = True
         try:
-            async with asyncio.timeout(self._remaining()):
-                await self.transport.send(encode({"type": "usage", "model": profile.model,
-                    "input_tokens": input_tokens, "output_tokens": output_tokens,
-                    "cache_read_tokens": cache_read_tokens}))
+            await self._send({"type": "usage", "model": profile.model,
+                "input_tokens": input_tokens, "output_tokens": output_tokens,
+                "cache_read_tokens": cache_read_tokens}, self._remaining())
         except BaseException:
             self.poisoned = True
             raise
@@ -248,7 +259,7 @@ class Session:
         # Cancellation grants a separate short grace window; do not reuse task deadline.
         if (self.task is None or self.poisoned) and not self.cancelled and not failed:
             raise WireError("ambiguous session cannot report success")
+        timeout = self.io_timeout if failed or self.cancelled else self._remaining()
         self.terminal = True
         frame = {"type": "error", "message": message} if failed else {"type": "done", "final_message": message}
-        async with asyncio.timeout(self.io_timeout):
-            await self.transport.send(encode(frame))
+        await self._send(frame, timeout)
