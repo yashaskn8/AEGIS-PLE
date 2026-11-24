@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "4236db94e907d527900348f8dfe1b634f7522cb8",
-    "ci_run": 45436617561,
-    "tests": 90,
+    "commit": "b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639",
+    "ci_run": 45436839314,
+    "tests": 96,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/4236db94e907d527900348f8dfe1b634f7522cb8.json",
+    "observed_record": "research/evidence/b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -122,6 +122,10 @@
         "pairs": 77,
         "scope": "published aggregate discipline matrix, not AEGIS"
       }
+    },
+    "experiment_0013": {
+      "loopback_cases": 6,
+      "passed": 6
     }
   },
   "promotion": "BLOCKED",
@@ -152,19 +156,23 @@
     },
     {
       "id": "mcp_and_tool_protocol",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Synthetic discovery and file protocol verified; actual tool execution and official protocol checks not authorized."
     },
     {
       "id": "provider_reasoning_loop",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Scripted text and usage handling verified; live and native provider behavior not verified."
     },
     {
       "id": "adaptive_budget",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Synthetic operation and reported usage limits verified; real cost and latency unmeasured."
     },
     {
       "id": "evidence_intelligence",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Synthetic structured revision and provenance checks verified; actual task document formats and engineering validation untested."
     },
     {
       "id": "bounded_candidate_generation",
@@ -172,7 +180,8 @@
     },
     {
       "id": "persistent_learning",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Archived data-only policy reproduced and retained; arbitrary executable candidate evolution and independent promotion not authorized."
     },
     {
       "id": "capability_matrix",
@@ -180,12 +189,13 @@
     },
     {
       "id": "engineering_transfer",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED",
+      "remaining": "Four fictional document categories tested; actual engineering capability and cross-model evaluation unverified."
     },
     {
       "id": "independent_governance",
       "status": "BLOCKED",
-      "blocker": "main unprotected; connector lacks administration"
+      "blocker": "main protected=false; 0 rulesets; connector lacks administration"
     },
     {
       "id": "untrusted_code_isolation",
@@ -237,10 +247,15 @@
     },
     {
       "id": "integrated_document_loopback",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "official_live_harness",
+      "status": "BLOCKED",
+      "blocker": "Official eligibility, task data permissions, approved model access, and authorized container evaluation not established."
     }
   ],
-  "next": "Verify integrated loopback CI, record actual results and review outstanding authorization blockers.",
+  "next": "Check latest main and its CI; review the exact external prerequisites in tasks. If legitimate prerequisites are established, independently review the public upstream harness and run authorized official compatibility validation before any real benchmark. For further educational work, keep tests synthetic, improve bounded data-only capabilities, and retain all mandatory checks.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -253,19 +268,20 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",
-    "reason": "bounded interactive development session checkpoint; work incomplete",
+    "last_code_commit": "b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639",
+    "reason": "End of bounded interactive implementation session; full project remains incomplete.",
     "next_files": [
+      "research/checkpoint.json",
+      "docs/DEVELOPMENT.md",
       "aegis/protocol.py",
-      "aegis/models.py",
-      "tests/test_protocol.py",
-      "research/checkpoint.json"
+      "aegis/document_runtime.py"
     ],
     "gates": [
-      "preserve all 52 mandatory tests",
+      "preserve all 96 mandatory tests",
       "no unverified model or dataset access",
       "no paid calls",
-      "no automatic release promotion"
+      "no automatic release promotion",
+      "no untrusted code execution"
     ],
     "verdict": "CONDITIONAL_GO_SYNTHETIC_ONLY"
   }

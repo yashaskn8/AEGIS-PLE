@@ -1,0 +1,1252 @@
+{
+  "scope": "synthetic and public aggregate only",
+  "repository": "yashaskn8/AEGIS-PLE",
+  "commit": "b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639",
+  "run": {
+    "id": 45436839314,
+    "head_sha": "b1c8b4e3221dd0c09787c8cbc7eeb4cfa67cf639",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "jobs": [
+    {
+      "id": 138596840549,
+      "name": "verification",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record candidate and interpreter",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install hash-pinned loopback dependency",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run fail-closed synthetic checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run bounded synthetic experiment",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compare dependency verification with full recomputation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Generate and compare bounded verification policies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compare synthetic document reconciliation ablations",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reproduce learned policy and measure fresh retention",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compare scripted document repair and single attempt",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analyze published baseline frontier",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify deterministic-first document route",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Analyze published discipline score matrix",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "tests": 96,
+  "document_runtime_tests": [
+    "2026-11-24T16:25:12.8784183Z test_cancel_during_write (tests.test_document_runtime.DocumentRuntime.test_cancel_during_write) ... ok",
+    "2026-11-24T16:25:12.8846332Z test_conflict_blocks_write (tests.test_document_runtime.DocumentRuntime.test_conflict_blocks_write) ... ok",
+    "2026-11-24T16:25:12.9071052Z test_corrupt_readback (tests.test_document_runtime.DocumentRuntime.test_corrupt_readback) ... ok",
+    "2026-11-24T16:25:12.9307913Z test_postwrite_source_change (tests.test_document_runtime.DocumentRuntime.test_postwrite_source_change) ... ok",
+    "2026-11-24T16:25:12.9525594Z test_prewrite_source_change (tests.test_document_runtime.DocumentRuntime.test_prewrite_source_change) ... ok",
+    "2026-11-24T16:25:12.9756582Z test_success (tests.test_document_runtime.DocumentRuntime.test_success) ... ok"
+  ],
+  "reports": {
+    "deterministic synthetic document route": {
+      "cases": 40,
+      "correct": 40,
+      "false_accepts": 0,
+      "model_calls": 0,
+      "promotion": "BLOCKED",
+      "scope": "deterministic synthetic document route"
+    },
+    "published aggregate discipline matrix, not AEGIS": {
+      "discipline_scores": 308,
+      "leaders": {
+        "civil": [
+          {
+            "harness": "openhands",
+            "model": "gemini-4-neon",
+            "score": 0.782
+          }
+        ],
+        "electrical": [
+          {
+            "harness": "hermes",
+            "model": "claude-opus-5-5",
+            "score": 0.49
+          }
+        ],
+        "mechanical": [
+          {
+            "harness": "claude-code",
+            "model": "gemini-4-neon",
+            "score": 0.472
+          }
+        ],
+        "structural": [
+          {
+            "harness": "openhands",
+            "model": "claude-opus-5-5",
+            "score": 0.576
+          }
+        ]
+      },
+      "pairs": 77,
+      "scope": "published aggregate discipline matrix, not AEGIS"
+    },
+    "published baseline aggregate, not AEGIS": {
+      "frontier": [
+        {
+          "cost_status": "reported",
+          "cost_usd": 2.09,
+          "harness": "hermes",
+          "model": "gemini-3.1-pro-preview",
+          "score": 0.148
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 2.39,
+          "harness": "hermes",
+          "model": "gemini-3.8-flash",
+          "score": 0.174
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 2.45,
+          "harness": "opencode",
+          "model": "gemini-3.8-flash",
+          "score": 0.259
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 2.6,
+          "harness": "agy",
+          "model": "gemini-3.8-flash",
+          "score": 0.275
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 3.21,
+          "harness": "openhands",
+          "model": "gemini-3.8-flash",
+          "score": 0.282
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 4.01,
+          "harness": "pi",
+          "model": "gemini-4-hydrogen",
+          "score": 0.388
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 4.43,
+          "harness": "opencode",
+          "model": "gemini-4-hydrogen",
+          "score": 0.406
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 4.79,
+          "harness": "claude-code",
+          "model": "gemini-4-hydrogen",
+          "score": 0.43
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 7.16,
+          "harness": "agy",
+          "model": "gemini-4-carbon",
+          "score": 0.468
+        },
+        {
+          "cost_status": "approx",
+          "cost_usd": 8.78,
+          "harness": "pi",
+          "model": "gemini-4-neon",
+          "score": 0.484
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 10.13,
+          "harness": "agy",
+          "model": "gemini-4-neon",
+          "score": 0.507
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 10.71,
+          "harness": "claude-code",
+          "model": "gemini-4-neon",
+          "score": 0.519
+        },
+        {
+          "cost_status": "reported",
+          "cost_usd": 18.13,
+          "harness": "hermes",
+          "model": "gemini-4-neon",
+          "score": 0.525
+        }
+      ],
+      "known_costs": 75,
+      "pairs": 77,
+      "scope": "published baseline aggregate, not AEGIS",
+      "score_floor": 0.138
+    },
+    "synthetic policy retention": {
+      "baseline_checks": 88,
+      "cases": 24,
+      "checks": 48,
+      "correct": 24,
+      "evidence_digest": "3160fac73cc863f0743b42d97328f48d4bba59798728340f3bf6653b54a9b21b",
+      "false_accepts": 0,
+      "promotion": "BLOCKED",
+      "scope": "synthetic policy retention",
+      "selected": [
+        "label",
+        "quantity",
+        "source"
+      ],
+      "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
+    },
+    "scripted provider document repair": {
+      "cases": 16,
+      "metrics": {
+        "bounded_repair": {
+          "calls": 20,
+          "correct": 16,
+          "false_accepts": 0,
+          "reserved_output": 5120
+        },
+        "single": {
+          "calls": 12,
+          "correct": 12,
+          "false_accepts": 0,
+          "reserved_output": 3072
+        }
+      },
+      "promotion": "BLOCKED",
+      "rows": [
+        {
+          "case": "first_pass",
+          "category": "structural",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            }
+          }
+        },
+        {
+          "case": "repair",
+          "category": "structural",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "persistent_error",
+          "category": "structural",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": false
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "source_conflict",
+          "category": "structural",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            },
+            "single": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "first_pass",
+          "category": "civil",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            }
+          }
+        },
+        {
+          "case": "repair",
+          "category": "civil",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "persistent_error",
+          "category": "civil",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": false
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "source_conflict",
+          "category": "civil",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            },
+            "single": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "first_pass",
+          "category": "electrical",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            }
+          }
+        },
+        {
+          "case": "repair",
+          "category": "electrical",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "persistent_error",
+          "category": "electrical",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": false
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "source_conflict",
+          "category": "electrical",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            },
+            "single": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "first_pass",
+          "category": "mechanical",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": true
+            }
+          }
+        },
+        {
+          "case": "repair",
+          "category": "mechanical",
+          "expected": true,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": true
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "persistent_error",
+          "category": "mechanical",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 2,
+              "reported_input": 160,
+              "reported_output": 100,
+              "reserved_output": 512,
+              "verified": false
+            },
+            "single": {
+              "calls": 1,
+              "reported_input": 80,
+              "reported_output": 50,
+              "reserved_output": 256,
+              "verified": false
+            }
+          }
+        },
+        {
+          "case": "source_conflict",
+          "category": "mechanical",
+          "expected": false,
+          "outcomes": {
+            "bounded_repair": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            },
+            "single": {
+              "calls": 0,
+              "reported_input": 0,
+              "reported_output": 0,
+              "reserved_output": 0,
+              "verified": false
+            }
+          }
+        }
+      ],
+      "scope": "scripted provider document repair"
+    },
+    "synthetic document inventory only": {
+      "cases": 40,
+      "metrics": {
+        "baseline": {
+          "correct": 12,
+          "false_accepts": 24,
+          "valid_records_recovered": 8
+        },
+        "full": {
+          "correct": 40,
+          "false_accepts": 0,
+          "valid_records_recovered": 12
+        },
+        "revision_only": {
+          "correct": 16,
+          "false_accepts": 24,
+          "valid_records_recovered": 12
+        }
+      },
+      "promotion": "BLOCKED",
+      "rows": [
+        {
+          "actual": {
+            "baseline": 20,
+            "full": 20,
+            "revision_only": 20
+          },
+          "case": "clean",
+          "category": "structural",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 20
+        },
+        {
+          "actual": {
+            "baseline": 19,
+            "full": 20,
+            "revision_only": 20
+          },
+          "case": "obsolete_first",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 20
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": 20,
+            "revision_only": 20
+          },
+          "case": "obsolete_last",
+          "category": "structural",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 20
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": null,
+            "revision_only": 20
+          },
+          "case": "missing_current",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": null,
+            "revision_only": 20
+          },
+          "case": "conflict",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": null,
+            "revision_only": 20
+          },
+          "case": "duplicate",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": null,
+            "revision_only": 20
+          },
+          "case": "unapproved_future",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": null,
+            "full": null,
+            "revision_only": null
+          },
+          "case": "missing_fact",
+          "category": "structural",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": null,
+            "revision_only": 20
+          },
+          "case": "compound",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": null,
+            "revision_only": 20
+          },
+          "case": "malformed",
+          "category": "structural",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": 21,
+            "revision_only": 21
+          },
+          "case": "clean",
+          "category": "civil",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 21
+        },
+        {
+          "actual": {
+            "baseline": 20,
+            "full": 21,
+            "revision_only": 21
+          },
+          "case": "obsolete_first",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 21
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": 21,
+            "revision_only": 21
+          },
+          "case": "obsolete_last",
+          "category": "civil",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 21
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": null,
+            "revision_only": 21
+          },
+          "case": "missing_current",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": null,
+            "revision_only": 21
+          },
+          "case": "conflict",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": null,
+            "revision_only": 21
+          },
+          "case": "duplicate",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": null,
+            "revision_only": 21
+          },
+          "case": "unapproved_future",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": null,
+            "full": null,
+            "revision_only": null
+          },
+          "case": "missing_fact",
+          "category": "civil",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": null,
+            "revision_only": 21
+          },
+          "case": "compound",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": null,
+            "revision_only": 21
+          },
+          "case": "malformed",
+          "category": "civil",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": 22,
+            "revision_only": 22
+          },
+          "case": "clean",
+          "category": "electrical",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 22
+        },
+        {
+          "actual": {
+            "baseline": 21,
+            "full": 22,
+            "revision_only": 22
+          },
+          "case": "obsolete_first",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 22
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": 22,
+            "revision_only": 22
+          },
+          "case": "obsolete_last",
+          "category": "electrical",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 22
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": null,
+            "revision_only": 22
+          },
+          "case": "missing_current",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": null,
+            "revision_only": 22
+          },
+          "case": "conflict",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": null,
+            "revision_only": 22
+          },
+          "case": "duplicate",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": null,
+            "revision_only": 22
+          },
+          "case": "unapproved_future",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": null,
+            "full": null,
+            "revision_only": null
+          },
+          "case": "missing_fact",
+          "category": "electrical",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": null,
+            "revision_only": 22
+          },
+          "case": "compound",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": null,
+            "revision_only": 22
+          },
+          "case": "malformed",
+          "category": "electrical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": 23,
+            "revision_only": 23
+          },
+          "case": "clean",
+          "category": "mechanical",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 23
+        },
+        {
+          "actual": {
+            "baseline": 22,
+            "full": 23,
+            "revision_only": 23
+          },
+          "case": "obsolete_first",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 23
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": 23,
+            "revision_only": 23
+          },
+          "case": "obsolete_last",
+          "category": "mechanical",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": 23
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": null,
+            "revision_only": 23
+          },
+          "case": "missing_current",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": null,
+            "revision_only": 23
+          },
+          "case": "conflict",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": null,
+            "revision_only": 23
+          },
+          "case": "duplicate",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": null,
+            "revision_only": 23
+          },
+          "case": "unapproved_future",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": null,
+            "full": null,
+            "revision_only": null
+          },
+          "case": "missing_fact",
+          "category": "mechanical",
+          "correct": {
+            "baseline": true,
+            "full": true,
+            "revision_only": true
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": null,
+            "revision_only": 23
+          },
+          "case": "compound",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        },
+        {
+          "actual": {
+            "baseline": 23,
+            "full": null,
+            "revision_only": 23
+          },
+          "case": "malformed",
+          "category": "mechanical",
+          "correct": {
+            "baseline": false,
+            "full": true,
+            "revision_only": false
+          },
+          "expected": null
+        }
+      ],
+      "scope": "synthetic document inventory only"
+    }
+  },
+  "promotion": "BLOCKED"
+}
