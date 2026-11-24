@@ -68,6 +68,32 @@ class DocumentAgent(unittest.IsolatedAsyncioTestCase):
         self.assertIsNone(r.output)
 
 
+    async def test_transport_error_no_unaccounted_retry(self):
+        calls = []
+        async def disconnected(request):
+            calls.append(request)
+            raise ConnectionResetError("synthetic peer disconnected")
+        result = await solve(M, R, D, P, disconnected)
+        self.assertEqual(result.status, "BLOCKED")
+        self.assertIsNone(result.output)
+        self.assertEqual(result.calls, 1)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(result.reserved_output, 256)
+        self.assertEqual(result.diagnostics, ("unverifiable_provider_response",))
+
+    async def test_late_reply_after_cancellation(self):
+        async def late(request):
+            try:
+                await asyncio.sleep(1)
+            except asyncio.CancelledError:
+                return chunks_for(P.model, expected())
+        result = await solve(M, R, D, P, late, deadline_sec=0.01)
+        self.assertEqual(result.status, "BLOCKED")
+        self.assertIsNone(result.output)
+        self.assertEqual(result.calls, 1)
+        self.assertEqual(result.diagnostics, ("deadline_exceeded",))
+
+
 class GateNegative(unittest.TestCase):
     def test_missing_test_inventory_fails(self):
         with patch.object(ci.unittest.defaultTestLoader, "discover", return_value=unittest.TestSuite()), patch("sys.stderr", new=io.StringIO()):

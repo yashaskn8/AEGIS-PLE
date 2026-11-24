@@ -80,6 +80,9 @@ async def solve(manifest, required, documents, profile, provider, *, max_calls=3
         try:
             async with asyncio.timeout(remaining):
                 chunks = await provider(request)
+            if monotonic() - start >= deadline_sec:
+                diagnostics.append("deadline_exceeded")
+                break
             # Only a finite list of decoded chunks is accepted in this offline prototype.
             if type(chunks) is not list:
                 raise WireError("unsupported stream transport")
@@ -105,7 +108,7 @@ async def solve(manifest, required, documents, profile, provider, *, max_calls=3
             reason = "deadline_exceeded"
             diagnostics.append(reason)
             break
-        except (WireError, ValueError, TypeError, KeyError, UnicodeError, RuntimeError):
+        except (WireError, ValueError, TypeError, KeyError, UnicodeError, RuntimeError, OSError):
             # Unknown consumption is not refunded; stop rather than speculate about cost.
             diagnostics.append("unverifiable_provider_response")
             break

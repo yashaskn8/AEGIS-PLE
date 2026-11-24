@@ -82,6 +82,7 @@ EXPECTED_IDS |= {"tests.test_document_agent.DocumentAgent." + name for name in (
     "test_integrated_repair_experiment", "test_source_conflict_no_provider",
     "test_forged_provenance_and_boolean", "test_reported_input_over_budget",
     "test_no_retry_after_unaccounted_stream", "test_zero_and_timeout",
+    "test_transport_error_no_unaccounted_retry", "test_late_reply_after_cancellation",
 )}
 EXPECTED_IDS |= {"tests.test_document_agent.GateNegative." + name for name in (
     "test_missing_test_inventory_fails", "test_failed_and_skipped_results_fail",

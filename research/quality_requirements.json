@@ -93,7 +93,7 @@
     },
     {
       "id": "preflight_historical_evidence_schema",
-      "status": "IMPLEMENTED",
+      "status": "VERIFIED_SYNTHETIC",
       "gate": "required historical preflight report, externally supplied policy digest and exact step count"
     }
   ],

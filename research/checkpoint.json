@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4",
-    "ci_run": 45440339547,
-    "tests": 115,
+    "commit": "6ed2818994f9a3e88cac4cd175a7089b088d95f6",
+    "ci_run": 45440663523,
+    "tests": 116,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4.json",
+    "observed_record": "research/evidence/6ed2818994f9a3e88cac4cd175a7089b088d95f6.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,11 +157,10 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14941684451,
-      "outer_sha256": "e079d66abe445f022918e84df9cfbdef1b6565b24f2e23cf228db0aed7650bc6",
-      "inner_sha256": "6da6674545fe74bd7021ce1d65edcfea2ddced93c2a6ed93e06dc71ce9ca6e2d",
-      "tree_digest": "64b6f05464e9d7cf46aef611ae4ef26ffdf45c2887055871df0195494c1d868a",
-      "files": 75
+      "artifact_id": 14943930424,
+      "outer_sha256": "2c75f7efb4e3eef379f3f729ae0263a29dc9b21603443223ae3644af24ab8526",
+      "inner_sha256": "46f28753789e3330639145302e0b7ca0f1886734b5c58397dcf6a51147a49ad3",
+      "files": 76
     },
     "workflow_preflight": {
       "policy_sha256": "05644c78cc989c850b00f243ac5e47379a556da7c9bbac600d40d38b4d2e1b4c",
@@ -336,10 +335,14 @@
     },
     {
       "id": "preflight_historical_evidence_schema",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "offline_transport_failure_and_deadline",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify the exact integrated 116-test commit, archive the run externally, then address broader static coverage and remaining authorization gates.",
+  "next": "Verify exact 118-test integrated commit. Then measure synthetic runtime resources and broaden static coverage.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -352,16 +355,15 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "2cebfca0b4c6dce5c0441fd7ac7e661f645f5cd4",
-    "reason": "current schema regression awaits integrated CI",
+    "last_code_commit": "6ed2818994f9a3e88cac4cd175a7089b088d95f6",
+    "reason": "transport regression pending remote verification",
     "next_files": [
-      "aegis/quality_evidence.py",
-      "research/quality_requirements.json",
+      "aegis/document_agent.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve all 116 tests and configured CI steps",
-      "no unverified competition or model access",
+      "preserve all 118 tests and CI steps",
+      "no unverified official access",
       "no paid calls",
       "no release promotion"
     ],
@@ -406,6 +408,15 @@
       "actual": "BaseLoader conflates false and quoted false; confirmed by local inspection",
       "root_cause": "BaseLoader resolves scalar values as strings",
       "repair": "SafeLoader with explicit boolean resolver; reject scalar type substitutions in regression"
+    },
+    {
+      "commit": "6ed2818994f9a3e88cac4cd175a7089b088d95f6",
+      "requirement": "offline controller fail-closed result",
+      "actual": "local regression on original source: ConnectionResetError escapes solve; late reply misclassified as independent_process_rejected",
+      "root_cause": "missing OSError handler and absent post-transport deadline check",
+      "repair": "catch OSError without retry and check deadline immediately after provider returns",
+      "local_original": "2 tests: 1 failure, 1 error",
+      "local_repaired": "2/2 passed; 118/118 full suite"
     }
   ]
 }
