@@ -11,8 +11,9 @@ Run with Python 3.12 (no Docker, network, model API or credentials):
 ```sh
 python -m aegis.ci
 python -m aegis.experiment
+python -m aegis.graph_experiment
 ```
 
-CI runs both commands. The candidate comparison recommends a candidate; it cannot promote or modify code. Production/competition release remains blocked.
+CI runs all three commands. The graph experiment compares dependency-aware verification with full recomputation on synthetic fixtures; no external cache or arbitrary candidate code is trusted. The candidate comparison recommends a candidate; it cannot promote or modify code. Production/competition release remains blocked.
 
 See [development policy and research plan](docs/DEVELOPMENT.md). [AGENTS.md](AGENTS.md) is preserved from the organizers' public template. Do not interpret it as permission to access competition resources.

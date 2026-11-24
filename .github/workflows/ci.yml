@@ -23,3 +23,5 @@ jobs:
         run: python3 -m aegis.ci
       - name: Run bounded synthetic experiment
         run: python3 -m aegis.experiment
+      - name: Compare dependency verification with full recomputation
+        run: python3 -m aegis.graph_experiment

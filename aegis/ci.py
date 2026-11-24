@@ -12,6 +12,14 @@ EXPECTED = {
 EXPECTED_IDS = {"tests.test_foundation.Foundation." + name for name in EXPECTED}
 
 
+EXPECTED_IDS |= {"tests.test_constraints.Constraints." + name for name in (
+    "test_contradictory_evidence", "test_decimal_context", "test_graph_schema",
+    "test_dependency_invalidation", "test_missing_and_compound_failures",
+    "test_failure_not_cached", "test_candidate_data_not_executable",
+    "test_randomized_differential", "test_experiment",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

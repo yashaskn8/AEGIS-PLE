@@ -6,7 +6,7 @@ domain; do not execute untrusted candidate code here.
 """
 
 from dataclasses import asdict, dataclass
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_UP, localcontext
 from enum import Enum
 from hashlib import sha256
 import inspect
@@ -73,7 +73,7 @@ def gate(records: tuple[Evidence, ...], *, candidate: str, fixture: str,
         if (record.candidate, record.fixture, record.output, record.verifier) != (
                 candidate, fixture, output, verifier):
             return State.FAILED
-        if record.state is not State.VERIFIED:
+        if record.state is not State.VERIFIED or record.expected != record.actual:
             return State.FAILED
     return State.VERIFIED
 
@@ -91,9 +91,11 @@ def assess(candidate: Candidate, fixture: Fixture) -> Assessment:
             return Assessment(State.FAILED, (), "output_schema: invalid result")
         output_id = digest(result)
         # Independent oracle: Decimal arithmetic, not candidate integer rounding.
-        expected = int(sum(Decimal(x) / Decimal(1000)
-                           for x in fixture.micrometres).quantize(
-                               Decimal("1"), rounding=ROUND_HALF_UP))
+        with localcontext() as ctx:
+            ctx.prec = 40
+            expected = int(sum(Decimal(x) / Decimal(1000)
+                               for x in fixture.micrometres).quantize(
+                                   Decimal("1"), rounding=ROUND_HALF_UP))
         outcomes = (
             ("output_schema", True, "exact integer total_mm", "exact integer total_mm"),
             ("independent_total", result["total_mm"] == expected,

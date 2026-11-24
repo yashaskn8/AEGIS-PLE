@@ -28,3 +28,11 @@ Keep experiments bounded, preserve negative results, compare under equivalent co
 3. Audit pinned upstream harness and implement protocol adapter tests with synthetic peers.
 4. Add evidence provenance, dependency invalidation, bounded repair and checkpoint integrity.
 5. Only when authorized, run official compatibility checks and genuine benchmark experiments. Keep all claims scoped to actual evidence.
+
+## Experiment 0002 — dependency-aware verification
+
+Predeclared hypothesis: a task-local dependency graph can reduce deterministic check executions without changing any verification evidence versus full recomputation. Budget: seven synthetic scenarios, one incremental and one full run each, plus 100 seeded perturbations. Acceptance: identical observations in every scenario, fewer actual check invocations, rejected missing inputs, cycles, contradictory evidence and compound failures, and preserved original tests. Stop on any mismatch. The metric is check calls, not wall time, token cost or PLE accuracy. Check functions must be pure, deterministic, trusted and fixed during the controller lifetime; no candidate code is loaded by this controller. Dependencies and relevant fact keys must be complete. No external cache, hidden task data, or promotion.
+
+Review: official protocol blob 8ec13aeddb270ce581a5920224b6c856feb50a23 and rules blob 8bc47a001c24be0ed3157a9c30ce191f6d72a3a6. Current web guide: https://ple-bench.com/competition/guide. Conflicting artifact rules remain unresolved. Branch main reported protected=false, rulesets empty, protection details inaccessible (403). No independent gate or arbitrary code sandbox is claimed. This change is limited to trusted checks and synthetic JSON candidate data. The existing in-process candidate experiment remains trusted-only.
+
+Research rationale: https://arxiv.org/abs/2507.19457 (GEPA, instance-level feedback and Pareto candidate selection) and https://arxiv.org/abs/2506.13131 (AlphaEvolve, evaluator-driven search). Neither establishes performance on PLE or validates this graph. No unrestricted self-modification is enabled.
