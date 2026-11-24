@@ -71,6 +71,13 @@ EXPECTED_IDS |= {"tests.test_documents.Documents." + name for name in (
 )}
 
 
+EXPECTED_IDS |= {"tests.test_learning.Learning." + name for name in (
+    "test_reproduce_archived_policy", "test_fresh_retention",
+    "test_reject_consistent_but_fabricated_archive", "test_document_archive_replay",
+    "test_oversize_archive",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "2fb93faa30ba22762381c443e192d9114a93ff6a",
-    "ci_run": 45435426632,
-    "tests": 60,
+    "commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6",
+    "ci_run": 45435657813,
+    "tests": 68,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -24,9 +24,29 @@
         "baseline_checks": 100
       }
     },
-    "evidence": "research/evidence/2fb93faa30ba22762381c443e192d9114a93ff6a.json",
+    "evidence": "research/evidence/a063077c2cb8eca6e83fc643924e3fd42262f8e6.json",
     "checkpoint_commit": "df87d8be251112a4e4b1a12a3bd7e8d80b0d70b8",
-    "checkpoint_ci_run": 45434870519
+    "checkpoint_ci_run": 45434870519,
+    "experiment_0008": {
+      "cases": 40,
+      "metrics": {
+        "baseline": {
+          "correct": 12,
+          "false_accepts": 24,
+          "valid_records_recovered": 8
+        },
+        "full": {
+          "correct": 40,
+          "false_accepts": 0,
+          "valid_records_recovered": 12
+        },
+        "revision_only": {
+          "correct": 16,
+          "false_accepts": 24,
+          "valid_records_recovered": 12
+        }
+      }
+    }
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -68,7 +88,7 @@
     },
     {
       "id": "evidence_intelligence",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "bounded_candidate_generation",
@@ -76,7 +96,7 @@
     },
     {
       "id": "persistent_learning",
-      "status": "PARTIAL_SYNTHETIC_VERIFIED"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "capability_matrix",
@@ -84,7 +104,7 @@
     },
     {
       "id": "engineering_transfer",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "independent_governance",
@@ -132,13 +152,14 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Verify document reconciliation CI and recorded experiment. Then implement replay of learned policy from an authenticated-by-caller historical record with fresh reevaluation and no automatic promotion.",
+  "next": "Check the policy replay and retention CI. Continue with bounded synthetic multi-source proposal repair and independent process tests; external prerequisites remain blocked.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
     "python -m aegis.graph_experiment",
     "python -m aegis.policy_search",
-    "python -m aegis.document_experiment"
+    "python -m aegis.document_experiment",
+    "python -m aegis.learned_policy"
   ],
   "resume": {
     "last_code_commit": "39255bae348bc865a5c9c1c2fcf0c8cc68c96bfc",

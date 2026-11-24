@@ -1,0 +1,2044 @@
+{
+  "schema": 2,
+  "scope": "synthetic only",
+  "repository": "yashaskn8/AEGIS-PLE",
+  "commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6",
+  "run": {
+    "id": 45435657813,
+    "head_sha": "a063077c2cb8eca6e83fc643924e3fd42262f8e6",
+    "head_branch": "main",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "name": "Synthetic CI",
+    "run_attempt": 1,
+    "path": ".github/workflows/ci.yml"
+  },
+  "jobs": [
+    {
+      "id": 138592625747,
+      "name": "verification",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Record candidate and interpreter",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install hash-pinned loopback dependency",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run fail-closed synthetic checks",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run bounded synthetic experiment",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Compare dependency verification with full recomputation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Generate and compare bounded verification policies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Compare synthetic document reconciliation ablations",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    }
+  ],
+  "tests": 68,
+  "policy_report": {
+    "candidates": [
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 26,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": []
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 21,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 26,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "output"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 24,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "quantity"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 23,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 21,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "output"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 19,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 2,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "quantity"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 18,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 2,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 24,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "output",
+          "quantity"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 23,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "output",
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 21,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 2,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "quantity",
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 19,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 2,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "output",
+          "quantity"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 18,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 2,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "output",
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 16,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 1,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "quantity",
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 21,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 2,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 4,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "output",
+          "quantity",
+          "source"
+        ]
+      },
+      {
+        "development": {
+          "baseline_checks": 26,
+          "cases": 7,
+          "checks": 16,
+          "matches": 7,
+          "rows": [
+            {
+              "candidate_checks": 4,
+              "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 2,
+              "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": false
+            },
+            {
+              "candidate_checks": 1,
+              "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            },
+            {
+              "candidate_checks": 1,
+              "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+              "match": true,
+              "oracle_checks": 2,
+              "verified": false
+            },
+            {
+              "candidate_checks": 3,
+              "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+              "match": true,
+              "oracle_checks": 4,
+              "verified": true
+            }
+          ],
+          "verified": 5
+        },
+        "policy": [
+          "label",
+          "output",
+          "quantity",
+          "source"
+        ]
+      }
+    ],
+    "development": {
+      "baseline_checks": 26,
+      "cases": 7,
+      "checks": 16,
+      "matches": 7,
+      "rows": [
+        {
+          "candidate_checks": 4,
+          "input": "6d84c8d61512ec9f36d4a7d781b77c612e8a0e913dcaf720b81229169cd7757c",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        },
+        {
+          "candidate_checks": 2,
+          "input": "4722acdace1826010128ab23e17c558bce672df66d692ed20c67bb96cbc6d8af",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        },
+        {
+          "candidate_checks": 2,
+          "input": "fe9351e6116ffd190a719ea0d367e685a2b1fac68f021a4448b819a34f1bd6b8",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "026f09702a49ee32f225b37ba9bf4157decc6de6d171c3a2bc4ccbd859d6e551",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        },
+        {
+          "candidate_checks": 3,
+          "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        },
+        {
+          "candidate_checks": 1,
+          "input": "3762d7672aa926a902b26249437f45b7ddc954991737970a5b9743f377ee6504",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 3,
+          "input": "fecf88bb3aae35aaf7e02c567a437d4c4171e3374764031f31a13dd9ee6d56dc",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        }
+      ],
+      "verified": 5
+    },
+    "promotion": "BLOCKED",
+    "scope": "synthetic only",
+    "selected": [
+      "label",
+      "quantity",
+      "source"
+    ],
+    "transfer": {
+      "baseline_checks": 100,
+      "cases": 32,
+      "checks": 53,
+      "matches": 32,
+      "rows": [
+        {
+          "candidate_checks": 3,
+          "input": "59b658e5ae97316db7be435b7a48821c8558b2837dd419a8e835245bae157b2e",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "d748e31ba0bd3749fbc31b81d222b04f0a25df79dcbb345368f88d632367724c",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "e9dbae00fea9e0687b6cc5ef64ab3279c08b347bdbd2d911775e4eb62fdf2644",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "88cbb572963bd5e6c509da8a72d042ac62cb61b7e8e1b7b3ab2de696fdce18fc",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 3,
+          "input": "47217203cedb66b9e3905864ca4075630bec660f83ba227e90d796860f542ecf",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "cc80b8541b2a07dccb1b061a0c19de7586394744a58d655b28df38fc5df22bf7",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "55865df731c6d2cd050ea005cf8b7d1d53749d1354179ad8a5bba7a243ae2684",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "ce2b50b6e55e44d009bf03fdb6a9f4a996b503a61a970873b24a07d6ebd2dcf3",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 3,
+          "input": "3cecc2160ae7de902ce72b55bb1e1d18f154c9f915f12f83b90b3f01a0dd8bd4",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "a5a7adf4314bd52029614c8a028a48f1c148c86bd922f169e2227f475f7f87a4",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "a5a7adf4314bd52029614c8a028a48f1c148c86bd922f169e2227f475f7f87a4",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "31cfe1bb32a9b75fadfd3c773a8a02201a2c9c25fdc7193c4dac28db166729f5",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "0a8277c8e71b0f79465383e28f6143fe574b0580bedb0202cbb2e6c7f35fdd44",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "1f367bdc2097f52278353e3096f01f0e50fb973484911a4a5a328c903fd69545",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "17fb0abcabba890ef64c98380e96d6fbdb49f4bcfb68387df9a103dd2425e965",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "ee9a958fc41fea046539511e55686ef4c74aa9406820aa5a7d55587b33719a1f",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "e88f0fe0b2d4b1d3b30bbb8249b3cae8f02fd25e4a93d5615f80686bdbe13466",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "e88f0fe0b2d4b1d3b30bbb8249b3cae8f02fd25e4a93d5615f80686bdbe13466",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "cecb4b16367090b9a6f04807ed01b2e4b80aff1ea806b26e06a4072db0827ab7",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "5b9e6e43f9c784edac620cf57fb39204b449560e8fcca482555785af343eb4cb",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "5b9e6e43f9c784edac620cf57fb39204b449560e8fcca482555785af343eb4cb",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "115ee256c6a8bb1acb1ba1a12c8c053e338fd19360bfa90528afe1334f15618a",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "2be8f425c94118f2ddb6d8722995c026f6678b8162f6215369c127953f416fdd",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        },
+        {
+          "candidate_checks": 1,
+          "input": "2be8f425c94118f2ddb6d8722995c026f6678b8162f6215369c127953f416fdd",
+          "match": true,
+          "oracle_checks": 4,
+          "verified": true
+        },
+        {
+          "candidate_checks": 1,
+          "input": "914af455e21733fbcc6b205daadb45b1538a8716e2ea1d98de10322f08dcd635",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "914af455e21733fbcc6b205daadb45b1538a8716e2ea1d98de10322f08dcd635",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 3,
+          "input": "6eeaa60eaca9384b407abec354817b938944bcfcce8cfab7e80dc259f8f016d0",
+          "match": true,
+          "oracle_checks": 3,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "43fa7a0a623b9ee399d81e654fa6db651a53fef84696e70fb0f1e30feeba982b",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 2,
+          "input": "d9c0ccf98ca2c75db8aba597301fa8dc4ff8a87aa789736b1197805f836da4c5",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "d9c0ccf98ca2c75db8aba597301fa8dc4ff8a87aa789736b1197805f836da4c5",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "117a3499e7021191f96ded805f1317f943ef14aee911f82c96ed339875775040",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        },
+        {
+          "candidate_checks": 1,
+          "input": "117a3499e7021191f96ded805f1317f943ef14aee911f82c96ed339875775040",
+          "match": true,
+          "oracle_checks": 2,
+          "verified": false
+        }
+      ],
+      "verified": 2
+    }
+  },
+  "document_report": {
+    "cases": 40,
+    "metrics": {
+      "baseline": {
+        "correct": 12,
+        "false_accepts": 24,
+        "valid_records_recovered": 8
+      },
+      "full": {
+        "correct": 40,
+        "false_accepts": 0,
+        "valid_records_recovered": 12
+      },
+      "revision_only": {
+        "correct": 16,
+        "false_accepts": 24,
+        "valid_records_recovered": 12
+      }
+    },
+    "promotion": "BLOCKED",
+    "rows": [
+      {
+        "actual": {
+          "baseline": 20,
+          "full": 20,
+          "revision_only": 20
+        },
+        "case": "clean",
+        "category": "structural",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 20
+      },
+      {
+        "actual": {
+          "baseline": 19,
+          "full": 20,
+          "revision_only": 20
+        },
+        "case": "obsolete_first",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 20
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": 20,
+          "revision_only": 20
+        },
+        "case": "obsolete_last",
+        "category": "structural",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 20
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": null,
+          "revision_only": 20
+        },
+        "case": "missing_current",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": null,
+          "revision_only": 20
+        },
+        "case": "conflict",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": null,
+          "revision_only": 20
+        },
+        "case": "duplicate",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": null,
+          "revision_only": 20
+        },
+        "case": "unapproved_future",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": null,
+          "full": null,
+          "revision_only": null
+        },
+        "case": "missing_fact",
+        "category": "structural",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": null,
+          "revision_only": 20
+        },
+        "case": "compound",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": null,
+          "revision_only": 20
+        },
+        "case": "malformed",
+        "category": "structural",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": 21,
+          "revision_only": 21
+        },
+        "case": "clean",
+        "category": "civil",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 21
+      },
+      {
+        "actual": {
+          "baseline": 20,
+          "full": 21,
+          "revision_only": 21
+        },
+        "case": "obsolete_first",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 21
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": 21,
+          "revision_only": 21
+        },
+        "case": "obsolete_last",
+        "category": "civil",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 21
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": null,
+          "revision_only": 21
+        },
+        "case": "missing_current",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": null,
+          "revision_only": 21
+        },
+        "case": "conflict",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": null,
+          "revision_only": 21
+        },
+        "case": "duplicate",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": null,
+          "revision_only": 21
+        },
+        "case": "unapproved_future",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": null,
+          "full": null,
+          "revision_only": null
+        },
+        "case": "missing_fact",
+        "category": "civil",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": null,
+          "revision_only": 21
+        },
+        "case": "compound",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": null,
+          "revision_only": 21
+        },
+        "case": "malformed",
+        "category": "civil",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": 22,
+          "revision_only": 22
+        },
+        "case": "clean",
+        "category": "electrical",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 22
+      },
+      {
+        "actual": {
+          "baseline": 21,
+          "full": 22,
+          "revision_only": 22
+        },
+        "case": "obsolete_first",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 22
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": 22,
+          "revision_only": 22
+        },
+        "case": "obsolete_last",
+        "category": "electrical",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 22
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": null,
+          "revision_only": 22
+        },
+        "case": "missing_current",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": null,
+          "revision_only": 22
+        },
+        "case": "conflict",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": null,
+          "revision_only": 22
+        },
+        "case": "duplicate",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": null,
+          "revision_only": 22
+        },
+        "case": "unapproved_future",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": null,
+          "full": null,
+          "revision_only": null
+        },
+        "case": "missing_fact",
+        "category": "electrical",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": null,
+          "revision_only": 22
+        },
+        "case": "compound",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": null,
+          "revision_only": 22
+        },
+        "case": "malformed",
+        "category": "electrical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": 23,
+          "revision_only": 23
+        },
+        "case": "clean",
+        "category": "mechanical",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 23
+      },
+      {
+        "actual": {
+          "baseline": 22,
+          "full": 23,
+          "revision_only": 23
+        },
+        "case": "obsolete_first",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 23
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": 23,
+          "revision_only": 23
+        },
+        "case": "obsolete_last",
+        "category": "mechanical",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": 23
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": null,
+          "revision_only": 23
+        },
+        "case": "missing_current",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": null,
+          "revision_only": 23
+        },
+        "case": "conflict",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": null,
+          "revision_only": 23
+        },
+        "case": "duplicate",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": null,
+          "revision_only": 23
+        },
+        "case": "unapproved_future",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": null,
+          "full": null,
+          "revision_only": null
+        },
+        "case": "missing_fact",
+        "category": "mechanical",
+        "correct": {
+          "baseline": true,
+          "full": true,
+          "revision_only": true
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": null,
+          "revision_only": 23
+        },
+        "case": "compound",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      },
+      {
+        "actual": {
+          "baseline": 23,
+          "full": null,
+          "revision_only": 23
+        },
+        "case": "malformed",
+        "category": "mechanical",
+        "correct": {
+          "baseline": false,
+          "full": true,
+          "revision_only": false
+        },
+        "expected": null
+      }
+    ],
+    "scope": "synthetic document inventory only"
+  },
+  "promotion": "BLOCKED"
+}

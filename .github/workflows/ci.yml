@@ -33,3 +33,5 @@ jobs:
         run: .venv/bin/python -m aegis.policy_search
       - name: Compare synthetic document reconciliation ablations
         run: .venv/bin/python -m aegis.document_experiment
+      - name: Reproduce learned policy and measure fresh retention
+        run: .venv/bin/python -m aegis.learned_policy

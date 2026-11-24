@@ -32,7 +32,7 @@ def validate(record, *, expected_commit, expected_run, expected_tests):
             "invalid independently supplied commit")
     require(type(expected_run) is int and expected_run > 0 and
             type(expected_tests) is int and expected_tests > 0, "invalid expected CI identity")
-    require(record["schema"] == 1 and record["scope"] == "synthetic only", "record schema")
+    require(type(record["schema"]) is int and record["schema"] in (1, 2) and record["scope"] == "synthetic only", "record schema")
     require(record["promotion"] == "BLOCKED", "promotion must remain blocked")
     run = record["run"]
     require(record["commit"] == run["head_sha"] == expected_commit, "stale commit")
@@ -47,7 +47,10 @@ def validate(record, *, expected_commit, expected_run, expected_tests):
     require(job["name"] == "verification" and job["status"] == "completed"
             and job["conclusion"] == "success", "unsuccessful verification job")
     steps = job["steps"]
-    require(tuple(s["name"] for s in steps) == REQUIRED_STEPS, "missing, duplicate or unexpected step")
+    expected_steps = REQUIRED_STEPS
+    if record["schema"] == 2:
+        expected_steps = REQUIRED_STEPS[:-2] + ("Compare synthetic document reconciliation ablations",) + REQUIRED_STEPS[-2:]
+    require(tuple(s["name"] for s in steps) == expected_steps, "missing, duplicate or unexpected step")
     require(all(s["status"] == "completed" and s["conclusion"] == "success" for s in steps),
             "incomplete or unsuccessful mandatory step")
     report = record["policy_report"]
@@ -77,6 +80,8 @@ def validate(record, *, expected_commit, expected_run, expected_tests):
     winner = min(candidates, key=lambda c: (c["development"]["checks"], len(c["policy"]), c["policy"]))
     require(winner["policy"] == report["selected"] and winner["development"] == report["development"],
             "selection does not match observed candidates")
+    if record["schema"] == 2:
+        validate_documents(record["document_report"])
     return {"status": "VERIFIED_HISTORICAL_RECORD", "commit": expected_commit,
             "run": expected_run, "tests": expected_tests, "promotion": "BLOCKED"}
 
@@ -84,3 +89,30 @@ def validate(record, *, expected_commit, expected_run, expected_tests):
 def replay(path, *, expected_commit, expected_run, expected_tests):
     return validate(json.loads(Path(path).read_text()), expected_commit=expected_commit,
                     expected_run=expected_run, expected_tests=expected_tests)
+
+def validate_documents(report):
+    require(report["scope"] == "synthetic document inventory only" and report["promotion"] == "BLOCKED",
+            "invalid document report scope")
+    rows = report["rows"]
+    require(report["cases"] == len(rows) == 40, "document case count mismatch")
+    categories = ("structural", "civil", "electrical", "mechanical")
+    names = ("clean", "obsolete_first", "obsolete_last", "missing_current", "conflict",
+             "duplicate", "unapproved_future", "missing_fact", "compound", "malformed")
+    require({(r["category"], r["case"]) for r in rows} == {(c,n) for c in categories for n in names},
+            "document case inventory mismatch")
+    methods = ("baseline", "revision_only", "full")
+    for row in rows:
+        expected = row["expected"]
+        require(expected is None or type(expected) is int, "invalid expected label")
+        require(set(row["actual"]) == set(row["correct"]) == set(methods), "method inventory mismatch")
+        for m in methods:
+            actual = row["actual"][m]
+            require(actual is None or type(actual) is int, "invalid observed value")
+            require(row["correct"][m] is (actual == expected), "contradictory document result")
+    for m in methods:
+        observed = {"correct": sum(r["correct"][m] for r in rows),
+                    "false_accepts": sum(r["expected"] is None and r["actual"][m] is not None for r in rows),
+                    "valid_records_recovered": sum(r["expected"] is not None and r["correct"][m] for r in rows)}
+        require(observed == report["metrics"][m], "document aggregate mismatch")
+    require(report["metrics"]["full"] == {"correct": 40, "false_accepts": 0, "valid_records_recovered": 12},
+            "mandatory document experiment failed")
