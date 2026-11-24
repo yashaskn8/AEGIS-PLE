@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "e1f8c17921be07268a30874624bc9d50132f20c7",
-    "ci_run": 45434137959,
-    "tests": 36,
+    "commit": "e78bae31b266a8769f04ab04d67f6956ee2cb9bf",
+    "ci_run": 45434441700,
+    "tests": 43,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -24,7 +24,7 @@
         "baseline_checks": 100
       }
     },
-    "evidence": "research/evidence/e1f8c17921be07268a30874624bc9d50132f20c7.json"
+    "evidence": "research/evidence/e78bae31b266a8769f04ab04d67f6956ee2cb9bf.json"
   },
   "promotion": "BLOCKED",
   "tasks": [
@@ -58,11 +58,11 @@
     },
     {
       "id": "provider_reasoning_loop",
-      "status": "PENDING"
+      "status": "IMPLEMENTED_PARTIAL"
     },
     {
       "id": "adaptive_budget",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "evidence_intelligence",
@@ -74,7 +74,7 @@
     },
     {
       "id": "persistent_learning",
-      "status": "IMPLEMENTED_PARTIAL"
+      "status": "PARTIAL_SYNTHETIC_VERIFIED"
     },
     {
       "id": "capability_matrix",
@@ -130,7 +130,7 @@
       "blocker": "no independently verified release or user approval"
     }
   ],
-  "next": "Verify CI for budget and evidence replay. Continue provider response handling and bounded synthetic reasoning; full engineering capability evaluation and official execution remain subject to eligibility, permissions, compute and model access.",
+  "next": "Verify current CI for bounded proposal/repair. Next: strict usage accounting and declared MCP transport using only synthetic peers, then benign cross-domain document fixtures. Resume from latest main; no live endpoints, untrusted code, paid calls, official data, or promotion without required authorization.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",

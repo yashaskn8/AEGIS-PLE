@@ -28,7 +28,9 @@ class Profile:
         family = "gemini" if model.startswith("gemini-") else "claude" if model.startswith("claude-") else "compatible"
         return cls(declaration, model, family)
 
-    def request(self, messages, *, max_tokens, effort=None):
+    def request(self, messages, *, max_tokens, effort=None, stream=True):
+        if self != Profile.parse(self.declaration) or type(stream) is not bool:
+            raise ValueError("invalid provider profile or stream mode")
         if type(max_tokens) is not int or not 1 <= max_tokens <= 32000:
             raise ValueError("output budget outside synthetic profile")
         if type(messages) is not list or not messages or len(messages) > 64:
@@ -40,7 +42,7 @@ class Profile:
                     or type(m["content"]) is not str or len(m["content"]) > 65536):
                 raise ValueError("unsupported message shape")
             clean.append(dict(m))
-        body = {"model": self.model, "messages": clean, "max_tokens": max_tokens, "stream": True}
+        body = {"model": self.model, "messages": clean, "max_tokens": max_tokens, "stream": stream}
         if effort is not None:
             # Only profiles with explicitly documented controls. Others use defaults.
             allowed = {"gemini": ("low", "medium", "high"), "claude": ("low", "medium", "high", "max")}
