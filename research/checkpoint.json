@@ -2,9 +2,9 @@
   "schema": 1,
   "scope": "synthetic only",
   "last_verified": {
-    "commit": "81b1f27cabf365f00210fcf73d2671f66efe72dd",
-    "ci_run": 45444208473,
-    "tests": 130,
+    "commit": "1467abe4f47e8f5de26237662f3059c34ea2913e",
+    "ci_run": 45445153080,
+    "tests": 136,
     "experiment_0002": {
       "full_checks": 26,
       "incremental_checks": 16
@@ -55,7 +55,7 @@
       "baseline_checks": 88,
       "source_commit": "a063077c2cb8eca6e83fc643924e3fd42262f8e6"
     },
-    "observed_record": "research/evidence/81b1f27cabf365f00210fcf73d2671f66efe72dd.json",
+    "observed_record": "research/evidence/1467abe4f47e8f5de26237662f3059c34ea2913e.json",
     "experiment_0010": {
       "cases": 16,
       "metrics": {
@@ -157,10 +157,10 @@
       }
     },
     "download_verification": {
-      "artifact_id": 14944672509,
-      "outer_sha256": "19878d07ed725927a374df2816cc3b02b271528a9e2a1721a03329c099b75a22",
-      "inner_sha256": "4e56210d016bd8dfc2d66e04ca7c6260b66a23648d59f45be5700c1b96048725",
-      "files": 86
+      "artifact_id": 14944428353,
+      "outer_sha256": "dcd04ad111ba6d145e524136d1a35024993bfd64ba3a3aaa19a2a6fd74802200",
+      "inner_sha256": "8f445131dab9d55855ac8d5f8eb41410ba95b710f76ed00a147b464557d818ea",
+      "files": 88
     },
     "workflow_preflight": {
       "policy_sha256": "5f44adde621aa1b21fcc7618063d9fdb77fb143c853f101cdf233cca3c1e9bac",
@@ -302,7 +302,7 @@
     {
       "id": "evidence_intelligence",
       "status": "PARTIAL_SYNTHETIC_VERIFIED",
-      "remaining": "Synthetic structured revision and provenance checks verified; actual task document formats and engineering validation untested."
+      "remaining": "Canonical typed CSV and JSON reconciliation verified on fictional records; actual task formats and engineering correctness remain unverified."
     },
     {
       "id": "bounded_candidate_generation",
@@ -345,7 +345,8 @@
     {
       "id": "official_model_access",
       "status": "BLOCKED",
-      "blocker": "no authorized model credentials or compute credits"
+      "blocker": "no authorized model credentials or compute credits",
+      "remaining": "Current public organizer instructions say sponsored models only; repository AGENTS.md is older and differs. No approved access or eligibility verified; do not use the older document as authorization."
     },
     {
       "id": "official_artifact_policy",
@@ -451,10 +452,14 @@
     },
     {
       "id": "typed_csv_document_ingestion",
+      "status": "VERIFIED_SYNTHETIC"
+    },
+    {
+      "id": "measurement_repair_consumption_and_deadline",
       "status": "IMPLEMENTED"
     }
   ],
-  "next": "Verify exact 136-test integrated commit with cross-format reconciliation, separate verifier, scripted provider and loopback tests. Then assess remaining offline format and evidence requirements.",
+  "next": "Verify exact 140-test commit, seven-module strict typing and all unchanged CI gates; if verified, review remaining offline implementation and blocked external prerequisites.",
   "commands": [
     "python -m aegis.ci",
     "python -m aegis.experiment",
@@ -467,16 +472,15 @@
     "python -m aegis.disciplines"
   ],
   "resume": {
-    "last_code_commit": "81b1f27cabf365f00210fcf73d2671f66efe72dd",
-    "reason": "mixed-format integration pending exact remote CI",
+    "last_code_commit": "1467abe4f47e8f5de26237662f3059c34ea2913e",
+    "reason": "measurement repair pending remote verification",
     "next_files": [
-      "aegis/documents.py",
-      "aegis/document_worker.py",
-      "tests/test_csv_documents.py",
+      "aegis/repair.py",
+      "tests/test_repair.py",
       "research/checkpoint.json"
     ],
     "gates": [
-      "preserve 136 mandatory tests and all CI steps",
+      "preserve all 140 mandatory tests and CI steps",
       "no unverified official access",
       "no paid calls",
       "no release promotion"
@@ -557,6 +561,14 @@
       "root_cause": "asyncio timeout alone does not reject a cancellation-suppressing transport; finish reused I/O grace for successful completion",
       "repair": "monotonic postcondition on send and receive; normal terminal success uses remaining task time",
       "local_repaired": "126/126 tests"
+    },
+    {
+      "commit": "1467abe4f47e8f5de26237662f3059c34ea2913e",
+      "requirement": "measurement repair bounded failure behavior",
+      "actual": "Four local regressions failed on original code",
+      "root_cause": "Unknown output consumption retried, missing completion deadline postcondition, bool timeout accepted, reply bounded by characters rather than bytes",
+      "repair": "Stop on timeout or unverified reply, reject late completion, validate timeout type and UTF-8 byte size",
+      "local_repaired": "140/140 tests"
     }
   ]
 }

@@ -101,3 +101,45 @@ class Repair(unittest.IsolatedAsyncioTestCase):
         result = replay("research/evidence/" + commit + ".json",
                         expected_commit=commit, expected_run=45434441700, expected_tests=43)
         self.assertEqual(result["promotion"], "BLOCKED")
+
+    async def test_unknown_consumption_stops_retry(self):
+        for first in (response(proposal(), model="wrong"),
+                      response(proposal(), usage={"completion_tokens": 999})):
+            provider = Scripted([first, response(proposal())])
+            result = await solve(RAW, PROFILE, provider, attempts=2)
+            self.assertEqual(result.status, "BLOCKED")
+            self.assertEqual(result.attempts, 1)
+            self.assertEqual(result.reserved_output_tokens, 256)
+        requests = []
+        async def disconnected(request):
+            requests.append(request)
+            raise ConnectionResetError("fictional transport")
+        result = await solve(RAW, PROFILE, disconnected)
+        self.assertEqual(result.status, "BLOCKED")
+        self.assertEqual(len(requests), 1)
+        self.assertEqual(result.reserved_output_tokens, 256)
+
+    async def test_cancellation_suppressed_reply_is_late(self):
+        async def late(request):
+            try:
+                await asyncio.sleep(1)
+            except asyncio.CancelledError:
+                return response(proposal())
+        result = await solve(RAW, PROFILE, late, call_timeout=0.01)
+        self.assertEqual(result.status, "BLOCKED")
+        self.assertEqual(result.attempts, 1)
+        self.assertEqual(result.reasons, ("provider timeout",))
+
+    async def test_invalid_timeout_type(self):
+        for timeout in (True, float('nan'), float('inf')):
+            with self.assertRaises(ValueError):
+                await solve(RAW, PROFILE, Scripted([]), call_timeout=timeout)
+
+    async def test_utf8_reply_budget(self):
+        oversized = proposal(note="界" * 1400 + "界" * 1400)
+        reply = response(oversized)
+        reply["choices"][0]["message"]["content"] = json.dumps(oversized, ensure_ascii=False)
+        provider = Scripted([reply, response(proposal())])
+        result = await solve(RAW, PROFILE, provider)
+        self.assertEqual(result.status, "BLOCKED")
+        self.assertEqual(result.attempts, 1)

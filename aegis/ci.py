@@ -164,6 +164,12 @@ EXPECTED_IDS |= {"tests.test_csv_documents.CSVDocuments." + name for name in (
 EXPECTED_IDS.add("tests.test_document_runtime.DocumentRuntime.test_mixed_csv_bundle")
 
 
+EXPECTED_IDS |= {"tests.test_repair.Repair." + name for name in (
+    "test_unknown_consumption_stops_retry", "test_cancellation_suppressed_reply_is_late",
+    "test_invalid_timeout_type", "test_utf8_reply_budget",
+)}
+
+
 def flatten(suite):
     for item in suite:
         if isinstance(item, unittest.TestSuite):

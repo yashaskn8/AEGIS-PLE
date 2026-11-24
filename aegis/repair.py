@@ -5,6 +5,8 @@ here and no endpoint, external tool, executable candidate, or secret is used.
 Provider replies are untrusted data. Acceptance uses a separate Decimal oracle.
 """
 import asyncio
+from collections.abc import Awaitable, Callable
+from typing import Any
 from dataclasses import dataclass
 from decimal import Decimal, ROUND_HALF_UP, localcontext
 import json
@@ -25,10 +27,10 @@ class Result:
     attempts: int
     reserved_output_tokens: int
     reasons: tuple[str, ...]
-    verified: dict | None
+    verified: dict[str, Any] | None
 
 
-def extract(reply, model, limit):
+def extract(reply: object, model: str, limit: int) -> dict[str, Any]:
     if type(reply) is not dict or reply.get("model") != model:
         raise ValueError("provider identity mismatch")
     choices = reply.get("choices")
@@ -46,12 +48,12 @@ def extract(reply, model, limit):
     if not 0 <= usage["completion_tokens"] <= limit:
         raise ValueError("reported output budget violation")
     content = message.get("content")
-    if type(content) is not str or len(content) > MAX_REPLY:
+    if type(content) is not str or len(content.encode("utf-8")) > MAX_REPLY:
         raise ValueError("invalid proposal content")
     return decode(content)
 
 
-def verify(proposal, fixture):
+def verify(proposal: dict[str, Any], fixture: Fixture) -> str | None:
     if (type(proposal) is not dict or set(proposal) != {"source_sha256", "count", "total_mm"}
             or proposal["source_sha256"] != fixture.identity
             or type(proposal["count"]) is not int or proposal["count"] != len(fixture.micrometres)
@@ -59,17 +61,19 @@ def verify(proposal, fixture):
         return "source or output schema mismatch"
     with localcontext() as ctx:
         ctx.prec = 40
-        expected = int(sum(Decimal(x) / Decimal(1000) for x in fixture.micrometres)
+        expected = int(sum((Decimal(x) / Decimal(1000) for x in fixture.micrometres), Decimal(0))
                        .quantize(Decimal("1"), rounding=ROUND_HALF_UP))
     return None if proposal["total_mm"] == expected else "independent arithmetic mismatch"
 
 
-async def solve(raw: bytes, profile: Profile, provider, *, attempts=3, output_budget=768,
-                call_timeout=2.0):
+async def solve(raw: bytes, profile: Profile, provider: Callable[[dict[str, Any]], Awaitable[object]],
+                *, attempts: int = 3, output_budget: int = 768,
+                call_timeout: float = 2.0) -> Result:
     if (type(raw) is not bytes or len(raw) > MAX_REPLY or
             type(attempts) is not int or not 1 <= attempts <= MAX_ATTEMPTS or
             type(output_budget) is not int or not 0 <= output_budget <= MAX_ATTEMPTS * MAX_OUTPUT or
-            not 0 < call_timeout <= 10 or profile != Profile.parse(profile.declaration)):
+            type(call_timeout) not in (int, float) or not 0 < call_timeout <= 10
+            or type(profile) is not Profile or profile != Profile.parse(profile.declaration)):
         raise ValueError("invalid controller limits")
     data = decode(raw.decode("utf-8"))
     if set(data) != {"micrometres"} or type(data["micrometres"]) is not list:
@@ -92,20 +96,28 @@ async def solve(raw: bytes, profile: Profile, provider, *, attempts=3, output_bu
         request = profile.request(messages, max_tokens=limit, effort=effort, stream=False)
         reserved += limit
         calls += 1
+        end = asyncio.get_running_loop().time() + call_timeout
         try:
-            async with asyncio.timeout(call_timeout):
+            async with asyncio.timeout_at(end):
                 reply = await provider(request)
+            if asyncio.get_running_loop().time() >= end:
+                raise TimeoutError
             proposal = extract(reply, profile.model, limit)
             reason = verify(proposal, fixture)
+            if asyncio.get_running_loop().time() >= end:
+                raise TimeoutError
             if reason is None:
                 return Result("VERIFIED_SYNTHETIC", calls, reserved, tuple(reasons), dict(proposal))
         except TimeoutError:
-            reason = "provider timeout"
+            reasons.append("provider timeout")
+            break
         except (ValueError, TypeError, KeyError, RuntimeError):
-            reason = "invalid or incomplete proposal"
+            reasons.append("invalid or incomplete proposal")
+            break
         except Exception:
-            # Wire parser errors and transport exceptions cannot grant acceptance.
-            reason = "provider or protocol failure"
+            # Unknown consumption is not refunded; never retry an unverified reply.
+            reasons.append("provider or protocol failure")
+            break
         reasons.append(reason)
         # Only trusted diagnostic labels enter the next request; not raw model text.
         messages.append({"role": "user", "content": "Previous attempt rejected: " + reason + ". Recompute independently."})
